@@ -1,7 +1,5 @@
 import 'typeface-roboto';
 import './style.css';
-
-import 'promise-polyfill/src/polyfill';
 import { convertAllImages } from './convert';
 
 const input = document.querySelector('#input') as HTMLInputElement;
