@@ -38,8 +38,7 @@ module.exports = env => ({
    plugins: [
       new CleanPlugin(),
       new HtmlPlugin({
-         template: './index.html',
-         scriptLoading: 'defer'
+         template: './index.html'
       }),
       new CssExtractPlugin({
          filename: '[contenthash].css'

@@ -2,17 +2,20 @@ import 'typeface-roboto';
 import './style.css';
 
 import 'promise-polyfill/src/polyfill';
-import { convertImage } from './convert';
+import { convertAllImages } from './convert';
 
 const input = document.querySelector('#input') as HTMLInputElement;
-
-function inputChange(): void {
-   if (input.files === null || input.files.length < 1) {
-      return;
+input.onchange = () => {
+   if (input.files !== null) {
+      convertAllImages(input.files);
    }
-   convertImage(input.files[0]);
-   input.value = '';
-}
+};
 
-input.onchange = inputChange;
-inputChange();
+const label = document.querySelector('#label') as HTMLDivElement;
+label.ondragover = event => event.preventDefault();
+label.ondrop = event => {
+   event.preventDefault();
+   if (event.dataTransfer !== null) {
+      convertAllImages(event.dataTransfer.files);
+   }
+};

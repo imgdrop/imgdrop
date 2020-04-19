@@ -28,3 +28,7 @@ export async function convertImage(file: File): Promise<void> {
    link.click();
    URL.revokeObjectURL(link.href);
 }
+
+export async function convertAllImages(files: FileList): Promise<void> {
+   await Promise.all(Array.from(files).map(file => convertImage(file)));
+}
