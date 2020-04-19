@@ -11,8 +11,7 @@
 
    box-sizing: border-box;
    padding: 1rem;
-
-   font: 4rem 'Roboto', sans-serif;
+   font: 3rem 'Roboto', sans-serif;
    color: gray;
 }
 
@@ -20,10 +19,12 @@
    display: flex;
    justify-content: center;
    align-items: center;
+   text-align: center;
 
    box-sizing: border-box;
    width: 100%;
    height: 100%;
    border: dashed 1rem lightgray;
-   border-radius: 4rem;
+   border-radius: 3rem;
+   padding: 1rem;
 }

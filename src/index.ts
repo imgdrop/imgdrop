@@ -7,6 +7,7 @@ input.onchange = () => {
    if (input.files !== null) {
       convertAllImages(input.files);
    }
+   input.value = '';
 };
 
 const label = document.querySelector('#label') as HTMLDivElement;
