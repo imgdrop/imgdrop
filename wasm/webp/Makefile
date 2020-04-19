@@ -20,6 +20,6 @@ $(SRC_MAKE):
 
 clean:
 	$(SRC_CD) git clean -fdX
-	rm index.js
+	rm index.js index.wasm
 
 .PHONY: all clean

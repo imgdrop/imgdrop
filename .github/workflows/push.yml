@@ -14,35 +14,18 @@ jobs:
           key: install-${{ github.sha }}
           path: node_modules
 
-  emsdk:
-    name: Install EMSDK
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: git clone https://github.com/emscripten-core/emsdk.git
-      - run: emsdk/emsdk install latest
-      - run: emsdk/emsdk activate latest
-      - uses: actions/cache@v1
-        with:
-          key: emsdk-${{ github.sha }}
-          path: emsdk
-
   webp:
     name: Build WebP
     runs-on: ubuntu-latest
-    needs:
-      - emsdk
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - uses: actions/setup-node@v1
-      - uses: actions/cache@v1
-        with:
-          key: emsdk-${{ github.sha }}
-          path: emsdk
-      - run: source emsdk/emsdk_env.sh && make -C wasm/webp
+      - uses: mymindstorm/setup-emsdk@v4
+      - run: emcc --help
+      - run: emconfigure echo test
+      - run: make -C wasm/webp
       - uses: actions/cache@v1
         with:
           key: webp-${{ github.sha }}
