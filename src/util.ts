@@ -1,7 +1,3 @@
-export function changeExtension(file: string, ext: string): string {
-   return `${file.replace(/\.[^.]*$/, '')}.${ext}`;
-}
-
 export function readBlob(file: Blob): Promise<ArrayBuffer> {
    return new Promise((resolve, reject) => {
       const reader = new FileReader();

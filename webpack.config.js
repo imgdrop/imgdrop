@@ -27,11 +27,12 @@ module.exports = env => ({
             use: [CssExtractPlugin.loader, 'css-loader']
          },
          {
-            test: /\.woff2?$/,
+            test: /\.(woff2?|wasm)$/,
             loader: 'file-loader',
             options: {
-               name: 'fonts/[name]-[contenthash].[ext]'
-            }
+               name: '[ext]/[name]-[contenthash].[ext]'
+            },
+            type: 'javascript/auto'
          }
       ]
    },

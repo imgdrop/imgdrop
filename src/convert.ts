@@ -1,6 +1,5 @@
 import { decodeImage } from './decode';
 import { encodeImage } from './encode';
-import { changeExtension } from './util';
 import { monitorAction } from './monitor';
 
 export async function convertImage(file: File): Promise<void> {
@@ -23,7 +22,7 @@ export async function convertImage(file: File): Promise<void> {
    }
 
    const link = document.createElement('a');
-   link.download = changeExtension(file.name, 'png');
+   link.download = `${file.name.replace(/\.[^.]*$/, '')}.png`;
    link.href = URL.createObjectURL(output);
    link.click();
    URL.revokeObjectURL(link.href);
