@@ -1,7 +1,7 @@
 import { readBlob, createImageData } from '../util';
 
 export async function decodeWithUtif(file: Blob): Promise<ImageData> {
-   const utif = await import('utif');
+   const utif = await import(/* webpackChunkName: 'utif' */ 'utif');
    const data = await readBlob(file);
    for (const ifd of utif.decode(data)) {
       utif.decodeImage(data, ifd);
@@ -13,5 +13,5 @@ export async function decodeWithUtif(file: Blob): Promise<ImageData> {
       image.data.set(utif.toRGBA8(ifd));
       return image;
    }
-   throw new Error('Could not find image');
+   throw new Error('Could not find image in IFD list');
 }

@@ -1,19 +1,30 @@
 import { decodeImage } from './decode';
 import { encodeImage } from './encode';
 import { changeExtension } from './util';
+import { monitorAction } from './monitor';
 
 export async function convertImage(file: File): Promise<void> {
+   let image: ImageData;
    try {
-      const image = await decodeImage(file);
-      const output = await encodeImage(image);
-
-      const link = document.createElement('a');
-      link.download = changeExtension(file.name, 'png');
-      link.href = URL.createObjectURL(output);
-      link.click();
-      URL.revokeObjectURL(link.href);
+      image = await monitorAction(() => decodeImage(file), 'decode', {
+         mimeType: file.type
+      });
    } catch (error) {
-      console.log(`Mime type: ${file.type}`);
-      alert(error);
+      alert('Failed to read image');
+      return;
    }
+
+   let output: Blob;
+   try {
+      output = await monitorAction(() => encodeImage(image), 'encode');
+   } catch (error) {
+      alert('Failed to encode image');
+      return;
+   }
+
+   const link = document.createElement('a');
+   link.download = changeExtension(file.name, 'png');
+   link.href = URL.createObjectURL(output);
+   link.click();
+   URL.revokeObjectURL(link.href);
 }

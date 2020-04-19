@@ -10,7 +10,8 @@ module.exports = env => ({
    entry: './src',
    output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: '[contenthash].js'
+      filename: '[contenthash].js',
+      chunkFilename: '[name]-[contenthash].js'
    },
    resolve: {
       extensions: ['.js', '.ts']

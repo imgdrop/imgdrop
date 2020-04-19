@@ -27,7 +27,7 @@ export function createImageData(width: number, height: number): ImageData {
    try {
       return new ImageData(width, height);
    } catch (error) {
-      console.warn('Failed to create image data:', error);
+      console.warn(error);
    }
    return createContext(1, 1).createImageData(width, height);
 }

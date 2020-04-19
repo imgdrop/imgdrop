@@ -6,7 +6,7 @@ export function encodeImage(image: ImageData): Promise<Blob> {
       ctx.putImageData(image, 0, 0);
       ctx.canvas.toBlob(blob => {
          if (blob === null) {
-            reject(new Error('Failed to encode image'));
+            reject(new Error('Failed to create blob'));
          } else {
             resolve(blob);
          }

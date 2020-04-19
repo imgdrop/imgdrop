@@ -5,14 +5,7 @@ export async function decodeImage(file: Blob): Promise<ImageData> {
    try {
       return await decodeWithImage(file);
    } catch (error) {
-      console.warn('Failed to decode with image:', error);
+      console.warn(error);
    }
-
-   try {
-      return await decodeWithHeader(file);
-   } catch (error) {
-      console.warn('Failed to decode with UTIF:', error);
-   }
-
-   throw new Error('Failed to read image');
+   return await decodeWithHeader(file);
 }
