@@ -1,0 +1,29 @@
+#input {
+   display: none;
+}
+
+#label {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+
+   box-sizing: border-box;
+   padding: 1rem;
+
+   font: 4rem 'Roboto', sans-serif;
+   color: gray;
+}
+
+#label #border {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   box-sizing: border-box;
+   width: 100%;
+   height: 100%;
+   border: dashed 1rem lightgray;
+   border-radius: 4rem;
+}
