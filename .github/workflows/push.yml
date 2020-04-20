@@ -40,7 +40,7 @@ jobs:
       - uses: mymindstorm/setup-emsdk@v4
       - run: make -C wasm/raw
       - uses: actions/cache@v1
-      - with:
+        with:
           key: raw-${{ github.sha }}
           path: wasm/raw
 
