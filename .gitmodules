@@ -1,3 +1,6 @@
 [submodule "wasm/webp/src"]
 	path = wasm/webp/src
 	url = https://github.com/webmproject/libwebp
+[submodule "wasm/raw/src"]
+	path = wasm/raw/src
+	url = https://github.com/LibRaw/LibRaw.git
