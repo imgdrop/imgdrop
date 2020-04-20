@@ -1,6 +1,7 @@
 import { createContext } from '../util';
 
 export function decodeWithImage(file: Blob): Promise<ImageData> {
+   console.log('Trying native decoder...');
    return new Promise((resolve, reject) => {
       const image = new Image();
       image.src = URL.createObjectURL(file);

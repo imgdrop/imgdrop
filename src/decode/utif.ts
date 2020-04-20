@@ -1,6 +1,7 @@
 import { readFile, createImageData } from '../util';
 
 export async function decodeWithUtif(file: File): Promise<ImageData> {
+   console.log('Trying UTIF decoder...');
    const utif = await import(/* webpackChunkName: 'utif' */ 'utif');
    const data = await readFile(file);
    for (const ifd of utif.decode(data)) {

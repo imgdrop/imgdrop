@@ -12,7 +12,8 @@ all: $(SRC_OBJS)
 		-Oz \
 		-s EXPORTED_FUNCTIONS=[_malloc] \
 		-s MODULARIZE \
-		-s ENVIRONMENT=web
+		-s ENVIRONMENT=web \
+		-s ALLOW_MEMORY_GROWTH
 
 -include $(SRC_OBJS:.o=.d)
 bin/%.o: src/%.cpp
