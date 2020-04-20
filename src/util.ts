@@ -1,4 +1,17 @@
-export function readBlob(file: Blob): Promise<ArrayBuffer> {
+export function fileExtension(name: string): string {
+   const extIndex = name.lastIndexOf('.');
+   if (extIndex === -1) {
+      return '';
+   } else {
+      return name.substr(extIndex);
+   }
+}
+
+export function fileBasename(name: string): string {
+   return name.substr(0, name.length - fileExtension(name).length);
+}
+
+export function readFile(file: Blob): Promise<ArrayBuffer> {
    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result as ArrayBuffer);

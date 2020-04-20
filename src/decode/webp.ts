@@ -1,10 +1,10 @@
-import { readBlob, createImageData } from '../util';
+import { readFile, createImageData } from '../util';
 import webpInit from '../../wasm/webp';
 
-export async function decodeWithWebp(file: Blob): Promise<ImageData> {
+export async function decodeWithWebp(file: File): Promise<ImageData> {
    const webp = webpInit();
    await webp.promise;
-   const data = await readBlob(file);
+   const data = await readFile(file);
    const dataPtr = webp.webpAllocate(data.byteLength);
    webp.HEAPU8.set(new Uint8Array(data), dataPtr);
    const imagePtr = webp.webpDecode(dataPtr, data.byteLength);

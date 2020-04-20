@@ -1,8 +1,8 @@
-import { readBlob, createImageData } from '../util';
+import { readFile, createImageData } from '../util';
 
-export async function decodeWithUtif(file: Blob): Promise<ImageData> {
+export async function decodeWithUtif(file: File): Promise<ImageData> {
    const utif = await import(/* webpackChunkName: 'utif' */ 'utif');
-   const data = await readBlob(file);
+   const data = await readFile(file);
    for (const ifd of utif.decode(data)) {
       utif.decodeImage(data, ifd);
       if (ifd.width === undefined || ifd.height === undefined) {

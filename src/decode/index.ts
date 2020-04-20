@@ -1,11 +1,19 @@
 import { decodeWithImage } from './image';
 import { decodeWithHeader } from './header';
+import { fileExtension } from '../util';
 
-export async function decodeImage(file: Blob): Promise<ImageData> {
+export async function decodeImage(file: File): Promise<ImageData> {
    try {
       return await decodeWithImage(file);
    } catch (error) {
       console.warn(error);
    }
-   return await decodeWithHeader(file);
+
+   try {
+      return await decodeWithHeader(file);
+   } catch (error) {
+      console.warn(error);
+   }
+
+   throw new Error(`Failed to read image with extension: ${fileExtension(file.name)}`);
 }
