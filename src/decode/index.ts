@@ -4,7 +4,7 @@ import { fileExtension } from '../util';
 
 export async function decodeImage(file: File): Promise<ImageData> {
    try {
-      return await decodeWithImage(file);
+      // return await decodeWithImage(file);
    } catch (error) {
       console.warn(error);
    }
