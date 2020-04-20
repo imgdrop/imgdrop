@@ -6,7 +6,6 @@ all: $(SRC_MAKE)
 	emcc -o webp.js src/src/.libs/libwebp.a webp.c \
 		-Oz \
 		-s EXPORTED_FUNCTIONS=[_malloc] \
-		-s EXPORTED_RUNTIME_METHODS=[cwrap] \
 		-s MODULARIZE \
 		-s ENVIRONMENT=web
 

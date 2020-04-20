@@ -1,4 +1,3 @@
-import { readFile, createImageData } from '../util';
 import { decodeWithWasm } from '../../wasm';
 import js from '../../wasm/webp/webp';
 import wasm from '../../wasm/webp/webp.wasm';
