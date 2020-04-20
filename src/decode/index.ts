@@ -1,6 +1,7 @@
 import { decodeWithImage } from './image';
 import { decodeWithHeader } from './header';
 import { fileExtension } from '../util';
+import { decodeWithRaw } from './raw';
 
 export async function decodeImage(file: File): Promise<ImageData> {
    try {
@@ -11,6 +12,12 @@ export async function decodeImage(file: File): Promise<ImageData> {
 
    try {
       return await decodeWithHeader(file);
+   } catch (error) {
+      console.warn(error);
+   }
+
+   try {
+      return await decodeWithRaw(file);
    } catch (error) {
       console.warn(error);
    }

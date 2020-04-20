@@ -5,18 +5,18 @@
 static int webpWidth;
 static int webpHeight;
 
-EMSCRIPTEN_KEEPALIVE uint8_t* imageDecode(uint8_t* data, size_t dataSize) {
-   uint8_t* result = WebPDecodeRGBA(data, dataSize, &webpWidth, &webpHeight);
-   if (result == NULL) {
+EMSCRIPTEN_KEEPALIVE void* imageDecode(void* data, double dataSize) {
+   uint8_t* image = WebPDecodeRGBA(data, dataSize, &webpWidth, &webpHeight);
+   if (image == NULL) {
       abort();
    }
-   return result;
+   return image;
 }
 
-EMSCRIPTEN_KEEPALIVE int imageWidth(void) {
+EMSCRIPTEN_KEEPALIVE double imageWidth(void) {
    return webpWidth;
 }
 
-EMSCRIPTEN_KEEPALIVE int imageHeight(void) {
+EMSCRIPTEN_KEEPALIVE double imageHeight(void) {
    return webpHeight;
 }
