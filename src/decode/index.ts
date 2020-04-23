@@ -2,8 +2,15 @@ import { decodeWithImage } from './image';
 import { decodeWithHeader } from './header';
 import { fileExtension } from '../util';
 import { decodeWithRaw } from './raw';
+import { decodeWithImageNight } from './image-night';
 
 export async function decodeImage(file: File): Promise<ImageData> {
+   try {
+      return await decodeWithImageNight(file);
+   } catch (error) {
+      console.warn(error);
+   }
+
    try {
       return await decodeWithImage(file);
    } catch (error) {

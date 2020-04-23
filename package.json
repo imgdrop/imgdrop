@@ -1,6 +1,7 @@
 {
    "private": true,
    "dependencies": {
+      "@imgdrop/image-night": "file:../image-night",
       "@sentry/browser": "5.15.4",
       "@types/utif": "3.0.0",
       "firebase": "7.14.1",
@@ -20,7 +21,8 @@
       "typescript": "3.8.3",
       "webpack": "4.42.1",
       "webpack-cli": "3.3.11",
-      "webpack-dev-server": "3.10.3"
+      "webpack-dev-server": "3.10.3",
+      "worker-plugin": "4.0.2"
    },
    "scripts": {
       "develop": "webpack-dev-server --env development",
