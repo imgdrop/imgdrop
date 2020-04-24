@@ -35,7 +35,9 @@
    },
    "scripts": {
       "develop": "gatsby develop",
-      "build": "gatsby build",
+      "build": "run-s build:*",
+      "build:clean": "gatsby clean",
+      "build:gatsby": "gatsby build",
       "serve": "gatsby serve",
       "lint": "run-s lint:*",
       "lint:tsc": "tsc",
@@ -45,6 +47,14 @@
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write"
    },
+   "browserslist": [
+      ">0.25%",
+      "not dead",
+      "not ie 11",
+      "not op_mini all",
+      "not and_uc > 0",
+      "not chrome < 57"
+   ],
    "eslintConfig": {
       "extends": [
          "airbnb-typescript",

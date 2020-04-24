@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) =>
          width: '100vw',
          height: '100vh',
          padding: theme.spacing(2),
+         '&:focus': {
+            outline: 'none',
+         },
       },
 
       border: {
@@ -26,12 +29,22 @@ const useStyles = makeStyles((theme) =>
          flexDirection: 'column',
          justifyContent: 'center',
          alignItems: 'center',
+         transition: 'border-color 0.5s',
+      },
+
+      activeBorder: {
+         borderColor: theme.palette.primary.light,
       },
 
       icon: {
          fontSize: theme.typography.pxToRem(200),
          marginBottom: theme.spacing(1),
          color: theme.palette.grey.A200,
+         transition: 'color 0.5s',
+      },
+
+      activeIcon: {
+         color: theme.palette.primary.light,
       },
 
       text: {
@@ -45,7 +58,7 @@ const useStyles = makeStyles((theme) =>
 export const ImageDrop: React.FC = () => {
    const classes = useStyles();
    const { enqueueSnackbar } = useSnackbar();
-   const { getRootProps, getInputProps } = useDropzone({
+   const { getRootProps, getInputProps, isDragActive, isFileDialogActive } = useDropzone({
       onDrop(files) {
          files.map(async (file) => {
             try {
@@ -63,12 +76,16 @@ export const ImageDrop: React.FC = () => {
       },
    });
 
+   const isActive = isDragActive || isFileDialogActive;
+
    /* eslint-disable react/jsx-props-no-spreading */
    return (
       <div {...getRootProps()} className={classes.root}>
          <input {...getInputProps()} />
-         <div className={classes.border}>
-            <Panorama className={classes.icon} />
+         <div className={`${classes.border} ${isActive ? classes.activeBorder : ''}`}>
+            <Panorama
+               className={`${classes.icon} ${isActive ? classes.activeIcon : ''}`}
+            />
             <div className={classes.text}>
                Just drop an image to instantly convert it to PNG
             </div>
