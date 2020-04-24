@@ -1,33 +1,88 @@
 {
    "private": true,
    "dependencies": {
-      "@imgdrop/image-night": "file:../image-night",
+      "@material-ui/core": "4.9.11",
+      "@material-ui/icons": "4.9.1",
+      "@material-ui/styles": "4.9.10",
       "@sentry/browser": "5.15.4",
-      "@types/utif": "3.0.0",
-      "firebase": "7.14.1",
-      "typeface-roboto": "0.0.75",
-      "utif": "3.1.0"
+      "@types/react": "16.9.34",
+      "@types/react-helmet": "5.0.15",
+      "gatsby": "2.20.29",
+      "notistack": "0.9.11",
+      "react": "16.13.1",
+      "react-dom": "16.13.1",
+      "react-dropzone": "10.2.2",
+      "react-helmet": "6.0.0"
    },
    "devDependencies": {
-      "clean-webpack-plugin": "3.0.0",
-      "css-loader": "3.5.2",
-      "file-loader": "6.0.0",
-      "firebase-tools": "8.1.1",
-      "html-webpack-plugin": "4.2.0",
-      "mini-css-extract-plugin": "0.9.0",
-      "optimize-css-assets-webpack-plugin": "5.0.3",
-      "terser-webpack-plugin": "2.3.5",
-      "ts-loader": "7.0.0",
-      "typescript": "3.8.3",
-      "webpack": "4.42.1",
-      "webpack-cli": "3.3.11",
-      "webpack-dev-server": "3.10.3",
-      "worker-plugin": "4.0.2"
+      "@typescript-eslint/eslint-plugin": "2.29.0",
+      "@typescript-eslint/parser": "2.29.0",
+      "eslint": "6.8.0",
+      "eslint-config-airbnb-typescript": "7.2.1",
+      "eslint-config-prettier": "6.11.0",
+      "eslint-plugin-import": "2.20.2",
+      "eslint-plugin-jsx-a11y": "6.2.3",
+      "eslint-plugin-react": "7.19.0",
+      "eslint-plugin-react-hooks": "2.5.1",
+      "gatsby-cli": "2.11.15",
+      "gatsby-plugin-material-ui": "2.1.6",
+      "gatsby-plugin-prefetch-google-fonts": "1.4.3",
+      "gatsby-plugin-react-helmet": "3.2.4",
+      "gatsby-plugin-typescript": "2.3.3",
+      "npm-run-all": "4.1.5",
+      "prettier": "2.0.5",
+      "typescript": "3.8.3"
    },
    "scripts": {
-      "develop": "webpack-dev-server --env development",
-      "build": "webpack --env production",
-      "serve": "firebase serve",
-      "deploy": "firebase deploy -P image-drop"
+      "develop": "gatsby develop",
+      "build": "gatsby build",
+      "serve": "gatsby serve",
+      "lint": "run-s lint:*",
+      "lint:tsc": "tsc",
+      "lint:eslint": "eslint \"**/*.tsx\" --max-warnings 0",
+      "lint:prettier": "prettier \"**/*.{tsx,js,json,yml}\" -c",
+      "fix": "run-s fix:*",
+      "fix:eslint": "yarn lint:eslint --fix",
+      "fix:prettier": "yarn lint:prettier --write"
+   },
+   "eslintConfig": {
+      "extends": [
+         "airbnb-typescript",
+         "plugin:@typescript-eslint/eslint-recommended",
+         "plugin:@typescript-eslint/recommended",
+         "plugin:@typescript-eslint/recommended-requiring-type-checking",
+         "prettier",
+         "prettier/react",
+         "prettier/@typescript-eslint"
+      ],
+      "parserOptions": {
+         "project": "./tsconfig.json"
+      },
+      "rules": {
+         "no-console": "off",
+         "import/prefer-default-export": "off",
+         "import/no-default-export": "error",
+         "sort-imports": [
+            "warn",
+            {
+               "ignoreDeclarationSort": true
+            }
+         ],
+         "import/order": [
+            "warn",
+            {
+               "newlines-between": "never",
+               "alphabetize": {
+                  "order": "asc"
+               }
+            }
+         ]
+      }
+   },
+   "prettier": {
+      "tabWidth": 3,
+      "printWidth": 90,
+      "singleQuote": true,
+      "jsxSingleQuote": true
    }
 }
