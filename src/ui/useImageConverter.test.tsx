@@ -1,6 +1,6 @@
 import * as notistack from 'notistack';
 import * as convert from '../convert';
-import * as logging from '../logging';
+import * as logging from '../logging/logging';
 import { useImageConverter } from './useImageConverter';
 
 describe(useImageConverter, () => {

@@ -1,5 +1,5 @@
+import { decodeImage } from './decode';
 import * as decodeHTML from './html';
-import { decodeImage } from '.';
 
 describe(decodeImage, () => {
    let decodeHTMLSpy: jest.SpyInstance;

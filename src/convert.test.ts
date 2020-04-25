@@ -1,5 +1,5 @@
 import { convertImage } from './convert';
-import * as decode from './decode';
+import * as decode from './decode/decode';
 
 describe(convertImage, () => {
    let imageMock: {

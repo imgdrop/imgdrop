@@ -1,4 +1,4 @@
-import { decodeImage } from './decode';
+import { decodeImage } from './decode/decode';
 import { getPathBasename } from './util/path';
 
 function encodeImage(image: HTMLCanvasElement, type: string): Promise<Blob> {
