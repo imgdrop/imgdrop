@@ -1,0 +1,12 @@
+{
+   "configurations": [
+      {
+         "name": "Jest File",
+         "type": "node",
+         "request": "launch",
+         "program": "${workspaceFolder}/node_modules/.bin/jest",
+         "args": ["${file}"],
+         "console": "integratedTerminal"
+      }
+   ]
+}

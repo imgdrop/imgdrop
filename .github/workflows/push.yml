@@ -45,3 +45,17 @@ jobs:
               key: install-${{ github.sha }}
               path: node_modules
          - run: yarn lint
+
+   test:
+      name: Run Tests
+      runs-on: ubuntu-latest
+      needs:
+         - install
+      steps:
+         - uses: actions/checkout@v2
+         - uses: actions/setup-node@v1
+         - uses: actions/cache@v1
+           with:
+              key: install-${{ github.sha }}
+              path: node_modules
+         - run: yarn test --runInBand

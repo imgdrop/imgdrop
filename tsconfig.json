@@ -4,7 +4,7 @@
       "strict": true,
       "target": "ESNext",
       "jsx": "react",
-      "types": [],
+      "types": ["jest"],
       "moduleResolution": "Node",
       "esModuleInterop": true
    }
