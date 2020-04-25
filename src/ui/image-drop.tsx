@@ -61,7 +61,7 @@ export const ImageDrop: React.FC<ImageDropProps> = ({ onImageDropped }) => {
    const classes = useStyles();
    const { getRootProps, getInputProps, isDragActive, isFileDialogActive } = useDropzone({
       onDrop(files) {
-         files.forEach(file => onImageDropped(file));
+         files.forEach((file) => onImageDropped(file));
       },
    });
 

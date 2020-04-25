@@ -16,5 +16,5 @@ export function useImageConverter(): (file: File) => void {
             variant: 'error',
          });
       }
-   }
+   };
 }
