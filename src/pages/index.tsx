@@ -2,7 +2,7 @@ import { CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { App } from '../ui/app';
+import { App } from '../ui/App';
 
 const Index: React.FC = () => {
    return (

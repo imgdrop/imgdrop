@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageDrop } from './image-drop';
-import { useImageConverter } from './use-image-converter';
+import { ImageDrop } from './ImageDrop';
+import { useImageConverter } from './useImageConverter';
 
 export const App: React.FC = () => {
    const convertImage = useImageConverter();

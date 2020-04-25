@@ -1,7 +1,7 @@
 import React from 'react';
 import * as dropzone from 'react-dropzone';
 import TestRenderer from 'react-test-renderer';
-import { ImageDrop } from './image-drop';
+import { ImageDrop } from './ImageDrop';
 
 describe(ImageDrop, () => {
    let useDropzoneSpy: jest.SpyInstance;

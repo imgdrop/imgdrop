@@ -1,8 +1,8 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import { App } from './app';
-import { ImageDrop } from './image-drop';
-import * as useConverter from './use-image-converter';
+import { App } from './App';
+import { ImageDrop } from './ImageDrop';
+import * as useConverter from './useImageConverter';
 
 describe(App, () => {
    let convertImageMock: jest.Mock;

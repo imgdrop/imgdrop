@@ -129,9 +129,10 @@
       "setupFiles": [
          "<rootDir>src/test-setup.tsx"
       ],
-      "restoreMocks": true,
       "collectCoverageFrom": [
          "**/*.tsx"
-      ]
+      ],
+      "restoreMocks": true,
+      "resetModules": true
    }
 }

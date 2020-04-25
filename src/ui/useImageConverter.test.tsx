@@ -1,7 +1,7 @@
 import * as notistack from 'notistack';
 import * as convert from '../convert';
 import * as logging from '../logging';
-import { useImageConverter } from './use-image-converter';
+import { useImageConverter } from './useImageConverter';
 
 describe(useImageConverter, () => {
    let snackbarMock: {
