@@ -59,3 +59,4 @@ jobs:
               key: install-${{ github.sha }}
               path: node_modules
          - run: yarn test --runInBand
+         - uses: codecov/codecov-action@v1
