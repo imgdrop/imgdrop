@@ -3,7 +3,10 @@
 interface EmscriptenOptions {
    memory?: WebAssembly.Memory;
    locateFile?: (path: string, prefix: string) => string;
-   initiateWasm?: (imports: WebAssembly.Imports, callback: (exports: WebAssembly.Exports) => void) => WebAssembly.Exports | false;
+   initiateWasm?: (
+      imports: WebAssembly.Imports,
+      callback: (exports: WebAssembly.Exports) => void
+   ) => WebAssembly.Exports | false;
    onRuntimeInitialized?: () => void;
 }
 

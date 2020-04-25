@@ -1,4 +1,4 @@
-import { createContext } from '.';
+import { createContext } from './util';
 
 describe(createContext, () => {
    let canvasMock: {

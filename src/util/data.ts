@@ -9,4 +9,4 @@ export function readBlobData(blob: Blob): Promise<ArrayBuffer> {
 
 export function checkData(data: Uint8Array, check: number[], offset = 0): boolean {
    return check.every((byte, index) => byte === data[index + offset]);
-} 
+}

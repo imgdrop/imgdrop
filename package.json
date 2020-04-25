@@ -50,8 +50,8 @@
       "serve": "gatsby serve",
       "lint": "run-s lint:*",
       "lint:tsc": "tsc",
-      "lint:eslint": "eslint \"**/*.tsx\" --max-warnings 0",
-      "lint:prettier": "prettier \"**/*.{tsx,js,json,yml}\" -c",
+      "lint:eslint": "eslint \"**/*.{ts,tsx}\" --max-warnings 0",
+      "lint:prettier": "prettier \"**/*.{ts,tsx,js,json,yml}\" -c",
       "fix": "run-s fix:*",
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write",
@@ -102,8 +102,8 @@
       "overrides": [
          {
             "files": [
-               "*.test.tsx",
-               "src/test-setup.tsx"
+               "*.test.*",
+               "src/test-setup.ts"
             ],
             "rules": {
                "@typescript-eslint/no-explicit-any": "off",
@@ -127,10 +127,10 @@
          "/public/"
       ],
       "setupFiles": [
-         "<rootDir>src/test-setup.tsx"
+         "<rootDir>src/test-setup.ts"
       ],
       "collectCoverageFrom": [
-         "**/*.tsx"
+         "**/*.{ts,tsx}"
       ],
       "restoreMocks": true,
       "resetModules": true

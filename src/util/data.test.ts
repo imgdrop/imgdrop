@@ -12,7 +12,7 @@ describe(readBlobData, () => {
 
    beforeEach(() => {
       fileReaderMock = {
-         readAsArrayBuffer: jest.fn()
+         readAsArrayBuffer: jest.fn(),
       };
       fileReaderSpy = jest.spyOn(window, 'FileReader');
       fileReaderSpy.mockImplementation(function FileReader() {
@@ -47,25 +47,14 @@ describe(readBlobData, () => {
 
 describe(checkData, () => {
    it('returns true if the data matches the array', () => {
-      expect(checkData(
-         new Uint8Array([1, 2, 3, 4, 5]),
-         [2, 3, 4],
-         1
-      )).toBeTruthy();
+      expect(checkData(new Uint8Array([1, 2, 3, 4, 5]), [2, 3, 4], 1)).toBeTruthy();
    });
 
    it('returns false if the data does not match the array', () => {
-      expect(checkData(
-         new Uint8Array([1, 2, 3, 4, 5]),
-         [4, 3, 2],
-         1
-      )).toBeFalsy();
+      expect(checkData(new Uint8Array([1, 2, 3, 4, 5]), [4, 3, 2], 1)).toBeFalsy();
    });
 
    it('defaults to an offset of 0', () => {
-      expect(checkData(
-         new Uint8Array([1, 2, 3, 4, 5]),
-         [1, 2, 3]
-      )).toBeTruthy();
+      expect(checkData(new Uint8Array([1, 2, 3, 4, 5]), [1, 2, 3])).toBeTruthy();
    });
 });

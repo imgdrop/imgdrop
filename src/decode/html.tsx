@@ -1,4 +1,4 @@
-import { createContext } from '../util';
+import { createContext } from '../util/util';
 
 function loadHTMLImage(url: string): Promise<HTMLImageElement> {
    return new Promise((resolve, reject) => {

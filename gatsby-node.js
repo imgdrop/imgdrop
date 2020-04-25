@@ -4,8 +4,8 @@ exports.onCreateWebpackConfig = ({ actions }) => {
    actions.setWebpackConfig({
       resolve: {
          alias: {
-            '~wasm': path.resolve(__dirname, 'wasm')
-         }
-      }
+            '~wasm': path.resolve(__dirname, 'wasm'),
+         },
+      },
    });
 };
