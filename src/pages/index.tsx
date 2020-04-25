@@ -2,7 +2,7 @@ import { CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { ImageDrop } from '../ui/image-drop';
+import { App } from '../ui/app';
 
 const Index: React.FC = () => {
    return (
@@ -21,7 +21,7 @@ const Index: React.FC = () => {
          </Helmet>
          <CssBaseline />
          <SnackbarProvider>
-            <ImageDrop />
+            <App />
          </SnackbarProvider>
       </>
    );

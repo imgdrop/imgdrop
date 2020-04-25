@@ -1,10 +1,7 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 import { Panorama } from '@material-ui/icons';
-import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
-import { convertImage } from '../convert';
-import { logError } from '../logging';
 
 const useStyles = makeStyles((theme) =>
    createStyles({
@@ -56,24 +53,15 @@ const useStyles = makeStyles((theme) =>
    })
 );
 
-export const ImageDrop: React.FC = () => {
+export interface ImageDropProps {
+   onImageDropped(file: File): void;
+}
+
+export const ImageDrop: React.FC<ImageDropProps> = ({ onImageDropped }) => {
    const classes = useStyles();
-   const { enqueueSnackbar } = useSnackbar();
    const { getRootProps, getInputProps, isDragActive, isFileDialogActive } = useDropzone({
       onDrop(files) {
-         files.map(async (file) => {
-            try {
-               await convertImage(file);
-               enqueueSnackbar(`Successfully converted '${file.name}'`, {
-                  variant: 'success',
-               });
-            } catch (error) {
-               logError(error);
-               enqueueSnackbar(`Failed to convert to '${file.name}'`, {
-                  variant: 'error',
-               });
-            }
-         });
+         files.forEach(file => onImageDropped(file));
       },
    });
 
