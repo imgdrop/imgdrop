@@ -13,4 +13,10 @@ describe(decodeImage, () => {
       await expect(decodeImage('file' as any)).resolves.toBe('image');
       expect(decodeHTMLSpy).toHaveBeenCalledWith('file');
    });
+
+   it('rejects if all decoders fail', async () => {
+      decodeHTMLSpy.mockRejectedValue('error');
+      await expect(decodeImage('file' as any)).rejects.toBeInstanceOf(Error);
+      expect(decodeHTMLSpy).toHaveBeenCalledWith('file');
+   });
 });

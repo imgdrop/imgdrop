@@ -4,6 +4,7 @@ import { useSnackbar } from 'notistack';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 import { convertImage } from '../convert';
+import { logError } from '../logging';
 
 const useStyles = makeStyles((theme) =>
    createStyles({
@@ -67,7 +68,7 @@ export const ImageDrop: React.FC = () => {
                   variant: 'success',
                });
             } catch (error) {
-               console.error(error);
+               logError(error);
                enqueueSnackbar(`Failed to convert to '${file.name}'`, {
                   variant: 'error',
                });

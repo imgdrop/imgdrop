@@ -49,7 +49,7 @@
       "fix": "run-s fix:*",
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write",
-      "test": "jest"
+      "test": "jest --silent"
    },
    "browserslist": [
       ">0.25%",

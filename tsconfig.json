@@ -3,6 +3,7 @@
       "noEmit": true,
       "strict": true,
       "target": "ESNext",
+      "module": "ESNext",
       "jsx": "react",
       "types": ["jest"],
       "moduleResolution": "Node",
