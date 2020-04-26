@@ -28,8 +28,6 @@ describe(createContext, () => {
    it('throws if getContext returns null', () => {
       canvasMock.getContext.mockReturnValue(null);
       expect(() => createContext(100, 200, 'webgl')).toThrow(expect.any(Error));
-      expect(createElementSpy).toHaveBeenCalledWith('canvas');
-      expect(canvasMock.getContext).toHaveBeenCalledWith('webgl');
    });
 });
 

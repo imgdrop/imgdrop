@@ -1,8 +1,8 @@
 import * as notistack from 'notistack';
 import * as convert from '../convert';
 import * as logging from '../logging/logging';
-import { useImageConverter } from './useImageConverter';
 import { timeoutPromise } from '../util/util';
+import { useImageConverter } from './useImageConverter';
 
 describe(useImageConverter, () => {
    let snackbarMock: {
@@ -10,6 +10,7 @@ describe(useImageConverter, () => {
    };
    let useSnackbarSpy: jest.SpyInstance;
    let convertImageSpy: jest.SpyInstance;
+   let logErrorSpy: jest.SpyInstance;
 
    beforeEach(() => {
       snackbarMock = {
@@ -18,6 +19,8 @@ describe(useImageConverter, () => {
       useSnackbarSpy = jest.spyOn(notistack, 'useSnackbar');
       useSnackbarSpy.mockReturnValue(snackbarMock);
       convertImageSpy = jest.spyOn(convert, 'convertImage');
+      logErrorSpy = jest.spyOn(logging, 'logError');
+      logErrorSpy.mockResolvedValue(undefined);
    });
 
    it('converts an image', async () => {
@@ -34,12 +37,8 @@ describe(useImageConverter, () => {
 
    it('logs an error if converting fails', async () => {
       convertImageSpy.mockRejectedValue('error');
-      const logErrorSpy = jest.spyOn(logging, 'logError');
-      logErrorSpy.mockResolvedValue(undefined);
-
       const convertImage = useImageConverter();
       convertImage('file' as any);
-      expect(convertImageSpy).toHaveBeenCalledWith('file');
 
       await timeoutPromise();
       expect(logErrorSpy).toHaveBeenCalledWith('error');

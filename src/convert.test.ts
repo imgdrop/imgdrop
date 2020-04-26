@@ -23,17 +23,17 @@ describe(convertImage, () => {
       decodeImageSpy = jest.spyOn(decode, 'decodeImage');
       decodeImageSpy.mockResolvedValue(imageMock);
       linkMock = {
-         click: jest.fn()
+         click: jest.fn(),
       };
       createElementSpy = jest.spyOn(document, 'createElement');
       createElementSpy.mockReturnValue(linkMock);
       createURLSpy = jest.spyOn(URL, 'createObjectURL');
+      createURLSpy.mockReturnValue('object/url');
       revokeURLSpy = jest.spyOn(URL, 'revokeObjectURL');
    });
 
    it('converts an image', async () => {
       imageMock.toBlob.mockImplementation((callback) => callback('blob'));
-      createURLSpy.mockReturnValue('object/url');
       const fileMock = {
          name: 'filename.jpg',
       };
@@ -57,12 +57,12 @@ describe(convertImage, () => {
 
    it('queues multiple conversion attempts', async () => {
       const fileMock1 = {
-         name: 'filename1.jpg'
+         name: 'filename1.jpg',
       };
       const fileMock2 = {
-         name: 'filename2.png'
+         name: 'filename2.png',
       };
-      
+
       const conversion1 = convertImage(fileMock1 as any);
       const conversion2 = convertImage(fileMock2 as any);
       await timeoutPromise();
@@ -82,10 +82,10 @@ describe(convertImage, () => {
 
    it('runs later queued images if the first one failed', async () => {
       decodeImageSpy.mockRejectedValueOnce('error');
-      imageMock.toBlob.mockImplementation(callback => callback('blob'));
+      imageMock.toBlob.mockImplementation((callback) => callback('blob'));
       const fileMock1 = 'file1';
       const fileMock2 = {
-         name: 'filename2.jpg'
+         name: 'filename2.jpg',
       };
 
       const conversion1 = convertImage(fileMock1 as any);

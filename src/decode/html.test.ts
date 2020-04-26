@@ -61,14 +61,9 @@ describe(decodeHTMLImage, () => {
 
    it('rejects if onerror is called', async () => {
       const promise = decodeHTMLImage('file' as any);
-      expect(createURLSpy).toHaveBeenCalledWith('file');
-      expect(createElementSpy).toHaveBeenCalledWith('img');
-      expect(imageMock.onload).toBeInstanceOf(Function);
-      expect(imageMock.onerror).toBeInstanceOf(Function);
-      expect(imageMock.src).toBe('object/url');
-
       imageMock.onerror!();
       await expect(promise).rejects.toBeInstanceOf(Error);
       expect(revokeURLSpy).toHaveBeenCalledWith('object/url');
+      expect(canvasMock.getContext).not.toHaveBeenCalled();
    });
 });

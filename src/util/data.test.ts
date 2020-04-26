@@ -34,11 +34,6 @@ describe(readBlobData, () => {
 
    it('rejects if onerror is called', async () => {
       const promise = readBlobData('blob' as any);
-      expect(fileReaderSpy).toHaveBeenCalledWith();
-      expect(fileReaderMock.onload).toBeInstanceOf(Function);
-      expect(fileReaderMock.onerror).toBeInstanceOf(Function);
-      expect(fileReaderMock.readAsArrayBuffer).toHaveBeenCalledWith('blob');
-
       fileReaderMock.error = 'error';
       fileReaderMock.onerror!();
       await expect(promise).rejects.toBe('error');
