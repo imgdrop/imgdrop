@@ -2,6 +2,7 @@ import * as notistack from 'notistack';
 import * as convert from '../convert';
 import * as logging from '../logging/logging';
 import { useImageConverter } from './useImageConverter';
+import { timeoutPromise } from '../util/util';
 
 describe(useImageConverter, () => {
    let snackbarMock: {
@@ -25,7 +26,7 @@ describe(useImageConverter, () => {
       convertImage('file' as any);
       expect(convertImageSpy).toHaveBeenCalledWith('file');
 
-      await new Promise((resolve) => setTimeout(resolve));
+      await timeoutPromise();
       expect(snackbarMock.enqueueSnackbar).toHaveBeenCalledWith(expect.any(String), {
          variant: 'success',
       });
@@ -40,7 +41,7 @@ describe(useImageConverter, () => {
       convertImage('file' as any);
       expect(convertImageSpy).toHaveBeenCalledWith('file');
 
-      await new Promise((resolve) => setTimeout(resolve));
+      await timeoutPromise();
       expect(logErrorSpy).toHaveBeenCalledWith('error');
       expect(snackbarMock.enqueueSnackbar).toHaveBeenCalledWith(expect.any(String), {
          variant: 'error',

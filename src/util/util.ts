@@ -18,3 +18,7 @@ export function createContext<T extends keyof ContextMap>(
    }
    return context as ContextMap[T];
 }
+
+export function timeoutPromise(time = 0): Promise<void> {
+   return new Promise(resolve => setTimeout(resolve, time));
+}

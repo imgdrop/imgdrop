@@ -1,4 +1,4 @@
-import { createContext } from './util';
+import { createContext, timeoutPromise } from './util';
 
 describe(createContext, () => {
    let canvasMock: {
@@ -30,5 +30,27 @@ describe(createContext, () => {
       expect(() => createContext(100, 200, 'webgl')).toThrow(expect.any(Error));
       expect(createElementSpy).toHaveBeenCalledWith('canvas');
       expect(canvasMock.getContext).toHaveBeenCalledWith('webgl');
+   });
+});
+
+describe(timeoutPromise, () => {
+   beforeEach(() => {
+      jest.useFakeTimers();
+   });
+
+   afterEach(() => {
+      jest.useRealTimers();
+   });
+
+   it('resolves after the specified time has finished', async () => {
+      const promise = timeoutPromise(10000);
+      jest.advanceTimersByTime(10000);
+      await promise;
+   });
+
+   it('defaults to a time of 0', async () => {
+      const promise = timeoutPromise();
+      jest.advanceTimersByTime(0);
+      await promise;
    });
 });

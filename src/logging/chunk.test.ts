@@ -1,3 +1,7 @@
+beforeEach(() => {
+   jest.resetModules();
+});
+
 it('initializes sentry', async () => {
    const sentry = await import('@sentry/browser');
    const sentryInitSpy = jest.spyOn(sentry, 'init');

@@ -132,7 +132,6 @@
       "collectCoverageFrom": [
          "**/*.{ts,tsx}"
       ],
-      "restoreMocks": true,
-      "resetModules": true
+      "restoreMocks": true
    }
 }
