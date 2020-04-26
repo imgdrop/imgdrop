@@ -1,6 +1,9 @@
 import { WorkerExports, WorkerMessage } from './types';
 
-const decodeWorker = new Worker('./chunk', { type: 'module' });
+let decodeWorker: Worker;
+if (typeof Worker === 'function') {
+   decodeWorker = new Worker('./chunk', { type: 'module' });
+}
 
 export function callWorker<E extends keyof WorkerExports>(
    data: WorkerMessage<E>

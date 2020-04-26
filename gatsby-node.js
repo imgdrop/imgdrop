@@ -1,7 +1,7 @@
 const path = require('path');
 const WorkerPlugin = require('worker-plugin');
 
-exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
+exports.onCreateWebpackConfig = ({ stage, getConfig, actions }) => {
    const config = getConfig();
    config.output.globalObject = 'this';
    config.resolve.alias['@wasm'] = path.resolve(__dirname, 'wasm');
@@ -9,6 +9,9 @@ exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
       test: /\.wasm$/,
       use: 'file-loader',
    });
-   config.plugins.push(new WorkerPlugin());
+
+   if (!stage.endsWith('-html')) {
+      config.plugins.push(new WorkerPlugin());
+   }
    actions.replaceWebpackConfig(config);
 };
