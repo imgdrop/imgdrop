@@ -1,7 +1,8 @@
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({ adapter: new Adapter() });
+/* eslint-disable class-methods-use-this */
 
 URL.createObjectURL = (): string => '';
 URL.revokeObjectURL = (): void => {};
+
+window.Worker = class {
+   postMessage(): void {}
+} as any;

@@ -2,11 +2,15 @@
    "compilerOptions": {
       "noEmit": true,
       "strict": true,
-      "target": "ESNext",
-      "module": "ESNext",
+      "target": "ES6",
+      "module": "ES2020",
       "jsx": "react",
       "types": ["jest"],
       "moduleResolution": "Node",
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "baseUrl": ".",
+      "paths": {
+         "@wasm/*": ["wasm/*"]
+      }
    }
 }
