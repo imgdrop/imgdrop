@@ -6,5 +6,4 @@ declare const webp: EmscriptenFactory<{
    _getWebpHeight(): number;
 }>;
 
-// eslint-disable-next-line import/no-default-export
 export default webp;
