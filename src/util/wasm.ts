@@ -1,4 +1,4 @@
-import { EmscriptenFactory, EmscriptenModule, EmscriptenOptions } from '@wasm/types';
+import { EmscriptenFactory, EmscriptenModule, EmscriptenOptions } from '../../wasm/types';
 import { ValueCache } from './value-cache';
 
 const wasmMemory = new ValueCache(() => new WebAssembly.Memory({ initial: 256 }));

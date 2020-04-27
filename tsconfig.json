@@ -7,10 +7,6 @@
       "jsx": "react",
       "types": ["jest"],
       "moduleResolution": "Node",
-      "esModuleInterop": true,
-      "baseUrl": ".",
-      "paths": {
-         "@wasm/*": ["wasm/*"]
-      }
+      "esModuleInterop": true
    }
 }

@@ -1,4 +1,4 @@
-CFLAGS = -Oz -DIMGDROP_FILENAME='/wfs/input'
+CFLAGS = -Oz
 LDFLAGS = \
 	-lworkerfs.js \
 	-Oz --closure 1 \
