@@ -1,7 +1,7 @@
 import { WorkerExports, WorkerMessage, WorkerPostMessage } from './types';
 import * as webp from './webp';
 
-const workerExports = {
+const workerExports: WorkerExports = {
    ...webp,
 };
 

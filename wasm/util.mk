@@ -1,7 +1,8 @@
 CFLAGS = -Oz
 LDFLAGS = \
 	-lworkerfs.js \
-	-Oz --closure 1 \
+	-Oz \
+	-s MODULARIZE \
+	-s ALLOW_MEMORY_GROWTH \
 	-s ENVIRONMENT=worker \
-	-s EXPORTED_RUNTIME_METHODS=[FS] \
-	-s ALLOW_MEMORY_GROWTH
+	-s EXPORTED_RUNTIME_METHODS=[FS]

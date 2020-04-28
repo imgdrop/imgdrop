@@ -1,5 +1,6 @@
 import { ValueCache } from '../util/value-cache';
 import { getColorContext } from './context';
+import vertexCode from './vertex.glsl';
 
 function compileShader(type: number, code: string): WebGLShader {
    const gl = getColorContext();
@@ -8,10 +9,10 @@ function compileShader(type: number, code: string): WebGLShader {
       throw new Error('Failed to create shader');
    }
 
-   gl.shaderSource(shader, `#version 100\n${code}`);
+   gl.shaderSource(shader, code);
    gl.compileShader(shader);
    const log = gl.getShaderInfoLog(shader);
-   if (log !== null) {
+   if (log !== null && log.length > 0) {
       console.warn(log);
    }
    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
@@ -21,10 +22,7 @@ function compileShader(type: number, code: string): WebGLShader {
 }
 
 const vertexShader = new ValueCache(() =>
-   compileShader(
-      WebGLRenderingContext.VERTEX_SHADER,
-      '???' // TODO: use webpack-glsl-minify
-   )
+   compileShader(WebGLRenderingContext.VERTEX_SHADER, vertexCode.sourceCode)
 );
 
 export class ShaderCache extends ValueCache<WebGLProgram> {
@@ -43,7 +41,7 @@ export class ShaderCache extends ValueCache<WebGLProgram> {
          gl.detachShader(program, fragShader);
          gl.deleteShader(fragShader);
          const log = gl.getProgramInfoLog(program);
-         if (log !== null) {
+         if (log !== null && log.length > 0) {
             console.warn(log);
          }
          if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {

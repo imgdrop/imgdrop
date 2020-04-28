@@ -1,5 +1,7 @@
 export interface WorkerExports {
-   decodeWebpImage(file: File): Promise<Uint8Array>;
+   decodeWebpImage(
+      file: File
+   ): Promise<{ data: Uint8Array; width: number; height: number }>;
 }
 
 export interface WorkerMessage<E extends keyof WorkerExports> {
