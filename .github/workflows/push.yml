@@ -23,7 +23,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/webp
+      - run: make -C wasm/webp -j4
       - uses: actions/cache@v1
         with:
           key: webp-${{ github.sha }}
@@ -78,5 +78,5 @@ jobs:
         with:
           key: install-${{ github.sha }}
           path: node_modules
-      - run: yarn test --runInBand
+      - run: yarn test
       - uses: codecov/codecov-action@v1
