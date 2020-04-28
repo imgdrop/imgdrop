@@ -1,9 +1,9 @@
-import { ShaderCache } from './shader-cache';
 import { ValueCache } from '../util/value-cache';
 import * as context from './context';
+import { ShaderCache } from './shader-cache';
 
 jest.mock('./vertex.glsl', () => ({
-   sourceCode: 'vertex(code)'
+   sourceCode: 'vertex(code)',
 }));
 
 afterEach(() => {
@@ -51,7 +51,7 @@ describe(ShaderCache, () => {
          COMPILE_STATUS: 'compile status',
          VERTEX_SHADER: 'vertex shader',
          FRAGMENT_SHADER: 'fragment shader',
-         LINK_STATUS: 'link status'
+         LINK_STATUS: 'link status',
       };
       glMock.createShader.mockReturnValueOnce('vertex object');
       glMock.createShader.mockReturnValue('fragment object');
@@ -79,16 +79,25 @@ describe(ShaderCache, () => {
       it('creates a default vertex shader', () => {
          expect(shaderCache.value).toBe('program object');
          expect(glMock.createShader).toHaveBeenCalledWith('vertex shader');
-         expect(glMock.shaderSource).toHaveBeenCalledWith('vertex object', 'vertex(code)');
+         expect(glMock.shaderSource).toHaveBeenCalledWith(
+            'vertex object',
+            'vertex(code)'
+         );
          expect(glMock.getShaderInfoLog).toHaveBeenCalledWith('vertex object');
-         expect(glMock.getShaderParameter).toHaveBeenCalledWith('vertex object', 'compile status');
+         expect(glMock.getShaderParameter).toHaveBeenCalledWith(
+            'vertex object',
+            'compile status'
+         );
       });
 
       it('throws an error if it fails to create a vertex shader', () => {
          glMock.createShader.mockReset();
          glMock.createShader.mockReturnValue(null);
          expect(() => shaderCache.value).toThrow(expect.any(Error));
-         expect(glMock.shaderSource).not.toHaveBeenCalledWith(expect.any(String), 'vertex(code)');
+         expect(glMock.shaderSource).not.toHaveBeenCalledWith(
+            expect.any(String),
+            'vertex(code)'
+         );
       });
 
       it('throws an error if it fails to compile a vertex shader', () => {
@@ -100,7 +109,10 @@ describe(ShaderCache, () => {
          expect(shaderCache.value).toBe('program object');
          glMock.attachShader.mockClear();
          expect(new ShaderCache('other(code)').value).toBe('program object');
-         expect(glMock.attachShader).toHaveBeenCalledWith('program object', 'vertex object');
+         expect(glMock.attachShader).toHaveBeenCalledWith(
+            'program object',
+            'vertex object'
+         );
          expect(glMock.createShader).toHaveBeenCalledTimes(3);
       });
    });
@@ -113,15 +125,24 @@ describe(ShaderCache, () => {
       it('creates a fragment shader from the code', () => {
          expect(shaderCache.value).toBe('program object');
          expect(glMock.createShader).toHaveBeenCalledWith('fragment shader');
-         expect(glMock.shaderSource).toHaveBeenCalledWith('fragment object', 'fragment(code)');
+         expect(glMock.shaderSource).toHaveBeenCalledWith(
+            'fragment object',
+            'fragment(code)'
+         );
          expect(glMock.getShaderInfoLog).toHaveBeenCalledWith('fragment object');
-         expect(glMock.getShaderParameter).toHaveBeenCalledWith('fragment object', 'compile status');
+         expect(glMock.getShaderParameter).toHaveBeenCalledWith(
+            'fragment object',
+            'compile status'
+         );
       });
 
       it('throws an error if it fails to create a fragment shader', () => {
          glMock.createShader.mockReturnValue(null);
          expect(() => shaderCache.value).toThrow(expect.any(Error));
-         expect(glMock.shaderSource).not.toHaveBeenCalledWith(expect.any(String), 'fragment(code)');
+         expect(glMock.shaderSource).not.toHaveBeenCalledWith(
+            expect.any(String),
+            'fragment(code)'
+         );
       });
 
       it('throws an error if it fails to compile a fragment shader', () => {
@@ -135,13 +156,25 @@ describe(ShaderCache, () => {
       it('links together the shaders in a program', () => {
          expect(shaderCache.value).toBe('program object');
          expect(glMock.createProgram).toHaveBeenCalledWith();
-         expect(glMock.attachShader).toHaveBeenCalledWith('program object', 'vertex object');
-         expect(glMock.attachShader).toHaveBeenCalledWith('program object', 'fragment object');
+         expect(glMock.attachShader).toHaveBeenCalledWith(
+            'program object',
+            'vertex object'
+         );
+         expect(glMock.attachShader).toHaveBeenCalledWith(
+            'program object',
+            'fragment object'
+         );
          expect(glMock.linkProgram).toHaveBeenCalledWith('program object');
-         expect(glMock.detachShader).toHaveBeenCalledWith('program object', 'fragment object');
+         expect(glMock.detachShader).toHaveBeenCalledWith(
+            'program object',
+            'fragment object'
+         );
          expect(glMock.deleteShader).toHaveBeenCalledWith('fragment object');
          expect(glMock.getProgramInfoLog).toHaveBeenCalledWith('program object');
-         expect(glMock.getProgramParameter).toHaveBeenCalledWith('program object', 'link status');
+         expect(glMock.getProgramParameter).toHaveBeenCalledWith(
+            'program object',
+            'link status'
+         );
       });
 
       it('throws an error if it fails to create the program', () => {

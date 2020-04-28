@@ -1,5 +1,5 @@
-import { getColorContext, useTexture, runShaderPass } from './context';
 import { ValueCache } from '../util/value-cache';
+import { getColorContext, runShaderPass, useTexture } from './context';
 
 let canvasMock: {
    getContext: jest.Mock;
@@ -33,8 +33,8 @@ let glMock: {
    TEXTURE_WRAP_T: string;
    LINEAR: string;
    CLAMP_TO_EDGE: string;
-   UNPACK_ALIGNMENT: string,
-   UNPACK_FLIP_Y_WEBGL: string,
+   UNPACK_ALIGNMENT: string;
+   UNPACK_FLIP_Y_WEBGL: string;
    TRIANGLES: string;
    NO_ERROR: string;
    canvas: typeof canvasMock;
@@ -43,7 +43,7 @@ let createElementSpy: jest.SpyInstance;
 
 beforeEach(() => {
    canvasMock = {
-      getContext: jest.fn()
+      getContext: jest.fn(),
    };
    glMock = {
       createBuffer: jest.fn(),
@@ -76,7 +76,7 @@ beforeEach(() => {
       UNPACK_FLIP_Y_WEBGL: 'unpack flip-Y WebGL',
       TRIANGLES: 'triangles',
       NO_ERROR: 'no error',
-      canvas: canvasMock
+      canvas: canvasMock,
    };
    canvasMock.getContext.mockReturnValue(glMock);
    createElementSpy = jest.spyOn(document, 'createElement');
@@ -103,7 +103,14 @@ describe(getColorContext, () => {
          1, 1,
       ]), 'static draw');
       expect(glMock.enableVertexAttribArray).toHaveBeenCalledWith(0);
-      expect(glMock.vertexAttribPointer).toHaveBeenCalledWith(0, 2, 'unsigned byte', false, 0, 0);
+      expect(glMock.vertexAttribPointer).toHaveBeenCalledWith(
+         0,
+         2,
+         'unsigned byte',
+         false,
+         0,
+         0
+      );
       expect(glMock.pixelStorei).toHaveBeenCalledWith('unpack alignment', 1);
       expect(glMock.pixelStorei).toHaveBeenCalledWith('unpack flip-Y WebGL', true);
    });
@@ -125,10 +132,26 @@ describe(getColorContext, () => {
       expect(glMock.activeTexture).toHaveBeenCalledWith(13);
       expect(glMock.bindTexture).toHaveBeenCalledWith('texture 2D', 'texture 3');
 
-      expect(glMock.texParameteri).toHaveBeenCalledWith('texture 2D', 'texture min filter', 'linear');
-      expect(glMock.texParameteri).toHaveBeenCalledWith('texture 2D', 'texture mag filter', 'linear');
-      expect(glMock.texParameteri).toHaveBeenCalledWith('texture 2D', 'texture wrap S', 'clamp to edge');
-      expect(glMock.texParameteri).toHaveBeenCalledWith('texture 2D', 'texture wrap T', 'clamp to edge');
+      expect(glMock.texParameteri).toHaveBeenCalledWith(
+         'texture 2D',
+         'texture min filter',
+         'linear'
+      );
+      expect(glMock.texParameteri).toHaveBeenCalledWith(
+         'texture 2D',
+         'texture mag filter',
+         'linear'
+      );
+      expect(glMock.texParameteri).toHaveBeenCalledWith(
+         'texture 2D',
+         'texture wrap S',
+         'clamp to edge'
+      );
+      expect(glMock.texParameteri).toHaveBeenCalledWith(
+         'texture 2D',
+         'texture wrap T',
+         'clamp to edge'
+      );
 
       expect(glMock.activeTexture).toHaveBeenCalledTimes(4);
       expect(glMock.createTexture).toHaveBeenCalledTimes(4);

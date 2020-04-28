@@ -1,11 +1,11 @@
-import { uploadRGBA } from './rgba';
 import * as context from './context';
+import { uploadRGBA } from './rgba';
 
 jest.mock('./rgba.glsl', () => ({
    sourceCode: 'rgba(code)',
    uniforms: {
-      rgba: 'rgba uniform'
-   }
+      rgba: 'rgba uniform',
+   },
 }));
 
 jest.mock('./shader-cache', () => ({
@@ -14,7 +14,7 @@ jest.mock('./shader-cache', () => ({
       use(): string {
          return 'program';
       }
-   }
+   },
 }));
 
 describe(uploadRGBA, () => {
@@ -35,7 +35,7 @@ describe(uploadRGBA, () => {
          TEXTURE_2D: 'texture 2D',
          RGBA: 'RGBA',
          UNSIGNED_BYTE: 'unsigned byte',
-         canvas: 'canvas'
+         canvas: 'canvas',
       };
       getContextSpy = jest.spyOn(context, 'getColorContext');
       getContextSpy.mockReturnValue(glMock);
@@ -49,7 +49,17 @@ describe(uploadRGBA, () => {
       expect(uploadRGBA('data' as any, 100, 200)).toBe('canvas');
       expect(getContextSpy).toHaveBeenCalledWith(100, 200);
       expect(useTextureSpy).toHaveBeenCalledWith('program', 'rgba uniform', 0);
-      expect(glMock.texImage2D).toHaveBeenCalledWith('texture 2D', 0, 'RGBA', 100, 200, 0, 'RGBA', 'unsigned byte', 'data');
+      expect(glMock.texImage2D).toHaveBeenCalledWith(
+         'texture 2D',
+         0,
+         'RGBA',
+         100,
+         200,
+         0,
+         'RGBA',
+         'unsigned byte',
+         'data'
+      );
       expect(runShaderSpy).toHaveBeenCalledWith();
    });
 });

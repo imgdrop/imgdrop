@@ -2,7 +2,7 @@ export class ValueCache<T> {
    private static currentlyCached: ValueCache<unknown>[] = [];
 
    static clearCached(): void {
-      this.currentlyCached.forEach(cache => {
+      this.currentlyCached.forEach((cache) => {
          // eslint-disable-next-line no-param-reassign
          delete cache.cache;
       });
