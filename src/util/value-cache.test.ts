@@ -29,4 +29,15 @@ describe(ValueCache, () => {
          expect(valueCache.value).toBe('value 3');
       });
    });
+
+   describe('clearCached', () => {
+      it('clears all current cached values', () => {
+         callbackMock.mockReturnValue('value 4');
+         expect(valueCache.value).toBe('value 4');
+         callbackMock.mockReturnValue('value 5');
+         ValueCache.clearCached();
+         expect(valueCache.value).toBe('value 5');
+         expect(callbackMock).toHaveBeenCalledTimes(2);
+      });
+   });
 });

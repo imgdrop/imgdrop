@@ -37,10 +37,9 @@ export class ShaderCache extends ValueCache<WebGLProgram> {
          gl.attachShader(program, vertexShader.value);
          const fragShader = compileShader(gl.FRAGMENT_SHADER, code);
          gl.attachShader(program, fragShader);
-         gl.bindAttribLocation(program, 0, 'pos');
          gl.linkProgram(program);
-         // gl.detachShader(program, fragShader);
-         // gl.deleteShader(fragShader);
+         gl.detachShader(program, fragShader);
+         gl.deleteShader(fragShader);
          const log = gl.getProgramInfoLog(program);
          if (log !== null && log.length > 0) {
             console.warn(log);

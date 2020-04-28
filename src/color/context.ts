@@ -11,7 +11,7 @@ const webglContext = new ValueCache(() => {
       0, 1,
       0, 1,
       1, 0,
-      1, 1
+      1, 1,
    ]), gl.STATIC_DRAW);
    gl.enableVertexAttribArray(0);
    gl.vertexAttribPointer(0, 2, gl.UNSIGNED_BYTE, false, 0, 0);
