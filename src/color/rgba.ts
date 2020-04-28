@@ -4,11 +4,11 @@ import { ShaderCache } from './shader-cache';
 
 const rgbaShader = new ShaderCache(rgbaCode.sourceCode);
 
-export async function uploadRGBA(
+export function uploadRGBA(
    data: Uint8Array,
    width: number,
    height: number
-): Promise<HTMLCanvasElement> {
+): HTMLCanvasElement {
    const gl = getColorContext(width, height);
    const program = rgbaShader.use();
    useTexture(program, rgbaCode.uniforms.rgba, 0);
@@ -23,6 +23,6 @@ export async function uploadRGBA(
       gl.UNSIGNED_BYTE,
       data
    );
-   await runShaderPass();
+   runShaderPass();
    return gl.canvas as HTMLCanvasElement;
 }
