@@ -118,7 +118,15 @@
       "tabWidth": 3,
       "printWidth": 90,
       "singleQuote": true,
-      "jsxSingleQuote": true
+      "jsxSingleQuote": true,
+      "overrides": [
+         {
+            "files": "*.yml",
+            "options": {
+               "tabWidth": 2
+            }
+         }
+      ]
    },
    "jest": {
       "preset": "ts-jest",

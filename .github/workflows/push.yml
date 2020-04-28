@@ -2,86 +2,86 @@ name: Build & Checks
 on: push
 
 jobs:
-   install:
-      name: Install Packages
-      runs-on: ubuntu-latest
-      steps:
-         - uses: actions/checkout@v2
-         - uses: actions/setup-node@v1
-         - run: yarn --frozen-lockfile
-         - uses: actions/cache@v1
-           with:
-              key: install-${{ github.sha }}
-              path: node_modules
+  install:
+    name: Install Packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: yarn --frozen-lockfile
+      - uses: actions/cache@v1
+        with:
+          key: install-${{ github.sha }}
+          path: node_modules
 
-   webp:
-      name: Build WebP
-      runs-on: ubuntu-latest
-      steps:
-         - uses: actions/checkout@v2
-           with:
-              submodules: true
-         - uses: actions/setup-node@v1
-         - uses: mymindstorm/setup-emsdk@v4
-         - run: make -C wasm/webp
-         - uses: actions/cache@v1
-           with:
-              key: webp-${{ github.sha }}
-              path: wasm/webp
+  webp:
+    name: Build WebP
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+      - uses: mymindstorm/setup-emsdk@v4
+      - run: make -C wasm/webp
+      - uses: actions/cache@v1
+        with:
+          key: webp-${{ github.sha }}
+          path: wasm/webp
 
-   build:
-      name: Build Website
-      runs-on: ubuntu-latest
-      needs:
-         - install
-         - webp
-      steps:
-         - uses: actions/checkout@v2
-         - uses: actions/setup-node@v1
-         - uses: actions/cache@v1
-           with:
-              key: install-${{ github.sha }}
-              path: node_modules
-         - uses: actions/cache@v1
-           with:
-              key: webp-${{ github.sha }}
-              path: wasm/webp
-         - run: yarn build
-         - uses: actions/cache@v1
-           with:
-              key: build-${{ github.sha }}
-              path: dist
+  build:
+    name: Build Website
+    runs-on: ubuntu-latest
+    needs:
+      - install
+      - webp
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: actions/cache@v1
+        with:
+          key: install-${{ github.sha }}
+          path: node_modules
+      - uses: actions/cache@v1
+        with:
+          key: webp-${{ github.sha }}
+          path: wasm/webp
+      - run: yarn build
+      - uses: actions/cache@v1
+        with:
+          key: build-${{ github.sha }}
+          path: dist
 
-   lint:
-      name: Lint Files
-      runs-on: ubuntu-latest
-      needs:
-         - install
-      steps:
-         - uses: actions/checkout@v2
-         - uses: actions/setup-node@v1
-         - uses: actions/cache@v1
-           with:
-              key: install-${{ github.sha }}
-              path: node_modules
-         - run: yarn lint
+  lint:
+    name: Lint Files
+    runs-on: ubuntu-latest
+    needs:
+      - install
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: actions/cache@v1
+        with:
+          key: install-${{ github.sha }}
+          path: node_modules
+      - run: yarn lint
 
-   test:
-      name: Run Tests
-      runs-on: ubuntu-latest
-      needs:
-         - install
-         - webp
-      steps:
-         - uses: actions/checkout@v2
-         - uses: actions/setup-node@v1
-         - uses: actions/cache@v1
-           with:
-              key: install-${{ github.sha }}
-              path: node_modules
-         - uses: actions/cache@v1
-           with:
-              key: webp-${{ github.sha }}
-              path: wasm/webp
-         - run: yarn test --runInBand
-         - uses: codecov/codecov-action@v1
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs:
+      - install
+      - webp
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: actions/cache@v1
+        with:
+          key: install-${{ github.sha }}
+          path: node_modules
+      - uses: actions/cache@v1
+        with:
+          key: webp-${{ github.sha }}
+          path: wasm/webp
+      - run: yarn test --runInBand
+      - uses: codecov/codecov-action@v1
