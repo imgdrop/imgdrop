@@ -20,7 +20,7 @@ jobs:
       steps:
          - uses: actions/checkout@v2
          - uses: actions/setup-node@v1
-         - uses: actions/setup-emsdk@v4
+         - uses: mymindstorm/setup-emsdk@v4
          - run: make -C wasm/webp
          - uses: actions/cache@v1
            with:
