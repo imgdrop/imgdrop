@@ -25,7 +25,7 @@ jobs:
          - uses: actions/cache@v1
            with:
               key: webp-${{ github.sha }}
-              path: dist
+              path: wasm/webp
 
    build:
       name: Build Website
@@ -40,6 +40,10 @@ jobs:
            with:
               key: install-${{ github.sha }}
               path: node_modules
+         - uses: actions/cache@v1
+           with:
+              key: webp-${{ github.sha }}
+              path: wasm/webp
          - run: yarn build
          - uses: actions/cache@v1
            with:
@@ -73,5 +77,9 @@ jobs:
            with:
               key: install-${{ github.sha }}
               path: node_modules
+         - uses: actions/cache@v1
+           with:
+              key: webp-${{ github.sha }}
+              path: wasm/webp
          - run: yarn test --runInBand
          - uses: codecov/codecov-action@v1
