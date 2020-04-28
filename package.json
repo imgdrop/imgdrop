@@ -127,8 +127,11 @@
          "/.cache/",
          "/public/"
       ],
+      "moduleNameMapper": {
+         "\\.glsl$": "<rootDir>/__mocks__/glsl-mock.ts"
+      },
       "setupFiles": [
-         "<rootDir>src/test-setup.ts"
+         "<rootDir>/src/test-setup.ts"
       ],
       "collectCoverageFrom": [
          "**/*.{ts,tsx}"

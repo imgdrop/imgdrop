@@ -9,7 +9,6 @@ declare module '*.glsl' {
       uniforms: {
          [key: string]: {
             variableName: string;
-            variableType: string;
          };
       };
    };

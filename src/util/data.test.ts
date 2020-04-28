@@ -52,4 +52,8 @@ describe(checkData, () => {
    it('defaults to an offset of 0', () => {
       expect(checkData(new Uint8Array([1, 2, 3, 4, 5]), [1, 2, 3])).toBeTruthy();
    });
+
+   it('returns false if the data is too short', () => {
+      expect(checkData(new Uint8Array([1, 2, 3]), [2, 3, 4], 1)).toBeFalsy();
+   });
 });
