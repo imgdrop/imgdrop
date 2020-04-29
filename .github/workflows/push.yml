@@ -85,7 +85,7 @@ jobs:
     name: Run Chromium Tests
     runs-on: ubuntu-latest
     container:
-      image: qawolf/playwright-ci
+      image: qawolf/playwright-ci:v0.9.0
     needs:
       - install
       - webp
@@ -105,7 +105,7 @@ jobs:
     name: Run Firefox Tests
     runs-on: ubuntu-latest
     container:
-      image: qawolf/playwright-ci
+      image: qawolf/playwright-ci:v0.9.0
     needs:
       - install
       - webp
@@ -125,7 +125,7 @@ jobs:
     name: Run WebKit Tests
     runs-on: ubuntu-latest
     container:
-      image: qawolf/playwright-ci
+      image: qawolf/playwright-ci:v0.9.0
     needs:
       - install
       - webp
