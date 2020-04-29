@@ -90,8 +90,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: sudo apt update
-      - run: sudo apt install chromium-browser
+      - run: sudo apt-get update
+      - run: sudo apt-get install libnss3 libxss1 libasound2
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -100,7 +100,7 @@ jobs:
         with:
           key: webp-${{ github.sha }}
           path: wasm/webp
-      - run: yarn test-e2e --browsers ChromiumHeadless
+      - run: yarn test-e2e --browsers Chromium
 
   e2e-firefox:
     name: Run Firefox Tests
@@ -111,6 +111,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - run: sudo apt-get update
+      - run: sudo apt-get install libdbus-glib-1-2 libxt6
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -119,26 +121,47 @@ jobs:
         with:
           key: webp-${{ github.sha }}
           path: wasm/webp
-      - run: yarn test-e2e --browsers FirefoxHeadless
+      - run: yarn test-e2e --browsers Firefox
 
-  e2e-safari:
-    name: Run Safari Tests
-    runs-on: macos-latest
+  e2e-webkit:
+    name: Run WebKit Tests
+    runs-on: ubuntu-latest
     needs:
+      - install
       - webp
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - uses: actions/setup-java@v1
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y libwoff1 libopus0 libwebp6 libwebpdemux2 libenchant1c2a libgudev-1.0-0 libsecret-1-0 libhyphen0 libgdk-pixbuf2.0-0 libegl1 libnotify4 libxslt1.1 libevent-2.1-6 libgles2 libvpx5
+      - uses: actions/cache@v1
         with:
-          java-version: 13
-          java-package: jre
-      - run: sudo safaridriver --enable
+          key: install-${{ github.sha }}
+          path: node_modules
       - uses: actions/cache@v1
         with:
           key: webp-${{ github.sha }}
           path: wasm/webp
-      - run: yarn --frozen-lockfile
-      - run: yarn webdriver-manager update
-      - run: yarn webdriver-manager start --detach
-      - run: yarn test-e2e --browsers SafariWebdriver
+      - run: yarn test-e2e --browsers WebKit
+
+  # e2e-safari:
+  #   name: Run Safari Tests
+  #   runs-on: macos-latest
+  #   needs:
+  #     - webp
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #     - uses: actions/setup-java@v1
+  #       with:
+  #         java-version: 13
+  #         java-package: jre
+  #     - run: sudo safaridriver --enable
+  #     - uses: actions/cache@v1
+  #       with:
+  #         key: webp-${{ github.sha }}
+  #         path: wasm/webp
+  #     - run: yarn --frozen-lockfile
+  #     - run: yarn webdriver-manager update
+  #     - run: yarn webdriver-manager start --detach
+  #     - run: yarn test-e2e --browsers SafariWebdriver

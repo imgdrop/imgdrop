@@ -33,10 +33,8 @@
       "gatsby-plugin-typescript": "2.3.5",
       "jest": "25.4.0",
       "karma": "5.0.2",
-      "karma-chrome-launcher": "3.1.0",
-      "karma-firefox-launcher": "1.3.0",
       "karma-jasmine": "3.1.1",
-      "karma-safari-launcher": "1.0.0",
+      "karma-playwright-launcher": "0.0.1",
       "karma-selenium-launcher": "1.0.1",
       "karma-sourcemap-loader": "0.3.7",
       "karma-webpack": "4.0.2",
@@ -64,7 +62,11 @@
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write",
       "test": "jest --silent --collectCoverage",
-      "test-e2e": "karma start karma/karma.config.js --single-run"
+      "xpretest-e2e": "run-s pretest-e2e:*",
+      "xpretest-e2e:update": "webdriver-manager update",
+      "xpretest-e2e:start": "webdriver-manager start --detach",
+      "test-e2e": "karma start karma/karma.config.js --single-run",
+      "xposttest-e2e": "webdriver-manager shutdown"
    },
    "browserslist": [
       "chrome >= 57",
