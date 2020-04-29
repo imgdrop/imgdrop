@@ -41,22 +41,5 @@ module.exports = (config) => {
          '*.karma.js': ['webpack', 'sourcemap'],
       },
       webpack: webpackConfig,
-      customLaunchers: {
-         ChromeWebdriver: {
-            base: 'Selenium',
-            browserName: 'chrome',
-            config: {},
-         },
-         FirefoxWebdriver: {
-            base: 'Selenium',
-            browserName: 'firefox',
-            config: {},
-         },
-         SafariWebdriver: {
-            base: 'Selenium',
-            browserName: 'safari',
-            config: {},
-         },
-      },
    });
 };
