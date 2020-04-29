@@ -1,4 +1,4 @@
-name: Build & Checks
+name: CI
 on: push
 
 jobs:
@@ -96,7 +96,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: sudo ./playwright-setup.sh
+      - run: sudo .github/workflows/playwright-setup.sh
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
