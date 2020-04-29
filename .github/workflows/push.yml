@@ -121,12 +121,32 @@ jobs:
           path: wasm/webp
       - run: yarn test-e2e --browsers FirefoxHeadless
 
+  e2e-edge:
+    name: Run Edge Tests
+    runs-on: windows-latest
+    needs:
+      - install
+      - webp
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - uses: actions/cache@v1
+        with:
+          key: install-${{ github.sha }}
+          path: node_modules
+      - uses: actions/cache@v1
+        with:
+          key: webp-${{ github.sha }}
+          path: wasm/webp
+      - run: yarn test-e2e --browsers Edge
+
   e2e-safari:
     name: Run Safari Tests
     runs-on: macos-latest
     needs:
       - install
       - webp
+    if: false
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
