@@ -67,6 +67,7 @@
       "samsung >= 7.2"
    ],
    "eslintConfig": {
+      "ignorePatterns": ["**/*.js"],
       "extends": [
          "airbnb-typescript",
          "plugin:@typescript-eslint/eslint-recommended",
@@ -132,8 +133,7 @@
       "preset": "ts-jest",
       "testPathIgnorePatterns": [
          "/node_modules/",
-         "/.cache/",
-         "/public/"
+         "/.cache/"
       ],
       "moduleNameMapper": {
          "\\.glsl$": "<rootDir>/__mocks__/glsl-mock.ts"
