@@ -81,12 +81,18 @@ jobs:
       - run: yarn test
       - uses: codecov/codecov-action@v1
 
-  e2e-chrome:
-    name: Run Chromium Tests
+  test-e2e:
+    name: Run End-to-End Tests
     runs-on: ubuntu-latest
     needs:
       - install
       - webp
+    strategy:
+      matrix:
+        browser:
+          - Chromium
+          - Firefox
+          - WebKit
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -99,44 +105,4 @@ jobs:
         with:
           key: webp-${{ github.sha }}
           path: wasm/webp
-      - run: yarn test-e2e --browsers Chromium
-
-  e2e-firefox:
-    name: Run Firefox Tests
-    runs-on: ubuntu-latest
-    needs:
-      - install
-      - webp
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: sudo ./playwright-setup.sh
-      - uses: actions/cache@v1
-        with:
-          key: install-${{ github.sha }}
-          path: node_modules
-      - uses: actions/cache@v1
-        with:
-          key: webp-${{ github.sha }}
-          path: wasm/webp
-      - run: yarn test-e2e --browsers Firefox
-
-  e2e-webkit:
-    name: Run WebKit Tests
-    runs-on: ubuntu-latest
-    needs:
-      - install
-      - webp
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: sudo ./playwright-setup.sh
-      - uses: actions/cache@v1
-        with:
-          key: install-${{ github.sha }}
-          path: node_modules
-      - uses: actions/cache@v1
-        with:
-          key: webp-${{ github.sha }}
-          path: wasm/webp
-      - run: yarn test-e2e --browsers WebKit
+      - run: yarn test-e2e --browsers ${{ matrix.browser }}
