@@ -84,16 +84,13 @@ jobs:
   e2e-chrome:
     name: Run Chromium Tests
     runs-on: ubuntu-latest
+    container:
+      image: qawolf/playwright-ci
     needs:
       - install
       - webp
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y chromium-browser
-      - run: sudo apt-get install -y libwoff1 libopus0 libwebp6 libwebpdemux2 libenchant1c2a libgudev-1.0-0 libsecret-1-0 libhyphen0 libgdk-pixbuf2.0-0 libegl1 libnotify4 libxslt1.1 libevent-2.1-6 libgles2 libvpx5 libdbus-glib-1-2 libxt6 libnss3 libxss1 libasound2
-      # - run: sudo apt-get install libnss3 libxss1 libasound2
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -107,14 +104,13 @@ jobs:
   e2e-firefox:
     name: Run Firefox Tests
     runs-on: ubuntu-latest
+    container:
+      image: qawolf/playwright-ci
     needs:
       - install
       - webp
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      # - run: sudo apt-get update
-      # - run: sudo apt-get install libdbus-glib-1-2 libxt6
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -128,15 +124,13 @@ jobs:
   e2e-webkit:
     name: Run WebKit Tests
     runs-on: ubuntu-latest
+    container:
+      image: qawolf/playwright-ci
     needs:
       - install
       - webp
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y libqtwebkit4
-      # - run: sudo apt-get install -y libwoff1 libopus0 libwebp6 libwebpdemux2 libenchant1c2a libgudev-1.0-0 libsecret-1-0 libhyphen0 libgdk-pixbuf2.0-0 libegl1 libnotify4 libxslt1.1 libevent-2.1-6 libgles2 libvpx5
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -146,25 +140,3 @@ jobs:
           key: webp-${{ github.sha }}
           path: wasm/webp
       - run: yarn test-e2e --browsers WebKit
-
-  # e2e-safari:
-  #   name: Run Safari Tests
-  #   runs-on: macos-latest
-  #   needs:
-  #     - webp
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #     - uses: actions/setup-java@v1
-  #       with:
-  #         java-version: 13
-  #         java-package: jre
-  #     - run: sudo safaridriver --enable
-  #     - uses: actions/cache@v1
-  #       with:
-  #         key: webp-${{ github.sha }}
-  #         path: wasm/webp
-  #     - run: yarn --frozen-lockfile
-  #     - run: yarn webdriver-manager update
-  #     - run: yarn webdriver-manager start --detach
-  #     - run: yarn test-e2e --browsers SafariWebdriver
