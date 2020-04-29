@@ -90,7 +90,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: ./playwright-setup.sh
+      - run: sudo ./playwright-setup.sh
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -110,7 +110,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: ./playwright-setup.sh
+      - run: sudo ./playwright-setup.sh
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -130,7 +130,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: ./playwright-setup.sh
+      - run: sudo ./playwright-setup.sh
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
