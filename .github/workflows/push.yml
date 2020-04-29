@@ -90,6 +90,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - run: sudo apt update
       - run: sudo apt install chromium-browser
       - uses: actions/cache@v1
         with:
@@ -110,7 +111,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: sudo apt install firefox
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -130,6 +130,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - run: sudo safaridriver --enable
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
