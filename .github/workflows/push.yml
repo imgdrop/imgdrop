@@ -130,6 +130,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - uses: actions/setup-java@v1
+        with:
+          java-version: 13
+          java-package: jre
       - run: sudo safaridriver --enable
       - uses: actions/cache@v1
         with:

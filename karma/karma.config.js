@@ -45,18 +45,18 @@ module.exports = (config) => {
          ChromeWebdriver: {
             base: 'Selenium',
             browserName: 'chrome',
-            config: {}
+            config: {},
          },
          FirefoxWebdriver: {
             base: 'Selenium',
             browserName: 'firefox',
-            config: {}
+            config: {},
          },
          SafariWebdriver: {
             base: 'Selenium',
             browserName: 'safari',
-            config: {}
-         }
-      }
+            config: {},
+         },
+      },
    });
 };
