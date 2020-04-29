@@ -24,6 +24,7 @@ jobs:
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
       - run: make -C wasm/webp -j4
+      - run: git submodule deinit wasm/webp/libwebp
       - uses: actions/cache@v1
         with:
           key: webp-${{ github.sha }}
