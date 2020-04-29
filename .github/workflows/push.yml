@@ -82,7 +82,7 @@ jobs:
       - uses: codecov/codecov-action@v1
 
   e2e-chrome:
-    name: Run End-to-End tests on Chromium
+    name: Run Chromium Tests
     runs-on: ubuntu-latest
     needs:
       - install
@@ -90,7 +90,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: apt install chromium-browser
+      - run: sudo apt install chromium-browser
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -102,7 +102,7 @@ jobs:
       - run: yarn test-e2e --browsers ChromiumHeadless
 
   e2e-firefox:
-    name: Run End-to-End tests on Firefox
+    name: Run Firefox Tests
     runs-on: ubuntu-latest
     needs:
       - install
@@ -110,7 +110,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: apt install firefox
+      - run: sudo apt install firefox
       - uses: actions/cache@v1
         with:
           key: install-${{ github.sha }}
@@ -122,7 +122,7 @@ jobs:
       - run: yarn test-e2e --browsers FirefoxHeadless
 
   e2e-safari:
-    name: Run End-to-End tests on Safari
+    name: Run Safari Tests
     runs-on: macos-latest
     needs:
       - install

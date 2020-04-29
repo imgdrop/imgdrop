@@ -26,7 +26,6 @@
       "eslint-plugin-jsx-a11y": "6.2.3",
       "eslint-plugin-react": "7.19.0",
       "eslint-plugin-react-hooks": "2.5.1",
-      "file-loader": "6.0.0",
       "gatsby-cli": "2.11.19",
       "gatsby-plugin-material-ui": "2.1.7",
       "gatsby-plugin-prefetch-google-fonts": "1.4.3",
@@ -46,7 +45,6 @@
       "ts-jest": "25.4.0",
       "ts-loader": "7.0.1",
       "typescript": "3.8.3",
-      "webpack": "4.43.0",
       "webpack-glsl-minify": "1.4.0",
       "worker-plugin": "4.0.2"
    },
