@@ -1,8 +1,8 @@
 import * as wasm from '../../util/wasm';
 import { decodeWebpImage } from './webp';
 
-jest.mock('../../../wasm/webp/webp', () => 'webp js');
-jest.mock('../../../wasm/webp/webp.wasm', () => 'webp wasm');
+jest.mock('../../../wasm/webp/webp', () => 'webp js', { virtual: true });
+jest.mock('../../../wasm/webp/webp.wasm', () => 'webp wasm', { virtual: true });
 
 /* eslint-disable no-underscore-dangle */
 
