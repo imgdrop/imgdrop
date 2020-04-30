@@ -36,9 +36,9 @@ module.exports = (config) => {
 
    config.set({
       frameworks: ['jasmine'],
-      files: ['*.karma.js'],
+      files: ['tests/*.js'],
       preprocessors: {
-         '*.karma.js': ['webpack', 'sourcemap'],
+         'tests/*.js': ['webpack', 'sourcemap'],
       },
       webpack: webpackConfig,
    });
