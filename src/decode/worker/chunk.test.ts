@@ -5,7 +5,7 @@ jest.mock('./webp', () => ({
    decodeWebpImage: jest.fn(),
 }));
 
-describe(globalThis.onmessage!, () => {
+describe(onmessage!, () => {
    let postMessageSpy: jest.SpyInstance;
    let decodeWebpMock: jest.Mock;
 
