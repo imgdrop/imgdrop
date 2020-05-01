@@ -10,7 +10,7 @@ describe(loadWasmModule, () => {
    beforeEach(() => {
       moduleMock = {
          then: 'then',
-         mountFile: jest.fn()
+         mountFile: jest.fn(),
       };
       factoryMock = jest.fn();
       factoryMock.mockReturnValue(moduleMock);
