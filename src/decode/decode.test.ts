@@ -10,8 +10,12 @@ describe(decodeImage, () => {
 
    it('decodes using HTML by default', async () => {
       decodeHTMLSpy.mockResolvedValue('image');
-      await expect(decodeImage('file' as any)).resolves.toBe('image');
-      expect(decodeHTMLSpy).toHaveBeenCalledWith('file');
+      const fileMock = {
+         name: 'file.png',
+         type: 'image/png'
+      };
+      await expect(decodeImage(fileMock as any)).resolves.toBe('image');
+      expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
    });
 
    it('rejects if all decoders fail', async () => {

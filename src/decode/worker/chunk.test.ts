@@ -1,22 +1,25 @@
+const webpMock = {
+   decodeWebpImage: jest.fn()
+};
+
+jest.mock('./webp', () => webpMock);
+
+/* eslint-disable import/first */
 import * as webp from './webp';
 import './chunk';
 
-jest.mock('./webp', () => ({
-   decodeWebpImage: jest.fn(),
-}));
-
 describe(onmessage!, () => {
    let postMessageSpy: jest.SpyInstance;
-   let decodeWebpMock: jest.Mock;
+   let decodeWebpSpy: jest.SpyInstance;
 
    beforeEach(() => {
       postMessageSpy = jest.spyOn(window, 'postMessage');
       postMessageSpy.mockReturnValue(undefined);
-      decodeWebpMock = webp.decodeWebpImage as jest.Mock;
+      decodeWebpSpy = jest.spyOn(webp, 'decodeWebpImage');
    });
 
    it('it calls the specified function', async () => {
-      decodeWebpMock.mockResolvedValue('result');
+      decodeWebpSpy.mockResolvedValue('result');
       await (onmessage as Function)({
          data: {
             name: 'decodeWebpImage',
@@ -24,7 +27,7 @@ describe(onmessage!, () => {
          },
       } as any);
 
-      expect(decodeWebpMock).toHaveBeenCalledWith('foo', 'bar');
+      expect(decodeWebpSpy).toHaveBeenCalledWith('foo', 'bar');
       expect(postMessageSpy).toHaveBeenCalledWith('result');
    });
 
@@ -38,7 +41,7 @@ describe(onmessage!, () => {
       });
 
       it('throws an error outside of the promise on rejections', async () => {
-         decodeWebpMock.mockRejectedValue('error');
+         decodeWebpSpy.mockRejectedValue('error');
          await (onmessage as Function)({
             data: {
                name: 'decodeWebpImage',
