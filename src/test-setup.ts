@@ -6,3 +6,5 @@ URL.revokeObjectURL = (): void => {};
 window.Worker = class {
    postMessage(): void {}
 } as any;
+
+window.onmessage = (): void => {};

@@ -5,7 +5,7 @@ const workerExports: WorkerExports = {
    ...webp,
 };
 
-globalThis.onmessage = async (event): Promise<void> => {
+onmessage = async (event): Promise<void> => {
    try {
       const data = event.data as WorkerMessage<keyof WorkerExports>;
       const result = await workerExports[data.name](...data.args);

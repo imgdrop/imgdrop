@@ -17,7 +17,7 @@ describe(globalThis.onmessage!, () => {
 
    it('it calls the specified function', async () => {
       decodeWebpMock.mockResolvedValue('result');
-      await (globalThis.onmessage as Function)({
+      await (onmessage as Function)({
          data: {
             name: 'decodeWebpImage',
             args: ['foo', 'bar'],
@@ -39,7 +39,7 @@ describe(globalThis.onmessage!, () => {
 
       it('throws an error outside of the promise on rejections', async () => {
          decodeWebpMock.mockRejectedValue('error');
-         await (globalThis.onmessage as Function)({
+         await (onmessage as Function)({
             data: {
                name: 'decodeWebpImage',
                args: [],
