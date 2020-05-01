@@ -12,7 +12,7 @@ describe(decodeImage, () => {
       decodeHTMLSpy.mockResolvedValue('image');
       const fileMock = {
          name: 'file.png',
-         type: 'image/png'
+         type: 'image/png',
       };
       await expect(decodeImage(fileMock as any)).resolves.toBe('image');
       expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);

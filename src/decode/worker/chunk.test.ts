@@ -1,5 +1,5 @@
 const webpMock = {
-   decodeWebpImage: jest.fn()
+   decodeWebpImage: jest.fn(),
 };
 
 jest.mock('./webp', () => webpMock);
