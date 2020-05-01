@@ -88,6 +88,7 @@ jobs:
     needs:
       - install
       - webp
+    if: false
     strategy:
       matrix:
         browser:
