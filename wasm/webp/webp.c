@@ -9,6 +9,10 @@ EMSCRIPTEN_KEEPALIVE uint8_t* decodeWebpImage(void) {
    void* data = readInput(&dataSize);
    uint8_t* rgba = WebPDecodeRGBA(data, dataSize, &webpWidth, &webpHeight);
    free(data);
+
+   if (rgba == NULL) {
+      abort();
+   }
    return rgba;
 }
 

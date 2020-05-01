@@ -33,19 +33,6 @@ export async function loadWasmModule<T>(
       },
    });
 
-   module.FS.mkdir('/wfs');
-   module.FS.mount(
-      module.FS.filesystems.WORKERFS,
-      {
-         blobs: [
-            {
-               name: 'input',
-               data: inputFile,
-            },
-         ],
-      },
-      '/wfs'
-   );
-
+   module.mountFile(inputFile);
    return module;
 }

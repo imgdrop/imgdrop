@@ -3,26 +3,14 @@ import { loadWasmModule } from './wasm';
 describe(loadWasmModule, () => {
    let moduleMock: {
       then?: string;
-      FS: {
-         filesystems: {
-            WORKERFS: string;
-         };
-         mkdir: jest.Mock;
-         mount: jest.Mock;
-      };
+      mountFile: jest.Mock;
    };
    let factoryMock: jest.Mock;
 
    beforeEach(() => {
       moduleMock = {
          then: 'then',
-         FS: {
-            filesystems: {
-               WORKERFS: 'workerfs',
-            },
-            mkdir: jest.fn(),
-            mount: jest.fn(),
-         },
+         mountFile: jest.fn()
       };
       factoryMock = jest.fn();
       factoryMock.mockReturnValue(moduleMock);
@@ -39,19 +27,7 @@ describe(loadWasmModule, () => {
       factoryMock.mock.calls[0][0].onRuntimeInitialized();
       await expect(promise).resolves.toBe(moduleMock);
       expect(moduleMock.then).toBeUndefined();
-      expect(moduleMock.FS.mkdir).toHaveBeenCalledWith('/wfs');
-      expect(moduleMock.FS.mount).toHaveBeenCalledWith(
-         'workerfs',
-         {
-            blobs: [
-               {
-                  name: 'input',
-                  data: 'file',
-               },
-            ],
-         },
-         '/wfs'
-      );
+      expect(moduleMock.mountFile).toHaveBeenCalledWith('file');
    });
 
    describe('memory', () => {
