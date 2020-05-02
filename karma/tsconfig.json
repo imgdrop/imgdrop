@@ -1,8 +1,0 @@
-{
-   "extends": "..",
-   "compilerOptions": {
-      "noEmit": false,
-      "sourceMap": true
-   },
-   "include": ["../**/*"]
-}
