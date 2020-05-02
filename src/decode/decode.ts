@@ -1,6 +1,7 @@
 import { readBlobData } from '../util/data';
 import { getPathExtension } from '../util/path';
 import { decodeHTMLImage } from './html';
+import { decodeJP2Image } from './jp2';
 import { checkWebpImage, decodeWebpImage } from './webp';
 
 export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
@@ -19,6 +20,16 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
       console.log('Trying WebP decoder...');
       try {
          return await decodeWebpImage(file);
+      } catch (error) {
+         console.warn(error);
+      }
+   }
+
+   // TODO: check header
+   // eslint-disable-next-line no-constant-condition
+   if (false) {
+      try {
+         return await decodeJP2Image(file);
       } catch (error) {
          console.warn(error);
       }

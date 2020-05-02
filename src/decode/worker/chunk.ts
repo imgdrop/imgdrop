@@ -1,8 +1,10 @@
+import * as jp2 from './jp2';
 import { WorkerExports, WorkerMessage } from './types';
 import * as webp from './webp';
 
 const workerExports: WorkerExports = {
    ...webp,
+   ...jp2,
 };
 
 onmessage = async (event): Promise<void> => {

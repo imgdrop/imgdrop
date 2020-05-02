@@ -29,34 +29,6 @@ const webglContext = new ValueCache(() => {
    return gl;
 });
 
-export function getColorContext(): WebGLRenderingContext;
-export function getColorContext(width: number, height: number): WebGLRenderingContext;
-export function getColorContext(width?: number, height?: number): WebGLRenderingContext {
-   const gl = webglContext.value;
-   if (width !== undefined && height !== undefined) {
-      gl.canvas.width = width;
-      gl.canvas.height = height;
-      gl.viewport(0, 0, width, height);
-   }
-   return gl;
-}
-
-export function useTexture(
-   program: WebGLProgram,
-   uniform: { variableName: string },
-   texture: number
-): void {
-   const gl = getColorContext();
-   gl.activeTexture(gl.TEXTURE0 + texture);
-   const location = gl.getUniformLocation(program, uniform.variableName);
-   gl.uniform1i(location, texture);
-}
-
-export function runShaderPass(): void {
-   const gl = getColorContext();
-   gl.drawArrays(gl.TRIANGLES, 0, 6);
-   const error = gl.getError();
-   if (error !== gl.NO_ERROR) {
-      throw new Error(`WebGL error: ${error}`);
-   }
+export function getColorContext(): WebGLRenderingContext {
+   return webglContext.value;
 }

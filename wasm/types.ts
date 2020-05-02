@@ -13,8 +13,16 @@ export interface EmscriptenWorkerOptions {
 }
 
 export type EmscriptenModule<T = {}> = EmscriptenOptions & T & {
-   then: unknown;
+   HEAP8: Int8Array;
    HEAPU8: Uint8Array;
+   HEAP16: Int16Array;
+   HEAPU16: Uint16Array;
+   HEAP32: Int32Array;
+   HEAPU32: Uint32Array;
+   HEAPF32: Float32Array;
+   HEAPF64: Float64Array;
+
+   then: unknown;
    mountFile(file: File): void;
 };
 

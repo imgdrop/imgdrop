@@ -5,10 +5,10 @@ JP2_MAKE = build/Makefile
 all: $(JP2_MAKE)
 	$(MAKE) -C build
 	emcc -o jp2.js build/bin/libopenjp2.a jp2.c $(LDFLAGS) \
-		-s FORCE_FILESYSTEM
+		-Ibuild/src/lib/openjp2
 
 $(JP2_MAKE):
-	emcmake cmake -B build -S openjpeg -LAH \
+	emcmake cmake -B build -S openjpeg \
 		-DBUILD_CODEC=OFF \
 		-DBUILD_PKGCONFIG_FILES=OFF \
 		-DBUILD_SHARED_LIBS=OFF \

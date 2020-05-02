@@ -1,5 +1,11 @@
+#ifndef WASM_UTIL_H
+#define WASM_UTIL_H
 #include <emscripten.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -16,3 +22,5 @@ static void* readInput(size_t* size) {
    close(file);
    return data;
 }
+
+#endif
