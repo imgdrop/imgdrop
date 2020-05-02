@@ -30,12 +30,29 @@ jobs:
           key: webp-${{ github.sha }}
           path: wasm/webp
 
+  jp2:
+    name: Build JPEG 2000
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+      - uses: mymindstorm/setup-emsdk@v4
+      - run: make -C wasm/jp2 -j4
+      - run: git submodule deinit wasm/jp2/openjpeg
+      - uses: actions/cache@v1
+        with:
+          key: jp2-${{ github.sha }}
+          path: wasm/jp2
+
   build:
     name: Build Website
     runs-on: ubuntu-latest
     needs:
       - install
       - webp
+      - jp2
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

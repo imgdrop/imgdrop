@@ -12,12 +12,11 @@ export interface EmscriptenWorkerOptions {
    }[];
 }
 
-export type EmscriptenModule<T = {}> = EmscriptenOptions &
-   T & {
-      then: unknown;
-      HEAPU8: Uint8Array;
-      mountFile(file: File): void;
-   };
+export type EmscriptenModule<T = {}> = EmscriptenOptions & T & {
+   then: unknown;
+   HEAPU8: Uint8Array;
+   mountFile(file: File): void;
+};
 
 export type EmscriptenFactory<T = {}> = (
    options: EmscriptenOptions

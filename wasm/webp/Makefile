@@ -20,3 +20,5 @@ $(WEBP_MAKE):
 clean:
 	$(WEBP_CD) git clean -fdX
 	rm webp.js webp.wasm
+
+.PHONY: all clean
