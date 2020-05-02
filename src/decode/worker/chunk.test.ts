@@ -3,7 +3,7 @@ import * as webp from './webp';
 import './chunk';
 
 jest.mock('./webp', () => ({
-   decodeWebpImage: jest.fn()
+   decodeWebpImage: jest.fn(),
 }));
 
 describe(onmessage!, () => {
@@ -19,8 +19,8 @@ describe(onmessage!, () => {
    it('it calls the specified function', async () => {
       const resultMock = {
          data: {
-            buffer: 'buffer'
-         }
+            buffer: 'buffer',
+         },
       };
       decodeWebpSpy.mockResolvedValue(resultMock);
 

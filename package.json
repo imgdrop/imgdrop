@@ -53,8 +53,7 @@
       "fix": "run-s fix:*",
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write",
-      "test": "jest --silent --collectCoverage",
-      "test-e2e": "karma start karma/karma.config.js --single-run"
+      "test": "jest --silent --collectCoverage"
    },
    "browserslist": [
       "chrome >= 57",
