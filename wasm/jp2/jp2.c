@@ -10,7 +10,6 @@ static void messageHandler(const char* msg, void* user) {
 
 EMSCRIPTEN_KEEPALIVE enum COLOR_SPACE decodeJP2Image(void) {
    opj_codec_t* codec = opj_create_decompress(OPJ_CODEC_JP2);
-   opj_set_info_handler(codec, messageHandler, NULL);
    opj_set_warning_handler(codec, messageHandler, NULL);
    opj_set_error_handler(codec, messageHandler, NULL);
 
