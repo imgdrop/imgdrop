@@ -99,6 +99,14 @@ export class ShaderCache extends ValueCache<WebGLProgram> {
       this.activeTexture += 1;
    }
 
+   uploadBlank(name: string): void {
+      this.uploadTexture(name, WebGLRenderingContext.LUMINANCE, new Uint8Array([0xff]), {
+         offset: 0,
+         width: 1,
+         height: 1,
+      });
+   }
+
    end(): HTMLCanvasElement {
       const gl = getColorContext();
       gl.drawArrays(gl.TRIANGLES, 0, 6);

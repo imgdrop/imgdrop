@@ -32,16 +32,7 @@ export function uploadPlanarRGBA(
    rgbaPlanarShader.uploadTexture('green', WebGLRenderingContext.LUMINANCE, data, green);
    rgbaPlanarShader.uploadTexture('blue', WebGLRenderingContext.LUMINANCE, data, blue);
    if (alpha === undefined) {
-      rgbaPlanarShader.uploadTexture(
-         'alpha',
-         WebGLRenderingContext.LUMINANCE,
-         new Uint8Array([0xff]),
-         {
-            offset: 0,
-            width: 1,
-            height: 1,
-         }
-      );
+      rgbaPlanarShader.uploadBlank('alpha');
    } else {
       rgbaPlanarShader.uploadTexture(
          'alpha',

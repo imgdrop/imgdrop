@@ -11,6 +11,6 @@ export async function decodeJP2Image(file: File): Promise<HTMLCanvasElement> {
       case 'rgb':
          return uploadPlanarRGBA(data, planes[0], planes[1], planes[2], planes[3]);
       default:
-         throw new Error(`Unknown JP2 worker format: ${format}`);
+         throw new Error(`Unsupported JPEG 2000 format: ${format}`);
    }
 }

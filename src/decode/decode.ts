@@ -28,6 +28,7 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    // TODO: check header
    // eslint-disable-next-line no-constant-condition
    if (false) {
+      console.log('Trying JPEG 2000 decoder...');
       try {
          return await decodeJP2Image(file);
       } catch (error) {

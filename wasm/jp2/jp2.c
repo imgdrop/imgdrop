@@ -4,14 +4,23 @@
 
 static opj_image_t* jp2Image;
 
-static void messageHandler(const char* msg, void* user) {
-   puts(msg);
-}
+EM_JS(void, infoHandler, (const char* msg, void* user), {
+   console.log(UTF8ToString(msg));
+});
+
+EM_JS(void, warningHandler, (const char* msg, void* user), {
+   console.warn(UTF8ToString(msg));
+});
+
+EM_JS(void, errorHandler, (const char* msg, void* user), {
+   console.error(UTF8ToString(msg));
+});
 
 EMSCRIPTEN_KEEPALIVE enum COLOR_SPACE decodeJP2Image(void) {
    opj_codec_t* codec = opj_create_decompress(OPJ_CODEC_JP2);
-   opj_set_warning_handler(codec, messageHandler, NULL);
-   opj_set_error_handler(codec, messageHandler, NULL);
+   opj_set_info_handler(codec, infoHandler, NULL);
+   opj_set_warning_handler(codec, warningHandler, NULL);
+   opj_set_error_handler(codec, errorHandler, NULL);
 
    opj_dparameters_t params;
    opj_set_default_decoder_parameters(&params);
