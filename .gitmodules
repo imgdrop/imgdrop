@@ -1,3 +1,6 @@
 [submodule "wasm/webp/libwebp"]
 	path = wasm/webp/libwebp
 	url = https://github.com/webmproject/libwebp.git
+[submodule "wasm/jp2/openjpeg"]
+	path = wasm/jp2/openjpeg
+	url = https://github.com/uclouvain/openjpeg.git
