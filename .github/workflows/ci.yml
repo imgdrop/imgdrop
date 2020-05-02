@@ -64,6 +64,10 @@ jobs:
         with:
           key: webp-${{ github.sha }}
           path: wasm/webp
+      - uses: actions/cache@v1
+        with:
+          key: jp2-${{ github.sha }}
+          path: wasm/jp2
       - run: yarn build
       - uses: actions/cache@v1
         with:

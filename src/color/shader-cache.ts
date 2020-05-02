@@ -33,7 +33,7 @@ export class ShaderCache extends ValueCache<WebGLProgram> {
       private readonly shaderMeta: {
          sourceCode: string;
          uniforms: {
-            [name: string]: {
+            [key: string]: {
                variableName: string;
             };
          };
