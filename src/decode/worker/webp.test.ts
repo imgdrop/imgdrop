@@ -22,14 +22,14 @@ describe(decodeWebpImage, () => {
          _getWebpWidth: jest.fn(),
          _getWebpHeight: jest.fn(),
       };
+      webpModuleMock._decodeWebpImage.mockReturnValue(1);
+      webpModuleMock._getWebpWidth.mockReturnValue(1);
+      webpModuleMock._getWebpHeight.mockReturnValue(2);
       loadWasmSpy = jest.spyOn(wasm, 'loadWasmModule');
       loadWasmSpy.mockResolvedValue(webpModuleMock);
    });
 
    it('decodes an image to RGBA', async () => {
-      webpModuleMock._decodeWebpImage.mockReturnValue(1);
-      webpModuleMock._getWebpWidth.mockReturnValue(1);
-      webpModuleMock._getWebpHeight.mockReturnValue(2);
       await expect(decodeWebpImage('file' as any)).resolves.toEqual({
          data: new Uint8Array([2, 3, 4, 5, 9, 8, 7, 6]),
          width: 1,
@@ -40,5 +40,10 @@ describe(decodeWebpImage, () => {
       expect(webpModuleMock._decodeWebpImage).toHaveBeenCalledWith();
       expect(webpModuleMock._getWebpWidth).toHaveBeenCalledWith();
       expect(webpModuleMock._getWebpHeight).toHaveBeenCalledWith();
+   });
+
+   it('creates a new buffer instead of returning the wasm memory', async () => {
+      const result = await decodeWebpImage('file' as any);
+      expect(result.data.buffer).not.toBe(webpModuleMock.HEAPU8.buffer);
    });
 });

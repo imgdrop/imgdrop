@@ -15,10 +15,8 @@ export async function decodeWebpImage(
    const dataPtr = module._decodeWebpImage();
    const width = module._getWebpWidth();
    const height = module._getWebpHeight();
-   // TODO: copy HEAPU8 here and transfer it instead
-   // (right now its making a copy of the whole WebAssembly.Memory buffer)
    return {
-      data: module.HEAPU8.subarray(dataPtr, dataPtr + width * height * 4),
+      data: module.HEAPU8.slice(dataPtr, dataPtr + width * height * 4),
       width,
       height,
    };

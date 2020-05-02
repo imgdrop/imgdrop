@@ -1,12 +1,10 @@
-const webpMock = {
-   decodeWebpImage: jest.fn(),
-};
-
-jest.mock('./webp', () => webpMock);
-
 /* eslint-disable import/first */
 import * as webp from './webp';
 import './chunk';
+
+jest.mock('./webp', () => ({
+   decodeWebpImage: jest.fn()
+}));
 
 describe(onmessage!, () => {
    let postMessageSpy: jest.SpyInstance;
@@ -19,7 +17,13 @@ describe(onmessage!, () => {
    });
 
    it('it calls the specified function', async () => {
-      decodeWebpSpy.mockResolvedValue('result');
+      const resultMock = {
+         data: {
+            buffer: 'buffer'
+         }
+      };
+      decodeWebpSpy.mockResolvedValue(resultMock);
+
       await (onmessage as Function)({
          data: {
             name: 'decodeWebpImage',
@@ -28,7 +32,7 @@ describe(onmessage!, () => {
       } as any);
 
       expect(decodeWebpSpy).toHaveBeenCalledWith('foo', 'bar');
-      expect(postMessageSpy).toHaveBeenCalledWith('result');
+      expect(postMessageSpy).toHaveBeenCalledWith(resultMock, ['buffer']);
    });
 
    describe('error', () => {
