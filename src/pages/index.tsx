@@ -9,12 +9,11 @@ const Index: React.FC = () => {
       <>
          <Helmet>
             <html lang='en' />
-            <title>Image Drop - Fast and Free Online Image Converter</title>
+            <title>Image Drop - Online Image Converter</title>
             <meta
                name='description'
                content={
                   'Just drop an image to instantly convert it to PNG. ' +
-                  'Very fast and always free. ' +
                   'Supports many different formats both new and old.'
                }
             />

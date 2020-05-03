@@ -106,6 +106,7 @@
                "src/test-setup.ts"
             ],
             "rules": {
+               "dot-notation": "off",
                "@typescript-eslint/no-explicit-any": "off",
                "@typescript-eslint/no-non-null-assertion": "off",
                "import/no-extraneous-dependencies": "off"
@@ -133,9 +134,6 @@
          "/node_modules/",
          "/.cache/"
       ],
-      "moduleNameMapper": {
-         "\\.glsl$": "<rootDir>/__mocks__/glsl-mock.ts"
-      },
       "setupFiles": [
          "<rootDir>/src/test-setup.ts"
       ],

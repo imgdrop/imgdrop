@@ -1,65 +1,54 @@
-import * as context from './context';
-import { uploadRGBA } from './rgba';
+import './rgba';
+import { shaderMocks } from './__mocks__/shader-cache-array';
+import { uploadRGBA, uploadPlanarRGBA } from './rgba';
 
-jest.mock('./rgba.glsl', () => ({
-   sourceCode: 'rgba(code)',
-   uniforms: {
-      rgba: 'rgba uniform',
-   },
-}));
+jest.mock('./rgba.glsl', () => 'rgba meta');
+jest.mock('./rgba-planar.glsl', () => 'rgba planar meta');
+jest.mock('./shader-cache');
 
-jest.mock('./shader-cache', () => ({
-   ShaderCache: class {
-      // eslint-disable-next-line class-methods-use-this
-      use(): string {
-         return 'program';
-      }
-   },
-}));
-
-describe.skip(uploadRGBA, () => {
-   let glMock: {
-      texImage2D: jest.Mock;
-      TEXTURE_2D: string;
-      RGBA: string;
-      UNSIGNED_BYTE: string;
-      canvas: string;
+beforeEach(() => {
+   const glMock = {
+      RGBA: 'RGBA',
+      LUMINANCE: 'luminance'
    };
-   let getContextSpy: jest.SpyInstance;
-   let useTextureSpy: jest.SpyInstance;
-   let runShaderSpy: jest.SpyInstance;
+   window.WebGLRenderingContext = glMock as any;
+});
 
-   beforeEach(() => {
-      glMock = {
-         texImage2D: jest.fn(),
-         TEXTURE_2D: 'texture 2D',
-         RGBA: 'RGBA',
-         UNSIGNED_BYTE: 'unsigned byte',
-         canvas: 'canvas',
-      };
-      getContextSpy = jest.spyOn(context, 'getColorContext');
-      getContextSpy.mockReturnValue(glMock);
-      // useTextureSpy = jest.spyOn(context, 'useTexture');
-      useTextureSpy.mockReturnValue(undefined);
-      // runShaderSpy = jest.spyOn(context, 'runShaderPass');
-      runShaderSpy.mockReturnValue(undefined);
-   });
+afterEach(() => {
+   delete window.WebGLRenderingContext;
+});
 
+it('creates RGBA and planar RGBA shaders', () => {
+   expect(shaderMocks[0].meta).toBe('rgba meta');
+   expect(shaderMocks[1].meta).toBe('rgba planar meta');
+});
+
+describe(uploadRGBA, () => {
    it('uploads the RGBA data to WebGL and returns the canvas', () => {
+      shaderMocks[0].end.mockReturnValue('canvas');
       expect(uploadRGBA('data' as any, 100, 200)).toBe('canvas');
-      expect(getContextSpy).toHaveBeenCalledWith(100, 200);
-      expect(useTextureSpy).toHaveBeenCalledWith('program', 'rgba uniform', 0);
-      expect(glMock.texImage2D).toHaveBeenCalledWith(
-         'texture 2D',
-         0,
-         'RGBA',
-         100,
-         200,
-         0,
-         'RGBA',
-         'unsigned byte',
-         'data'
-      );
-      expect(runShaderSpy).toHaveBeenCalledWith();
+      expect(shaderMocks[0].begin).toHaveBeenCalledWith(100, 200);
+      expect(shaderMocks[0].uploadTexture).toHaveBeenCalledWith('rgba', 'RGBA', 'data', {
+         offset: 0,
+         width: 100,
+         height: 200
+      });
+      expect(shaderMocks[0].end).toHaveBeenCalledWith();
+   });
+});
+
+describe(uploadPlanarRGBA, () => {
+   it('uploads the RGBA planar data to WebGL and returns the canvas', () => {
+      shaderMocks[1].end.mockReturnValue('canvas');
+      const redMock = {
+         width: 100,
+         height: 200
+      };
+      expect(uploadPlanarRGBA('data' as any, redMock as any, 'green' as any, 'blue' as any, 'alpha' as any));
+      expect(shaderMocks[1].begin).toHaveBeenCalledWith(100, 200);
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('red', 'luminance', 'data', redMock);
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('green', 'luminance', 'data', 'green');
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('blue', 'luminance', 'data', 'blue');
+      expect(shaderMocks[1].uploadOptionalTexture).toHaveBeenCalledWith('alpha', 'luminance', 'data', 'alpha');
    });
 });
