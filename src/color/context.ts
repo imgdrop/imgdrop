@@ -2,7 +2,7 @@ import { createContext } from '../util/util';
 import { ValueCache } from '../util/value-cache';
 
 const webglContext = new ValueCache(() => {
-   const gl = createContext(1, 1, 'webgl');
+   const gl = createContext(1, 1, 'webgl', { premultipliedAlpha: false });
    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
    // prettier-ignore
    gl.bufferData(gl.ARRAY_BUFFER, new Uint8Array([

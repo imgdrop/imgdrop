@@ -22,7 +22,7 @@ describe(createContext, () => {
       expect(createElementSpy).toHaveBeenCalledWith('canvas');
       expect(canvasMock.width).toBe(100);
       expect(canvasMock.height).toBe(200);
-      expect(canvasMock.getContext).toHaveBeenCalledWith('2d');
+      expect(canvasMock.getContext).toHaveBeenCalledWith('2d', undefined);
    });
 
    it('throws if getContext returns null', () => {

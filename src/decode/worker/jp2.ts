@@ -3,31 +3,15 @@ import wasm from '../../../wasm/jp2/jp2.wasm';
 import { rescaleDepth } from '../../color/depth';
 import { ColorPlane } from '../../color/types';
 import { loadWasmModule } from '../../util/wasm';
-import { JP2Format } from './types';
 
 /* eslint-disable no-underscore-dangle */
 
-function getFormatString(format: number): JP2Format {
-   switch (format) {
-      case 1:
-         return 'rgb';
-      case 2:
-         return 'gray';
-      case 3:
-      case 4:
-         return 'yuv';
-      case 5:
-         return 'cmyk';
-      default:
-         throw new Error(`Unknown OpenJPEG format: ${format}`);
-   }
-}
-
 export async function decodeJP2Image(
-   file: File
-): Promise<{ data: Uint8Array; format: JP2Format; planes: ColorPlane[] }> {
+   file: File,
+   codec: number
+): Promise<{ data: Uint8Array; format: number; planes: ColorPlane[] }> {
    const module = await loadWasmModule(js, wasm, file);
-   const format = getFormatString(module._decodeJP2Image());
+   const format = module._decodeJP2Image(codec);
    const planeCount = module._getJP2Planes();
    const planes: ColorPlane[] = [];
    let dataSize = 0;

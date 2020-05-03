@@ -16,8 +16,8 @@ EM_JS(void, errorHandler, (const char* msg, void* user), {
    console.error(UTF8ToString(msg));
 });
 
-EMSCRIPTEN_KEEPALIVE enum COLOR_SPACE decodeJP2Image(void) {
-   opj_codec_t* codec = opj_create_decompress(OPJ_CODEC_JP2);
+EMSCRIPTEN_KEEPALIVE OPJ_COLOR_SPACE decodeJP2Image(OPJ_CODEC_FORMAT codecType) {
+   opj_codec_t* codec = opj_create_decompress(codecType);
    opj_set_info_handler(codec, infoHandler, NULL);
    opj_set_warning_handler(codec, warningHandler, NULL);
    opj_set_error_handler(codec, errorHandler, NULL);

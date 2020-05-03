@@ -11,8 +11,8 @@ function niceStringify(data: any): string {
    return JSON.stringify(
       data,
       (key, value) => {
-         if (key === 'path') {
-            return `<removed>.${getPathExtension(value)}`;
+         if (value instanceof File) {
+            return `<file with extension ${getPathExtension(value.name)}>`;
          }
          if (value instanceof Uint8Array) {
             return `<${value.length} byte array>`;

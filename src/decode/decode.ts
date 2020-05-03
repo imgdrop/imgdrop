@@ -1,7 +1,7 @@
 import { readBlobData } from '../util/data';
 import { getPathExtension } from '../util/path';
 import { decodeHTMLImage } from './html';
-import { decodeJP2Image } from './jp2';
+import { checkJP2Image, decodeJP2Image } from './jp2';
 import { checkWebpImage, decodeWebpImage } from './webp';
 
 export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
@@ -25,12 +25,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
       }
    }
 
-   // TODO: check header
-   // eslint-disable-next-line no-constant-condition
-   if (false) {
+   const jp2Codec = checkJP2Image(header);
+   if (jp2Codec !== -1) {
       console.log('Trying JPEG 2000 decoder...');
       try {
-         return await decodeJP2Image(file);
+         return await decodeJP2Image(file, jp2Codec);
       } catch (error) {
          console.warn(error);
       }
