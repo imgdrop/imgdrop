@@ -1,4 +1,6 @@
+import { uploadPlanarGray } from '../color/gray';
 import { uploadPlanarRGBA } from '../color/rgba';
+import { uploadPlanarYUV } from '../color/yuv';
 import { checkData } from '../util/data';
 import { callWorker } from './worker/worker';
 
@@ -29,9 +31,8 @@ export async function decodeJP2Image(
    });
 
    let guessedFormat = format;
-   if (guessedFormat === 0) {
-      // OPJ_CLRSPC_UNSPECIFIED
-      console.warn('JPEG 2000 format not specified');
+   if (guessedFormat <= 0) {
+      // OPJ_CLRSPC_UNKNOWN or OPJ_CLRSPC_UNSPECIFIED
       if (planes.length <= 2) {
          guessedFormat = 2; // OPJ_CLRSPC_GRAY
       } else if (planes[0].width !== planes[1].width) {
@@ -39,11 +40,17 @@ export async function decodeJP2Image(
       } else {
          guessedFormat = 1; // OPJ_CLRSPC_SRGB
       }
+      console.warn(`Guessed JPEG 2000 format: ${guessedFormat}`);
    }
 
    switch (guessedFormat) {
       case 1: // OPJ_CLRSPC_SRGB
          return uploadPlanarRGBA(data, planes[0], planes[1], planes[2], planes[3]);
+      case 2: // OPJ_CLRSPC_GRAY
+         return uploadPlanarGray(data, planes[0], planes[1]);
+      case 3: // OPJ_CLRSPC_SYCC
+      case 4: // OPJ_CLRSPC_EYCC
+         return uploadPlanarYUV(data, planes[0], planes[1], planes[2], planes[3]);
       default:
          throw new Error(`Unknown OpenJPEG format: ${guessedFormat}`);
    }

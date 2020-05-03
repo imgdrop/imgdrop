@@ -99,12 +99,26 @@ export class ShaderCache extends ValueCache<WebGLProgram> {
       this.activeTexture += 1;
    }
 
-   uploadBlank(name: string): void {
-      this.uploadTexture(name, WebGLRenderingContext.LUMINANCE, new Uint8Array([0xff]), {
-         offset: 0,
-         width: 1,
-         height: 1,
-      });
+   uploadOptionalTexture(
+      name: string,
+      format: number,
+      data: Uint8Array,
+      plane?: ColorPlane
+   ): void {
+      if (plane === undefined) {
+         this.uploadTexture(
+            name,
+            WebGLRenderingContext.LUMINANCE,
+            new Uint8Array([0xff]),
+            {
+               offset: 0,
+               width: 1,
+               height: 1,
+            }
+         );
+      } else {
+         this.uploadTexture(name, format, data, plane);
+      }
    }
 
    end(): HTMLCanvasElement {

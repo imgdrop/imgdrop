@@ -31,15 +31,11 @@ export function uploadPlanarRGBA(
    rgbaPlanarShader.uploadTexture('red', WebGLRenderingContext.LUMINANCE, data, red);
    rgbaPlanarShader.uploadTexture('green', WebGLRenderingContext.LUMINANCE, data, green);
    rgbaPlanarShader.uploadTexture('blue', WebGLRenderingContext.LUMINANCE, data, blue);
-   if (alpha === undefined) {
-      rgbaPlanarShader.uploadBlank('alpha');
-   } else {
-      rgbaPlanarShader.uploadTexture(
-         'alpha',
-         WebGLRenderingContext.LUMINANCE,
-         data,
-         alpha
-      );
-   }
+   rgbaPlanarShader.uploadOptionalTexture(
+      'alpha',
+      WebGLRenderingContext.LUMINANCE,
+      data,
+      alpha
+   );
    return rgbaPlanarShader.end();
 }

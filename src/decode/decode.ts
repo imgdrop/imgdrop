@@ -26,7 +26,7 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    }
 
    const jp2Codec = checkJP2Image(header);
-   if (jp2Codec !== -1) {
+   if (jp2Codec >= 0) {
       console.log('Trying JPEG 2000 decoder...');
       try {
          return await decodeJP2Image(file, jp2Codec);
