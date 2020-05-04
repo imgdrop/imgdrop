@@ -27,9 +27,9 @@ export function callWorker<E extends keyof WorkerExports>(
    data: WorkerMessage<E>
 ): Promise<ReturnType<WorkerExports[E]>> {
    return new Promise((resolve, reject) => {
-      console.log(`Worker call: ${niceStringify(data)}`);
+      console.debug(`Worker call: ${niceStringify(data)}`);
       decodeWorker.onmessage = (event): void => {
-         console.log(`Worker message: ${niceStringify(event.data)}`);
+         console.debug(`Worker message: ${niceStringify(event.data)}`);
          resolve(event.data);
       };
       decodeWorker.onerror = (event): void => reject(new Error(event.message));

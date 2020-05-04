@@ -5,7 +5,7 @@
 static opj_image_t* jp2Image;
 
 EM_JS(void, infoHandler, (const char* msg, void* user), {
-   console.log(UTF8ToString(msg));
+   console.debug(UTF8ToString(msg));
 });
 
 EM_JS(void, warningHandler, (const char* msg, void* user), {

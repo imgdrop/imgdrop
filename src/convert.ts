@@ -22,6 +22,7 @@ async function convertImageQueued(file: File): Promise<void> {
       console.warn('Previous conversion failed:', error);
    }
 
+   const startTime = performance.now();
    const image = await decodeImage(file);
    const blob = await encodeImage(image, 'image/png');
    const link = document.createElement('a');
@@ -29,6 +30,7 @@ async function convertImageQueued(file: File): Promise<void> {
    link.download = `${getPathBasename(file.name)}.png`;
    link.click();
    URL.revokeObjectURL(link.href);
+   console.log(`Conversion time: ${Math.ceil(performance.now() - startTime)}ms`);
 }
 
 export function convertImage(file: File): Promise<void> {
