@@ -8,6 +8,9 @@ export interface WorkerExports {
       file: File,
       codec: number
    ): Promise<{ data: Uint8Array; format: number; planes: ColorPlane[] }>;
+   decodeRawImage(
+      file: File
+   ): Promise<{ data: Uint8Array; width: number; height: number }>;
 }
 
 export interface WorkerMessage<E extends keyof WorkerExports> {

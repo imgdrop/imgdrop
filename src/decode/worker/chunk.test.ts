@@ -7,6 +7,7 @@ jest.mock('./webp', () => ({
 }));
 
 jest.mock('./jp2', () => ({}));
+jest.mock('./raw', () => ({}));
 
 describe(onmessage!, () => {
    let postMessageSpy: jest.SpyInstance;

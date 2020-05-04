@@ -39,3 +39,17 @@ export function uploadPlanarRGBA(
    );
    return rgbaPlanarShader.end();
 }
+
+export function uploadRGB(
+   data: Uint8Array,
+   width: number,
+   height: number
+): HTMLCanvasElement {
+   rgbaShader.begin(width, height);
+   rgbaShader.uploadTexture('rgba', WebGLRenderingContext.RGB, data, {
+      offset: 0,
+      width,
+      height,
+   });
+   return rgbaShader.end();
+}
