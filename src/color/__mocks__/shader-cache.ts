@@ -10,7 +10,6 @@ export class ShaderCache {
    end = jest.fn();
 
    constructor(public meta: string) {
-      console.warn(meta);
       shaderMocks.push(this);
    }
 }

@@ -1,17 +1,15 @@
-import './rgba';
 import { shaderMocks } from './__mocks__/shader-cache-array';
-import { uploadRGBA, uploadPlanarRGBA } from './rgba';
+import { uploadPlanarRGBA, uploadRGBA } from './rgba';
 
 jest.mock('./rgba.glsl', () => 'rgba meta');
 jest.mock('./rgba-planar.glsl', () => 'rgba planar meta');
 jest.mock('./shader-cache');
 
 beforeEach(() => {
-   const glMock = {
+   window.WebGLRenderingContext = {
       RGBA: 'RGBA',
-      LUMINANCE: 'luminance'
-   };
-   window.WebGLRenderingContext = glMock as any;
+      LUMINANCE: 'luminance',
+   } as any;
 });
 
 afterEach(() => {
@@ -31,7 +29,7 @@ describe(uploadRGBA, () => {
       expect(shaderMocks[0].uploadTexture).toHaveBeenCalledWith('rgba', 'RGBA', 'data', {
          offset: 0,
          width: 100,
-         height: 200
+         height: 200,
       });
       expect(shaderMocks[0].end).toHaveBeenCalledWith();
    });
@@ -42,13 +40,41 @@ describe(uploadPlanarRGBA, () => {
       shaderMocks[1].end.mockReturnValue('canvas');
       const redMock = {
          width: 100,
-         height: 200
+         height: 200,
       };
-      expect(uploadPlanarRGBA('data' as any, redMock as any, 'green' as any, 'blue' as any, 'alpha' as any));
+      expect(
+         uploadPlanarRGBA(
+            'data' as any,
+            redMock as any,
+            'green' as any,
+            'blue' as any,
+            'alpha' as any
+         )
+      );
       expect(shaderMocks[1].begin).toHaveBeenCalledWith(100, 200);
-      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('red', 'luminance', 'data', redMock);
-      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('green', 'luminance', 'data', 'green');
-      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith('blue', 'luminance', 'data', 'blue');
-      expect(shaderMocks[1].uploadOptionalTexture).toHaveBeenCalledWith('alpha', 'luminance', 'data', 'alpha');
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith(
+         'red',
+         'luminance',
+         'data',
+         redMock
+      );
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith(
+         'green',
+         'luminance',
+         'data',
+         'green'
+      );
+      expect(shaderMocks[1].uploadTexture).toHaveBeenCalledWith(
+         'blue',
+         'luminance',
+         'data',
+         'blue'
+      );
+      expect(shaderMocks[1].uploadOptionalTexture).toHaveBeenCalledWith(
+         'alpha',
+         'luminance',
+         'data',
+         'alpha'
+      );
    });
 });

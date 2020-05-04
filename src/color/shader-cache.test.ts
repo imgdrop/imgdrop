@@ -45,7 +45,7 @@ describe(ShaderCache, () => {
       canvas: {
          width?: number;
          height?: number;
-      }
+      };
    };
    let getContextSpy: jest.SpyInstance;
    let shaderMetaMock: {
@@ -53,8 +53,8 @@ describe(ShaderCache, () => {
       uniforms: {
          uniform: {
             variableName: string;
-         }
-      }
+         };
+      };
    };
    let shaderCache: ShaderCache;
 
@@ -90,7 +90,7 @@ describe(ShaderCache, () => {
          LUMINANCE: 'luminance',
          TRIANGLES: 'triangles',
          NO_ERROR: 'no error',
-         canvas: {}
+         canvas: {},
       };
       glMock.createShader.mockReturnValueOnce('vertex object');
       glMock.createShader.mockReturnValue('fragment object');
@@ -107,10 +107,10 @@ describe(ShaderCache, () => {
          sourceCode: 'fragment(code)',
          uniforms: {
             uniform: {
-               variableName: 'var'
-            }
-         }
-      }
+               variableName: 'var',
+            },
+         },
+      };
       shaderCache = new ShaderCache(shaderMetaMock);
    });
 
@@ -261,25 +261,45 @@ describe(ShaderCache, () => {
 
       it('uploads the data to the current active texture', () => {
          shaderCache['activeTexture'] = 1;
-         shaderCache.uploadTexture('uniform', 'format' as any, new Uint8Array([1, 2, 3, 4, 5]), {
-            offset: 1,
-            width: 100,
-            height: 200
-         });
+         shaderCache.uploadTexture(
+            'uniform',
+            'format' as any,
+            new Uint8Array([1, 2, 3, 4, 5]),
+            {
+               offset: 1,
+               width: 100,
+               height: 200,
+            }
+         );
 
          expect(glMock.activeTexture).toHaveBeenCalledWith(11);
          expect(glMock.getUniformLocation).toHaveBeenCalledWith('program object', 'var');
          expect(glMock.uniform1i).toHaveBeenCalledWith('location', 1);
-         expect(glMock.texImage2D).toHaveBeenCalledWith('texture 2D', 0, 'format', 100, 200, 0, 'format', 'unsigned byte', new Uint8Array([2, 3, 4, 5]));
+         expect(glMock.texImage2D).toHaveBeenCalledWith(
+            'texture 2D',
+            0,
+            'format',
+            100,
+            200,
+            0,
+            'format',
+            'unsigned byte',
+            new Uint8Array([2, 3, 4, 5])
+         );
       });
 
       it('increments the current active texture', () => {
          shaderCache['activeTexture'] = 1;
-         shaderCache.uploadTexture('uniform', 'format' as any, new Uint8Array([1, 2, 3, 4, 5]), {
-            offset: 0,
-            width: 100,
-            height: 200
-         });
+         shaderCache.uploadTexture(
+            'uniform',
+            'format' as any,
+            new Uint8Array([1, 2, 3, 4, 5]),
+            {
+               offset: 0,
+               width: 100,
+               height: 200,
+            }
+         );
          expect(shaderCache['activeTexture']).toBe(2);
       });
    });
@@ -290,25 +310,55 @@ describe(ShaderCache, () => {
       });
 
       it('uploads the data when the plane is defined', () => {
-         shaderCache.uploadOptionalTexture('uniform', 'format' as any, new Uint8Array([1, 2, 3, 4, 5]), {
-            offset: 1,
-            width: 100,
-            height: 200
-         });
+         shaderCache.uploadOptionalTexture(
+            'uniform',
+            'format' as any,
+            new Uint8Array([1, 2, 3, 4, 5]),
+            {
+               offset: 1,
+               width: 100,
+               height: 200,
+            }
+         );
 
          expect(glMock.activeTexture).toHaveBeenCalledWith(10);
          expect(glMock.getUniformLocation).toHaveBeenCalledWith('program object', 'var');
          expect(glMock.uniform1i).toHaveBeenCalledWith('location', 0);
-         expect(glMock.texImage2D).toHaveBeenCalledWith('texture 2D', 0, 'format', 100, 200, 0, 'format', 'unsigned byte', new Uint8Array([2, 3, 4, 5]));
+         expect(glMock.texImage2D).toHaveBeenCalledWith(
+            'texture 2D',
+            0,
+            'format',
+            100,
+            200,
+            0,
+            'format',
+            'unsigned byte',
+            new Uint8Array([2, 3, 4, 5])
+         );
       });
 
       it('uploads a blank image when the plane is not defined', () => {
-         shaderCache.uploadOptionalTexture('uniform', 'format' as any, new Uint8Array([1, 2, 3, 4, 5]), undefined);
+         shaderCache.uploadOptionalTexture(
+            'uniform',
+            'format' as any,
+            new Uint8Array([1, 2, 3, 4, 5]),
+            undefined
+         );
 
          expect(glMock.activeTexture).toHaveBeenCalledWith(10);
          expect(glMock.getUniformLocation).toHaveBeenCalledWith('program object', 'var');
          expect(glMock.uniform1i).toHaveBeenCalledWith('location', 0);
-         expect(glMock.texImage2D).toHaveBeenCalledWith('texture 2D', 0, 'luminance', 1, 1, 0, 'luminance', 'unsigned byte', new Uint8Array([0xFF]));
+         expect(glMock.texImage2D).toHaveBeenCalledWith(
+            'texture 2D',
+            0,
+            'luminance',
+            1,
+            1,
+            0,
+            'luminance',
+            'unsigned byte',
+            new Uint8Array([0xff])
+         );
       });
    });
 
