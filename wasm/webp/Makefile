@@ -21,4 +21,7 @@ clean:
 	$(WEBP_CD) git clean -fdX
 	rm webp.js webp.wasm
 
-.PHONY: all clean
+ci: all
+	git submodule deinit libwebp
+
+.PHONY: all clean ci

@@ -19,4 +19,8 @@ $(RAW_MAKE):
 clean:
 	rm -r build raw.js raw.wasm
 
-.PHONY: all clean
+ci: all
+	git submodule deinit libraw
+	rm -r build
+
+.PHONY: all clean ci

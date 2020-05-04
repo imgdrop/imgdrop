@@ -23,8 +23,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/webp -j4
-      - run: git submodule deinit wasm/webp/libwebp
+      - run: make -C wasm/webp ci -j4
       - uses: actions/cache@v1
         with:
           key: webp-${{ github.sha }}
@@ -39,8 +38,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/jp2 -j4
-      - run: git submodule deinit wasm/jp2/openjpeg
+      - run: make -C wasm/jp2 ci -j4
       - uses: actions/cache@v1
         with:
           key: jp2-${{ github.sha }}
@@ -55,8 +53,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/raw -j4
-      - run: git submodule deinit wasm/raw/libraw
+      - run: make -C wasm/raw ci -j4
       - uses: actions/cache@v1
         with:
           key: raw-${{ github.sha }}

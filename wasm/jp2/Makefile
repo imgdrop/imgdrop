@@ -20,4 +20,8 @@ $(JP2_MAKE):
 clean:
 	rm -r build jp2.js jp2.wasm
 
-.PHONY: all clean
+ci: all
+	git submodule deinit openjpeg
+	rm -r build
+
+.PHONY: all clean ci
