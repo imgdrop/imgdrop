@@ -4,3 +4,6 @@
 [submodule "wasm/jp2/openjpeg"]
 	path = wasm/jp2/openjpeg
 	url = https://github.com/uclouvain/openjpeg.git
+[submodule "wasm/raw/libraw"]
+	path = wasm/raw/libraw
+	url = https://github.com/LibRaw/LibRaw.git
