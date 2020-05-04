@@ -46,6 +46,22 @@ jobs:
           key: jp2-${{ github.sha }}
           path: wasm/jp2
 
+  raw:
+    name: Build LibRaw
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+      - uses: mymindstorm/setup-emsdk@v4
+      - run: make -C wasm/raw -j4
+      - run: git submodule deinit wasm/raw/libraw
+      - uses: actions/cache@v1
+        with:
+          key: raw-${{ github.sha }}
+          path: wasm/raw
+
   build:
     name: Build Website
     runs-on: ubuntu-latest
@@ -53,6 +69,7 @@ jobs:
       - install
       - webp
       - jp2
+      - raw
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -68,6 +85,10 @@ jobs:
         with:
           key: jp2-${{ github.sha }}
           path: wasm/jp2
+      - uses: actions/cache@v1
+        with:
+          key: raw-${{ github.sha }}
+          path: wasm/raw
       - run: yarn build
       - uses: actions/cache@v1
         with:
