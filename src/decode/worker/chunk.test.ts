@@ -6,6 +6,7 @@ jest.mock('./webp', () => ({
    decodeWebpImage: jest.fn(),
 }));
 
+jest.mock('./tiff', () => ({}));
 jest.mock('./jp2', () => ({}));
 jest.mock('./raw', () => ({}));
 

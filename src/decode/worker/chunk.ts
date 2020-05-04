@@ -1,10 +1,12 @@
 import * as jp2 from './jp2';
 import * as raw from './raw';
+import * as tiff from './tiff';
 import { WorkerExports, WorkerMessage } from './types';
 import * as webp from './webp';
 
 const workerExports: WorkerExports = {
    ...webp,
+   ...tiff,
    ...jp2,
    ...raw,
 };

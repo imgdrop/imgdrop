@@ -3,6 +3,7 @@ import { getPathExtension } from '../util/path';
 import { decodeHTMLImage } from './html';
 import { checkJP2Image, decodeJP2Image } from './jp2';
 import { decodeRawImage } from './raw';
+import { checkTiffImage, decodeTiffImage } from './tiff';
 import { checkWebpImage, decodeWebpImage } from './webp';
 
 export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
@@ -33,6 +34,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
       return await decodeRawImage(file);
    } catch (error) {
       console.warn(error);
+   }
+
+   if (checkTiffImage(header)) {
+      console.debug('Trying TIFF decoder...');
+      return decodeTiffImage(file);
    }
 
    throw new Error(

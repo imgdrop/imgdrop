@@ -1,4 +1,4 @@
-const chunkPromise = import('./chunk');
+const chunkPromise = import(/* webpackChunkName: 'logging' */ './chunk');
 
 export async function logError(error: Error): Promise<void> {
    console.error(error);

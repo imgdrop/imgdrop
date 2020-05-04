@@ -4,6 +4,9 @@ export interface WorkerExports {
    decodeWebpImage(
       file: File
    ): Promise<{ data: Uint8Array; width: number; height: number }>;
+   decodeTiffImage(
+      file: File
+   ): Promise<{ data: Uint8Array; width: number; height: number }>;
    decodeJP2Image(
       file: File,
       codec: number
