@@ -15,8 +15,8 @@ export async function decodeTiffImage(
    const ifd = utif.decode(buffer)[0];
    const compression = ifd.t259 as [number];
    if (compression[0] === 32946) {
-      console.warn('Assuming official deflate compression');
       compression[0] = 8;
+      console.warn('Guessed TIFF compression: ZLib');
    }
    if (!supportedCompression.includes(compression[0])) {
       throw new Error(`Unsupported compression: ${compression[0]}`);

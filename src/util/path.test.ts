@@ -12,6 +12,10 @@ describe(getPathExtension, () => {
    it('returns an empty string if there are no dots', () => {
       expect(getPathExtension('path-none')).toBe('');
    });
+
+   it('makes sure the returned string is lowercase', () => {
+      expect(getPathExtension('PATH.PNG')).toBe('png');
+   });
 });
 
 describe(getPathBasename, () => {

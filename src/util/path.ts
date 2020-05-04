@@ -3,7 +3,7 @@ export function getPathExtension(path: string): string {
    if (dotIndex === -1) {
       return '';
    }
-   return path.substr(dotIndex + 1);
+   return path.substr(dotIndex + 1).toLowerCase();
 }
 
 export function getPathBasename(path: string): string {
