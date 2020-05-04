@@ -14,59 +14,33 @@ jobs:
           key: install-${{ github.sha }}
           path: node_modules
 
-  webp:
-    name: Build WebP
+  wasm:
+    name: Build WebAssembly
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        library:
+          - webp
+          - jp2
+          - raw
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - uses: actions/setup-node@v1
       - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/webp ci -j4
+      - run: make -C wasm/${{ matrix.library }} ci -j4
       - uses: actions/cache@v1
         with:
-          key: webp-${{ github.sha }}
-          path: wasm/webp
-
-  jp2:
-    name: Build JPEG 2000
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - uses: actions/setup-node@v1
-      - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/jp2 ci -j4
-      - uses: actions/cache@v1
-        with:
-          key: jp2-${{ github.sha }}
-          path: wasm/jp2
-
-  raw:
-    name: Build LibRaw
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - uses: actions/setup-node@v1
-      - uses: mymindstorm/setup-emsdk@v4
-      - run: make -C wasm/raw ci -j4
-      - uses: actions/cache@v1
-        with:
-          key: raw-${{ github.sha }}
-          path: wasm/raw
+          key: ${{ matrix.library }}-${{ github.sha }}
+          path: wasm/${{ matrix.library }}
 
   build:
     name: Build Website
     runs-on: ubuntu-latest
     needs:
       - install
-      - webp
-      - jp2
-      - raw
+      - wasm
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
