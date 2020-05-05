@@ -12,4 +12,4 @@
 	url = https://github.com/strukturag/libheif.git
 [submodule "wasm/heif/libde265"]
 	path = wasm/heif/libde265
-	url = https://github.com/strukturag/libde265.git
+	url = https://github.com/imgdrop/libde265.git

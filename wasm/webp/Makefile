@@ -18,10 +18,10 @@ $(WEBP_MAKE):
 	$(WEBP_CD) rm a.out*
 
 clean:
-	$(WEBP_CD) git clean -fdX
+	$(WEBP_CD) $(GIT_CLEAN)
 	rm webp.js webp.wasm
 
 ci: all
-	git submodule deinit libwebp
+	$(GIT_DEINIT) libwebp
 
 .PHONY: all clean ci
