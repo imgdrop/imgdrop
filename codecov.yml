@@ -1,4 +1,8 @@
 coverage:
   status:
+    project:
+      default:
+        target: 90%
     patch:
-      target: 80%
+      default:
+        target: 80%
