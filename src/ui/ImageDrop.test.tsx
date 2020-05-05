@@ -58,7 +58,7 @@ describe(ImageDrop, () => {
       expect(renderer.toJSON()).toEqual(activeJson);
    });
 
-   it('calls the provided callback when a file is dropped', () => {
+   it.skip('calls the provided callback when a file is dropped', () => {
       createRenderer();
       expect(useDropzoneSpy).toHaveBeenCalledWith({
          onDrop: expect.any(Function),

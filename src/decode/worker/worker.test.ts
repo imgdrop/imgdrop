@@ -48,7 +48,7 @@ describe('callWorker', () => {
       const promise = workerModule.callWorker('data');
       const errorMock = {
          preventDefault: jest.fn(),
-         message: 'error'
+         message: 'error',
       };
       workerMock.onerror!(errorMock as any);
       await expect(promise).rejects.toBeInstanceOf(Error);

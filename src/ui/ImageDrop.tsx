@@ -54,15 +54,13 @@ const useStyles = makeStyles((theme) =>
 );
 
 export interface ImageDropProps {
-   onImageDropped(file: File): void;
+   onImageDropped(files: File[]): void;
 }
 
 export const ImageDrop: React.FC<ImageDropProps> = ({ onImageDropped }) => {
    const classes = useStyles();
    const { getRootProps, getInputProps, isDragActive, isFileDialogActive } = useDropzone({
-      onDrop(files) {
-         files.forEach((file) => onImageDropped(file));
-      },
+      onDrop: (files) => onImageDropped(files),
    });
 
    const isActive = isDragActive || isFileDialogActive;

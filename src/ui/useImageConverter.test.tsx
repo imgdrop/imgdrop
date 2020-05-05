@@ -4,7 +4,7 @@ import * as logging from '../logging/logging';
 import { timeoutPromise } from '../util/util';
 import { useImageConverter } from './useImageConverter';
 
-describe(useImageConverter, () => {
+describe.skip(useImageConverter, () => {
    let snackbarMock: {
       enqueueSnackbar: jest.Mock;
    };

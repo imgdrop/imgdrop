@@ -19,7 +19,7 @@ const Index: React.FC = () => {
             />
          </Helmet>
          <CssBaseline />
-         <SnackbarProvider>
+         <SnackbarProvider maxSnack={5}>
             <App />
          </SnackbarProvider>
       </>
