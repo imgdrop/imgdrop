@@ -7,8 +7,10 @@ describe(ImageDrop, () => {
    let useDropzoneSpy: jest.SpyInstance;
    let imageDroppedMock: jest.Mock;
 
-   const createRenderer = (): TestRenderer.ReactTestRenderer => {
-      return TestRenderer.create(<ImageDrop onImageDropped={imageDroppedMock} />);
+   const createRenderer = (imageName?: string): TestRenderer.ReactTestRenderer => {
+      return TestRenderer.create(
+         <ImageDrop imageName={imageName} onImageDropped={imageDroppedMock} />
+      );
    };
 
    beforeEach(() => {
@@ -18,6 +20,11 @@ describe(ImageDrop, () => {
 
    it('matches the snapshot', () => {
       const renderer = createRenderer();
+      expect(renderer.toJSON()).toMatchSnapshot();
+   });
+
+   it('matches the snapshot when provided a name', () => {
+      const renderer = createRenderer('PNG');
       expect(renderer.toJSON()).toMatchSnapshot();
    });
 

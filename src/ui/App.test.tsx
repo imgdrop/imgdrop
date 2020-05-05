@@ -24,4 +24,9 @@ describe(App, () => {
       renderer.root.findByType(ImageDrop).props.onImageDropped('file');
       expect(convertImageMock).toHaveBeenCalledWith('file');
    });
+
+   it('passes through the image name to ImageDrop', () => {
+      renderer = TestRenderer.create(<App imageName='png' />);
+      expect(renderer.root.findByType(ImageDrop).props.imageName).toBe('png');
+   });
 });
