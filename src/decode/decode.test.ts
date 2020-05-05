@@ -1,17 +1,23 @@
 import { decodeImage } from './decode';
 import * as html from './html';
 import * as jp2 from './jp2';
+import * as raw from './raw';
+import * as tiff from './tiff';
 import * as webp from './webp';
 
 describe(decodeImage, () => {
    let decodeHTMLSpy: jest.SpyInstance;
    let decodeWebpSpy: jest.SpyInstance;
+   let decodeTiffSpy: jest.SpyInstance;
    let decodeJP2Spy: jest.SpyInstance;
+   let decodeRawSpy: jest.SpyInstance;
 
    beforeEach(() => {
       decodeHTMLSpy = jest.spyOn(html, 'decodeHTMLImage');
       decodeWebpSpy = jest.spyOn(webp, 'decodeWebpImage');
       decodeJP2Spy = jest.spyOn(jp2, 'decodeJP2Image');
+      decodeTiffSpy = jest.spyOn(tiff, 'decodeTiffImage');
+      decodeRawSpy = jest.spyOn(raw, 'decodeRawImage');
    });
 
    describe('HTML', () => {
@@ -23,11 +29,6 @@ describe(decodeImage, () => {
          };
          await expect(decodeImage(fileMock as any)).resolves.toBe('image');
          expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
-      });
-
-      it.skip('rejects if HTML fails and theres no other decoders', async () => {
-         decodeHTMLSpy.mockRejectedValue('error');
-         await expect(decodeImage(new File([], 'file'))).rejects.toBeInstanceOf(Error);
       });
    });
 
@@ -56,6 +57,35 @@ describe(decodeImage, () => {
          decodeHTMLSpy.mockRejectedValue('error');
          decodeWebpSpy.mockRejectedValue('webp error');
          await expect(decodeImage(fileMock)).rejects.toBe('webp error');
+      });
+   });
+
+   describe('TIFF', () => {
+      let fileMock: File;
+
+      beforeEach(() => {
+         // prettier-ignore
+         fileMock = new File([new Uint8Array([
+            0x49, 0x49, 0x2A, 0x00,
+            0x11, 0x22, 0x33, 0x44,
+         ])], 'file');
+      });
+
+      it('decodes using TIFF if HTML/raw fails and its a TIFF image', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeRawSpy.mockRejectedValue('error');
+         decodeTiffSpy.mockResolvedValue('tiff');
+         await expect(decodeImage(fileMock)).resolves.toBe('tiff');
+         expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
+         expect(decodeRawSpy).toHaveBeenCalledWith(fileMock);
+         expect(decodeTiffSpy).toHaveBeenCalledWith(fileMock);
+      });
+
+      it('rejects if HTML/raw fails and TIFF fails', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeRawSpy.mockRejectedValue('error');
+         decodeTiffSpy.mockRejectedValue('tiff error');
+         await expect(decodeImage(fileMock)).rejects.toBe('tiff error');
       });
    });
 
@@ -99,6 +129,26 @@ describe(decodeImage, () => {
          decodeHTMLSpy.mockRejectedValue('error');
          decodeJP2Spy.mockRejectedValue('jp2 error');
          await expect(decodeImage(jp2FileMock)).rejects.toBe('jp2 error');
+      });
+   });
+
+   describe('raw', () => {
+      let fileMock: File;
+
+      beforeEach(() => {
+         fileMock = new File([], 'file');
+      });
+
+      it('decodes using raw if HTML fails', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeRawSpy.mockResolvedValue('raw');
+         await expect(decodeImage(fileMock)).resolves.toBe('raw');
+      });
+
+      it('rejects if HTML and raw fails and theres no other decoders', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeRawSpy.mockRejectedValue('error');
+         await expect(decodeImage(fileMock)).rejects.toBeInstanceOf(Error);
       });
    });
 });

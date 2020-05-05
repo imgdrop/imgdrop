@@ -29,10 +29,14 @@ describe('callWorker', () => {
       expect(workerMock.onmessage).toBeInstanceOf(Function);
       expect(workerMock.onerror).toBeInstanceOf(Function);
 
+      const dataMock = {
+         file: new File([], 'file'),
+         buffer: new Uint8Array(),
+      };
       workerMock.onmessage!({
-         data: 'response',
+         data: dataMock,
       } as any);
-      await expect(promise).resolves.toBe('response');
+      await expect(promise).resolves.toBe(dataMock);
    });
 
    it('rejects if the worker throws an error', async () => {

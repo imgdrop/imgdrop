@@ -58,14 +58,13 @@ describe(ImageDrop, () => {
       expect(renderer.toJSON()).toEqual(activeJson);
    });
 
-   it.skip('calls the provided callback when a file is dropped', () => {
+   it('calls the provided callback when a file is dropped', () => {
       createRenderer();
       expect(useDropzoneSpy).toHaveBeenCalledWith({
          onDrop: expect.any(Function),
       });
 
       useDropzoneSpy.mock.calls[0][0].onDrop(['file', 'image']);
-      expect(imageDroppedMock).toHaveBeenCalledWith('file');
-      expect(imageDroppedMock).toHaveBeenCalledWith('image');
+      expect(imageDroppedMock).toHaveBeenCalledWith(['file', 'image']);
    });
 });

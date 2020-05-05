@@ -1,5 +1,5 @@
 import { shaderMocks } from './__mocks__/shader-cache-array';
-import { uploadPlanarRGBA, uploadRGBA } from './rgba';
+import { uploadPlanarRGBA, uploadRGB, uploadRGBA } from './rgba';
 
 jest.mock('./rgba.glsl', () => 'rgba meta');
 jest.mock('./rgba-planar.glsl', () => 'rgba planar meta');
@@ -8,6 +8,7 @@ jest.mock('./shader-cache');
 beforeEach(() => {
    window.WebGLRenderingContext = {
       RGBA: 'RGBA',
+      RGB: 'RGB',
       LUMINANCE: 'luminance',
    } as any;
 });
@@ -76,5 +77,19 @@ describe(uploadPlanarRGBA, () => {
          'data',
          'alpha'
       );
+   });
+});
+
+describe(uploadRGB, () => {
+   it('uploads the RGBA data to WebGL and returns the canvas', () => {
+      shaderMocks[0].end.mockReturnValue('canvas');
+      expect(uploadRGB('data' as any, 100, 200)).toBe('canvas');
+      expect(shaderMocks[0].begin).toHaveBeenCalledWith(100, 200);
+      expect(shaderMocks[0].uploadTexture).toHaveBeenCalledWith('rgba', 'RGB', 'data', {
+         offset: 0,
+         width: 100,
+         height: 200,
+      });
+      expect(shaderMocks[0].end).toHaveBeenCalledWith();
    });
 });
