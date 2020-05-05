@@ -1,8 +1,8 @@
 import * as wasm from '../../util/wasm';
 import { decodeRawImage } from './raw';
 
-jest.mock('../../../wasm/raw/raw', () => 'raw js');
-jest.mock('../../../wasm/raw/raw.wasm', () => 'raw wasm');
+jest.mock('../../../wasm/raw/raw', () => 'raw js', { virtual: true });
+jest.mock('../../../wasm/raw/raw.wasm', () => 'raw wasm', { virtual: true });
 
 /* eslint-disable no-underscore-dangle */
 
