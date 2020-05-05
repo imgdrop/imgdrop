@@ -12,6 +12,7 @@ $(RAW_MAKE):
 	$(RAW_CD) autoreconf -fi
 	$(RAW_CD) emconfigure ./configure \
 		CFLAGS='$(CFLAGS)' \
+		CXXFLAGS='$(CFLAGS)' \
 		--disable-shared \
 		--disable-examples
 
@@ -19,7 +20,7 @@ clean:
 	rm -r build raw.js raw.wasm
 
 ci: all
-	git submodule deinit libraw
+	$(GIT_DEINIT) libraw
 	rm -r build
 
 .PHONY: all clean ci

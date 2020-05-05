@@ -21,7 +21,7 @@ clean:
 	rm -r build jp2.js jp2.wasm
 
 ci: all
-	git submodule deinit openjpeg
+	$(GIT_DEINIT) openjpeg
 	rm -r build
 
 .PHONY: all clean ci
