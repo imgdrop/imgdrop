@@ -1,5 +1,5 @@
 import { getPathExtension } from '../../util/path';
-import { WorkerExports, WorkerMessage } from './types';
+import { WorkerExports, WorkerMessage, WorkerReturn } from './types';
 
 let decodeWorker: Worker;
 if (typeof Worker === 'function') {
@@ -25,14 +25,18 @@ function niceStringify(data: any): string {
 
 export function callWorker<E extends keyof WorkerExports>(
    data: WorkerMessage<E>
-): Promise<ReturnType<WorkerExports[E]>> {
+): Promise<WorkerReturn<E>> {
    return new Promise((resolve, reject) => {
       console.debug(`Worker call: ${niceStringify(data)}`);
       decodeWorker.onmessage = (event): void => {
-         console.debug(`Worker message: ${niceStringify(event.data)}`);
-         resolve(event.data);
+         const result = event.data as WorkerReturn<E>;
+         console.debug(`Worker message: ${niceStringify(result)}`);
+         resolve(result);
       };
-      decodeWorker.onerror = (event): void => reject(new Error(event.message));
+      decodeWorker.onerror = (event): void => {
+         event.preventDefault();
+         reject(new Error(event.message));
+      };
       decodeWorker.postMessage(data);
    });
 }

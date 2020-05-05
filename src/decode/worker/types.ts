@@ -1,20 +1,21 @@
-import { ColorPlane } from '../../color/types';
+import * as jp2 from './jp2';
+import * as raw from './raw';
+import * as tiff from './tiff';
+import * as webp from './webp';
 
-export interface WorkerExports {
-   decodeWebpImage(
-      file: File
-   ): Promise<{ data: Uint8Array; width: number; height: number }>;
-   decodeTiffImage(
-      file: File
-   ): Promise<{ data: Uint8Array; width: number; height: number }>;
-   decodeJP2Image(
-      file: File,
-      codec: number
-   ): Promise<{ data: Uint8Array; format: number; planes: ColorPlane[] }>;
-   decodeRawImage(
-      file: File
-   ): Promise<{ data: Uint8Array; width: number; height: number }>;
-}
+export const workerExports = {
+   ...webp,
+   ...tiff,
+   ...jp2,
+   ...raw,
+};
+
+export type WorkerExports = typeof workerExports;
+
+type PromiseReturn<P> = P extends PromiseLike<infer T> ? T : P;
+export type WorkerReturn<E extends keyof WorkerExports> = PromiseReturn<
+   ReturnType<WorkerExports[E]>
+>;
 
 export interface WorkerMessage<E extends keyof WorkerExports> {
    name: E;

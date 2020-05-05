@@ -38,8 +38,20 @@ describe('callWorker', () => {
    it('rejects if the worker throws an error', async () => {
       const promise = workerModule.callWorker('data');
       workerMock.onerror!({
+         preventDefault: () => {},
          message: 'error',
       } as any);
       await expect(promise).rejects.toBeInstanceOf(Error);
+   });
+
+   it('calls prevent default on the error event', async () => {
+      const promise = workerModule.callWorker('data');
+      const errorMock = {
+         preventDefault: jest.fn(),
+         message: 'error'
+      };
+      workerMock.onerror!(errorMock as any);
+      await expect(promise).rejects.toBeInstanceOf(Error);
+      expect(errorMock.preventDefault).toHaveBeenCalledWith();
    });
 });
