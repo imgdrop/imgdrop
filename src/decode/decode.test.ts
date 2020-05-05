@@ -1,4 +1,5 @@
 import { decodeImage } from './decode';
+import * as heif from './heif';
 import * as html from './html';
 import * as jp2 from './jp2';
 import * as raw from './raw';
@@ -10,13 +11,15 @@ describe(decodeImage, () => {
    let decodeWebpSpy: jest.SpyInstance;
    let decodeTiffSpy: jest.SpyInstance;
    let decodeJP2Spy: jest.SpyInstance;
+   let decodeHeifSpy: jest.SpyInstance;
    let decodeRawSpy: jest.SpyInstance;
 
    beforeEach(() => {
       decodeHTMLSpy = jest.spyOn(html, 'decodeHTMLImage');
       decodeWebpSpy = jest.spyOn(webp, 'decodeWebpImage');
-      decodeJP2Spy = jest.spyOn(jp2, 'decodeJP2Image');
       decodeTiffSpy = jest.spyOn(tiff, 'decodeTiffImage');
+      decodeJP2Spy = jest.spyOn(jp2, 'decodeJP2Image');
+      decodeHeifSpy = jest.spyOn(heif, 'decodeHeifImage');
       decodeRawSpy = jest.spyOn(raw, 'decodeRawImage');
    });
 
@@ -129,6 +132,36 @@ describe(decodeImage, () => {
          decodeHTMLSpy.mockRejectedValue('error');
          decodeJP2Spy.mockRejectedValue('jp2 error');
          await expect(decodeImage(jp2FileMock)).rejects.toBe('jp2 error');
+      });
+   });
+
+   describe('HEIF', () => {
+      let fileMock: File;
+
+      beforeEach(() => {
+         // prettier-ignore
+         fileMock = new File([new Uint8Array([
+            0x11, 0x22, 0x33, 0x44,
+            0x66, 0x74, 0x79, 0x70,
+            0x99, 0x88, 0x77, 0x66,
+            0xAA, 0xBB, 0xCC, 0xDD,
+            0x68, 0x65, 0x69, 0x63,
+            0xFF, 0xEE, 0xDD, 0xCC,
+         ])], 'file');
+      });
+
+      it('decodes using HEIF if HTML fails and its a HEIF image', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeHeifSpy.mockResolvedValue('image');
+         await expect(decodeImage(fileMock)).resolves.toBe('image');
+         expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
+         expect(decodeHeifSpy).toHaveBeenCalledWith(fileMock);
+      });
+
+      it('rejects if HTML fails and HEIF fails', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeHeifSpy.mockRejectedValue('heif error');
+         await expect(decodeImage(fileMock)).rejects.toBe('heif error');
       });
    });
 
