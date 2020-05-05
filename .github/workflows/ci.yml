@@ -22,6 +22,7 @@ jobs:
         library:
           - webp
           - jp2
+          - heif
           - raw
     steps:
       - uses: actions/checkout@v2
@@ -56,6 +57,10 @@ jobs:
         with:
           key: jp2-${{ github.sha }}
           path: wasm/jp2
+      - uses: actions/cache@v1
+        with:
+          key: heif-${{ github.sha }}
+          path: wasm/heif
       - uses: actions/cache@v1
         with:
           key: raw-${{ github.sha }}
