@@ -8,6 +8,7 @@ jest.mock('./webp', () => ({
 
 jest.mock('./tiff', () => ({}));
 jest.mock('./jp2', () => ({}));
+jest.mock('./heif', () => ({}));
 jest.mock('./raw', () => ({}));
 
 describe(onmessage!, () => {

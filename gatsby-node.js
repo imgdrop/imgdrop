@@ -40,6 +40,9 @@ exports.createPages = ({ actions }) => {
    createPage('tiff', 'TIFF');
    createPage('jp2', 'JPEG 2000');
    createPage('j2k', 'JPEG 2000 codestream');
+   createPage('heif', 'HEIF');
+   createPage('heic', 'HEIC');
+   createPage('heix', 'HEIX');
    createPage('cr2', 'Canon raw');
    createPage('nef', 'Nikon raw');
    createPage('raf', 'Fuji raw');

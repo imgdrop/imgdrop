@@ -1,5 +1,6 @@
 import { readBlobData } from '../util/data';
 import { getPathExtension } from '../util/path';
+import { checkHeifImage, decodeHeifImage } from './heif';
 import { decodeHTMLImage } from './html';
 import { checkJP2Image, decodeJP2Image } from './jp2';
 import { decodeRawImage } from './raw';
@@ -17,7 +18,7 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
       console.warn(error);
    }
 
-   const header = new Uint8Array(await readBlobData(file.slice(0, 12)));
+   const header = new Uint8Array(await readBlobData(file.slice(0, 32)));
    if (checkWebpImage(header)) {
       console.debug('Trying WebP decoder...');
       return decodeWebpImage(file);
@@ -27,6 +28,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    if (jp2Codec >= 0) {
       console.debug('Trying JPEG 2000 decoder...');
       return decodeJP2Image(file, jp2Codec);
+   }
+
+   if (checkHeifImage(header)) {
+      console.debug('Trying HEIF decoder...');
+      return decodeHeifImage(file);
    }
 
    console.debug('Trying LibRaw decoder...');

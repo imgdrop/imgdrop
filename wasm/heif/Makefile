@@ -10,6 +10,8 @@ HEIF_CD = cd libheif &&
 all: $(H265_MAKE) $(HEIF_MAKE)
 	$(H265_CD) $(MAKE)
 	$(HEIF_CD) $(MAKE)
+	emcc -o heif.js $(H265_BIN) libheif/libheif/.libs/libheif.a heif.c $(LDFLAGS) \
+		-Ilibheif --bind
 
 $(H265_MAKE):
 	$(H265_CD) ./autogen.sh
