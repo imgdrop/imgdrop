@@ -42,7 +42,9 @@ exports[`matches the snapshot 1`] = `
     <div
       className="makeStyles-text-6"
     >
-      Just drop an image to instantly convert it to PNG
+      Just drop 
+      an image
+       to instantly convert it to PNG
     </div>
   </div>
 </div>

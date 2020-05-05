@@ -54,10 +54,11 @@ const useStyles = makeStyles((theme) =>
 );
 
 export interface ImageDropProps {
+   imageName?: string;
    onImageDropped(files: File[]): void;
 }
 
-export const ImageDrop: React.FC<ImageDropProps> = ({ onImageDropped }) => {
+export const ImageDrop: React.FC<ImageDropProps> = ({ imageName, onImageDropped }) => {
    const classes = useStyles();
    const { getRootProps, getInputProps, isDragActive, isFileDialogActive } = useDropzone({
       onDrop: (files) => onImageDropped(files),
@@ -74,7 +75,8 @@ export const ImageDrop: React.FC<ImageDropProps> = ({ onImageDropped }) => {
                className={`${classes.icon} ${isActive ? classes.activeIcon : ''}`}
             />
             <div className={classes.text}>
-               Just drop an image to instantly convert it to PNG
+               Just drop {imageName ? `a ${imageName} image` : 'an image'} to instantly
+               convert it to PNG
             </div>
          </div>
       </div>

@@ -4,7 +4,13 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { App } from '../ui/App';
 
-const Index: React.FC = () => {
+export interface IndexProps {
+   pageContext: {
+      imageName?: string;
+   };
+}
+
+const Index: React.FC<IndexProps> = ({ pageContext }) => {
    return (
       <>
          <Helmet>
@@ -20,7 +26,7 @@ const Index: React.FC = () => {
          </Helmet>
          <CssBaseline />
          <SnackbarProvider maxSnack={5}>
-            <App />
+            <App imageName={pageContext.imageName} />
          </SnackbarProvider>
       </>
    );

@@ -14,6 +14,11 @@ module.exports = {
             ],
          },
       },
+      'gatsby-plugin-sitemap',
+      'gatsby-plugin-robots-txt',
    ],
+   siteMetadata: {
+      siteUrl: 'https://imgdrop.netlify.app',
+   },
    polyfill: false,
 };
