@@ -7,3 +7,9 @@
 [submodule "wasm/raw/libraw"]
 	path = wasm/raw/libraw
 	url = https://github.com/LibRaw/LibRaw.git
+[submodule "wasm/heif/libheif"]
+	path = wasm/heif/libheif
+	url = https://github.com/strukturag/libheif.git
+[submodule "wasm/heif/libde265"]
+	path = wasm/heif/libde265
+	url = https://github.com/strukturag/libde265.git
