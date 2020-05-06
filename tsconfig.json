@@ -8,5 +8,7 @@
       "types": ["jest"],
       "moduleResolution": "Node",
       "esModuleInterop": true
-   }
+   },
+   "include": ["**/*.ts", "**/*.tsx"],
+   "files": ["src/webpack.d.ts"]
 }
