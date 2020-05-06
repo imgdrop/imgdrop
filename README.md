@@ -1,4 +1,8 @@
 # Image Drop - Online Image Converter
+[![CI](https://github.com/imgdrop/imgdrop/workflows/CI/badge.svg?branch=master)](https://github.com/imgdrop/imgdrop/actions)
+[![codecov](https://codecov.io/gh/imgdrop/imgdrop/branch/master/graph/badge.svg)](https://codecov.io/gh/imgdrop/imgdrop)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2ba002da-6b54-4554-860f-dcbb87dafd09/deploy-status)](https://app.netlify.com/sites/imgdrop/deploys)
+
 This is just a little (that ended up being alot bigger) open source project I started because I was tired with bad online image converters:
 
 - slow
