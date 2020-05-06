@@ -24,7 +24,7 @@ Currently supported image formats:
   - JPEG 2000 Codestream
 - `libheif`
   - HEIC (hopefully I don't get *too* many users and land in patent infringement <_<)
-- `libraw`
+- LibRaw
   - Canon Raw
   - Adobe Negative
   - etc.
