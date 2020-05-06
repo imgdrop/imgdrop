@@ -1,4 +1,7 @@
 # Image Drop - Online Image Converter
+[![CI](https://github.com/imgdrop/imgdrop/workflows/CI/badge.svg?branch=master)](https://github.com/imgdrop/imgdrop/actions)
+[![codecov](https://codecov.io/gh/imgdrop/imgdrop/branch/master/graph/badge.svg)](https://codecov.io/gh/imgdrop/imgdrop)
+
 This is just a little (that ended up being alot bigger) open source project I started because I was tired with bad online image converters:
 
 - slow
