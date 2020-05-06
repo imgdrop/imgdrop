@@ -1,0 +1,15 @@
+name: PR
+on: pull_request
+
+jobs:
+  approve:
+    name: Approve PR
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - lint
+      - test
+    steps:
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
