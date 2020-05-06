@@ -145,7 +145,7 @@ jobs:
 
   approve:
     name: Approve PR
-    runs-on: ubuntu-latest:
+    runs-on: ubuntu-latest
     needs:
       - build
       - lint
