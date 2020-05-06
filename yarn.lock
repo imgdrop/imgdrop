@@ -1005,6 +1005,9 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@imgdrop/pnm@file:../pnm.js":
+  version "1.0.0"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.0.0.tgz#10602de5570baea82f8afbfa2630b24e7a8cfe5b"

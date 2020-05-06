@@ -6,6 +6,7 @@ import grayPlanarMeta from './gray-planar.glsl';
 import { ShaderCache } from './shader-cache';
 import { ColorPlane } from './types';
 
+
 const grayPlanarShader = new ShaderCache(grayPlanarMeta);
 
 export function uploadPlanarGray(

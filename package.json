@@ -14,7 +14,8 @@
       "react-dom": "16.13.1",
       "react-dropzone": "11.0.1",
       "react-helmet": "6.0.0",
-      "utif": "3.1.0"
+      "utif": "3.1.0",
+      "@imgdrop/pnm": "file:../pnm.js"
    },
    "devDependencies": {
       "@types/jest": "25.2.1",
@@ -86,7 +87,6 @@
          "no-console": "off",
          "react/prop-types": "off",
          "import/prefer-default-export": "off",
-         "import/extensions": "off",
          "sort-imports": [
             "warn",
             {

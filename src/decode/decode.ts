@@ -10,6 +10,7 @@ import { checkJP2Image, decodeJP2Image } from './jp2';
 import { decodeRawImage } from './raw';
 import { checkTiffImage, decodeTiffImage } from './tiff';
 import { checkWebpImage, decodeWebpImage } from './webp';
+import { checkPNMImage, decodePNMImage } from './pnm';
 
 export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    console.log(`Mimetype: ${file.type}`);
@@ -37,6 +38,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    if (checkHeifImage(header)) {
       console.debug('Trying HEIF decoder...');
       return decodeHeifImage(file);
+   }
+
+   if (checkPNMImage(header)) {
+      console.debug('Trying PNM decoder...');
+      return decodePNMImage(file);
    }
 
    console.debug('Trying LibRaw decoder...');
