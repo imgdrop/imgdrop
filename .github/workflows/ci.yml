@@ -142,3 +142,15 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+
+  approve:
+    name: Approve PR
+    runs-on: ubuntu-latest:
+    needs:
+      - build
+      - lint
+      - test
+    steps:
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
