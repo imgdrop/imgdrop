@@ -30,7 +30,7 @@ exports[`matches the snapshot 1`] = `
     className="makeStyles-border-2 "
   >
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="MuiSvgIcon-root makeStyles-icon-4 "
       focusable="false"
       viewBox="0 0 24 24"

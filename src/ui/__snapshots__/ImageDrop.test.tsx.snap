@@ -30,7 +30,7 @@ exports[`matches the snapshot 1`] = `
     className="makeStyles-border-2 "
   >
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="MuiSvgIcon-root makeStyles-icon-4 "
       focusable="false"
       viewBox="0 0 24 24"
@@ -59,7 +59,7 @@ exports[`matches the snapshot when active 1`] = `
     className="makeStyles-border-2 makeStyles-activeBorder-3"
   >
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="MuiSvgIcon-root makeStyles-icon-4 makeStyles-activeIcon-5"
       focusable="false"
       viewBox="0 0 24 24"
@@ -109,7 +109,7 @@ exports[`matches the snapshot when provided a name 1`] = `
     className="makeStyles-border-2 "
   >
     <svg
-      aria-hidden="true"
+      aria-hidden={true}
       className="MuiSvgIcon-root makeStyles-icon-4 "
       focusable="false"
       viewBox="0 0 24 24"
