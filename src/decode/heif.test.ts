@@ -1,4 +1,6 @@
+import * as gray from '../color/gray';
 import * as rgba from '../color/rgba';
+import * as yuv from '../color/yuv';
 import { checkHeifImage, decodeHeifImage } from './heif';
 import * as worker from './worker/worker';
 
@@ -45,18 +47,71 @@ describe(checkHeifImage, () => {
 
 describe(decodeHeifImage, () => {
    let callWorkerSpy: jest.SpyInstance;
+   let uploadYUVSpy: jest.SpyInstance;
+   let uploadPlanarRGBASpy: jest.SpyInstance;
    let uploadRGBASpy: jest.SpyInstance;
+   let uploadRGBSpy: jest.SpyInstance;
+   let uploadGraySpy: jest.SpyInstance;
 
    beforeEach(() => {
       callWorkerSpy = jest.spyOn(worker, 'callWorker');
+      uploadYUVSpy = jest.spyOn(yuv, 'uploadPlanarYUV');
+      uploadPlanarRGBASpy = jest.spyOn(rgba, 'uploadPlanarRGBA');
       uploadRGBASpy = jest.spyOn(rgba, 'uploadRGBA');
+      uploadRGBSpy = jest.spyOn(rgba, 'uploadRGB');
+      uploadGraySpy = jest.spyOn(gray, 'uploadPlanarGray');
    });
 
-   it('decodes a HEIF image using the worker', async () => {
+   it('decodes a HEIF YUV image using the worker', async () => {
       callWorkerSpy.mockResolvedValue({
          data: 'data',
-         width: 100,
-         height: 200,
+         colorspace: 0,
+         planes: ['y', 'cb', 'cr', 'alpha'],
+      });
+      uploadYUVSpy.mockResolvedValue('image');
+      await expect(decodeHeifImage('file' as any)).resolves.toBe('image');
+
+      expect(callWorkerSpy).toHaveBeenCalledWith({
+         name: 'decodeHeifImage',
+         args: ['file'],
+      });
+      expect(uploadYUVSpy).toHaveBeenCalledWith('data', 'y', 'cb', 'cr', 'alpha');
+   });
+
+   it('decodes a HEIF RGBA planar image using the worker', async () => {
+      callWorkerSpy.mockResolvedValue({
+         data: 'data',
+         colorspace: 1,
+         chroma: 3,
+         planes: ['red', 'green', 'blue', 'alpha'],
+      });
+      uploadPlanarRGBASpy.mockResolvedValue('image');
+      await expect(decodeHeifImage('file' as any)).resolves.toBe('image');
+
+      expect(callWorkerSpy).toHaveBeenCalledWith({
+         name: 'decodeHeifImage',
+         args: ['file'],
+      });
+      expect(uploadPlanarRGBASpy).toHaveBeenCalledWith(
+         'data',
+         'red',
+         'green',
+         'blue',
+         'alpha'
+      );
+   });
+
+   it('decoes a HEIF RGBA image using the worker', async () => {
+      callWorkerSpy.mockResolvedValue({
+         data: 'data',
+         colorspace: 1,
+         chroma: 11,
+         planes: [
+            {
+               width: 100,
+               height: 200,
+            },
+         ],
       });
       uploadRGBASpy.mockResolvedValue('image');
       await expect(decodeHeifImage('file' as any)).resolves.toBe('image');
@@ -66,5 +121,52 @@ describe(decodeHeifImage, () => {
          args: ['file'],
       });
       expect(uploadRGBASpy).toHaveBeenCalledWith('data', 100, 200);
+   });
+
+   it('decoes a HEIF RGB image using the worker', async () => {
+      callWorkerSpy.mockResolvedValue({
+         data: 'data',
+         colorspace: 1,
+         chroma: 10,
+         planes: [
+            {
+               width: 100,
+               height: 200,
+            },
+         ],
+      });
+      uploadRGBSpy.mockResolvedValue('image');
+      await expect(decodeHeifImage('file' as any)).resolves.toBe('image');
+
+      expect(callWorkerSpy).toHaveBeenCalledWith({
+         name: 'decodeHeifImage',
+         args: ['file'],
+      });
+      expect(uploadRGBSpy).toHaveBeenCalledWith('data', 100, 200);
+   });
+
+   it('decodes a HEIF monochrome image using the worker', async () => {
+      callWorkerSpy.mockResolvedValue({
+         data: 'data',
+         colorspace: 2,
+         planes: ['gray', 'alpha'],
+      });
+      uploadGraySpy.mockResolvedValue('image');
+      await expect(decodeHeifImage('file' as any)).resolves.toBe('image');
+
+      expect(callWorkerSpy).toHaveBeenCalledWith({
+         name: 'decodeHeifImage',
+         args: ['file'],
+      });
+      expect(uploadGraySpy).toHaveBeenCalledWith('data', 'gray', 'alpha');
+   });
+
+   it('rejects if it does not recognise the colorspace', async () => {
+      callWorkerSpy.mockResolvedValue({
+         data: 'data',
+         colorspace: -1,
+         planes: ['gray', 'alpha'],
+      });
+      await expect(decodeHeifImage('file' as any)).rejects.toBeInstanceOf(Error);
    });
 });
