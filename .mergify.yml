@@ -10,10 +10,23 @@ pull_request_rules:
 
   - name: Merge Dependabot
     conditions:
-      - status-success=Run Tests
-      - status-success=Lint Files
-      - status-success=Deploy Draft
       - author=dependabot-preview[bot]
+    actions:
+      merge:
+        method: squash
+
+  - name: Merge Owner PR's
+    conditions:
+      - label=mergify
+      - author=matanui159
+    actions:
+      merge:
+        method: squash
+
+  - name: Merge Owner Reviewed
+    conditions:
+      - label=mergify
+      - approved-reviews-by=matanui159
     actions:
       merge:
         method: squash
