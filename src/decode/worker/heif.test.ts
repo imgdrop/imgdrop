@@ -6,7 +6,7 @@ jest.mock('../../../wasm/heif/heif.wasm', () => 'heif wasm', { virtual: true });
 
 /* eslint-disable no-underscore-dangle */
 
-describe(decodeHeifImage, () => {
+describe.skip(decodeHeifImage, () => {
    let heifModuleMock: {
       HEAPU8: Uint8Array;
       _decodeHeifImage: jest.Mock;

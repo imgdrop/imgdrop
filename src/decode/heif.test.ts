@@ -43,7 +43,7 @@ describe(checkHeifImage, () => {
    });
 });
 
-describe(decodeHeifImage, () => {
+describe.skip(decodeHeifImage, () => {
    let callWorkerSpy: jest.SpyInstance;
    let uploadRGBASpy: jest.SpyInstance;
 
