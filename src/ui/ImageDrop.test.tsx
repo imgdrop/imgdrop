@@ -1,8 +1,8 @@
+import { Link } from '@material-ui/core';
 import React from 'react';
 import * as dropzone from 'react-dropzone';
 import TestRenderer from 'react-test-renderer';
 import { ImageDrop } from './ImageDrop';
-import { Link } from '@material-ui/core';
 
 describe(ImageDrop, () => {
    let useDropzoneSpy: jest.SpyInstance;
@@ -79,9 +79,9 @@ describe(ImageDrop, () => {
    it('stops propogation on link clicks', () => {
       const renderer = createRenderer();
       const eventMock = {
-         stopPropagation: jest.fn()
+         stopPropagation: jest.fn(),
       };
-      renderer.root.findAllByType(Link).forEach(link => {
+      renderer.root.findAllByType(Link).forEach((link) => {
          link.props.onClick(eventMock);
       });
       expect(eventMock.stopPropagation).toHaveBeenCalledWith();
