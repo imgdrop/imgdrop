@@ -1,4 +1,6 @@
-import { uploadRGBA } from '../color/rgba';
+import { uploadPlanarGray } from '../color/gray';
+import { uploadPlanarRGBA, uploadRGB, uploadRGBA } from '../color/rgba';
+import { uploadPlanarYUV } from '../color/yuv';
 import { checkData } from '../util/data';
 import { callWorker } from './worker/worker';
 
@@ -19,9 +21,28 @@ export function checkHeifImage(header: Uint8Array): boolean {
 }
 
 export async function decodeHeifImage(file: File): Promise<HTMLCanvasElement> {
-   const { data, width, height } = await callWorker({
+   const { data, colorspace, chroma, planes } = await callWorker({
       name: 'decodeHeifImage',
       args: [file],
    });
-   return uploadRGBA(data, width, height);
+
+   switch (colorspace) {
+      case 0: // heif_colorspace_YCbCr
+         return uploadPlanarYUV(data, planes[0], planes[1], planes[2], planes[3]);
+      case 1: // heif_colorspace_RGB
+         if (chroma < 10) {
+            // heif_chroma_4xx
+            return uploadPlanarRGBA(data, planes[0], planes[1], planes[2], planes[3]);
+         }
+         if (chroma % 1) {
+            // heif_chroma_interleaved_*A
+            return uploadRGBA(data, planes[0].width, planes[0].height);
+         }
+         // heif_chroma_interleaved_*
+         return uploadRGB(data, planes[0].width, planes[1].height);
+      case 2: // heif_colorspace_monochrome
+         return uploadPlanarGray(data, planes[0], planes[1]);
+      default:
+         throw new Error(`Unknown libheif colorspace: ${colorspace}`);
+   }
 }

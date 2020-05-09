@@ -1,6 +1,6 @@
 import js from '../../../wasm/jp2/jp2';
 import wasm from '../../../wasm/jp2/jp2.wasm';
-import { rescaleDepth } from '../../color/depth';
+import { fixupData } from '../../color/fixup';
 import { ColorPlane } from '../../color/types';
 import { loadWasmModule } from '../../util/wasm';
 
@@ -30,11 +30,11 @@ export async function decodeJP2Image(
    planes.forEach((plane, index) => {
       // eslint-disable-next-line no-bitwise
       const dataPtr = module._getJP2Data(index) >> 2;
-      rescaleDepth(
-         module._getJP2Bitdepth(index),
-         module.HEAP32.subarray(dataPtr, dataPtr + plane.width * plane.height),
-         data.subarray(plane.offset)
-      );
+      fixupData(data.subarray(plane.offset), module.HEAP32.subarray(dataPtr), {
+         width: plane.width,
+         height: plane.height,
+         depth: module._getJP2Bitdepth(index),
+      });
    });
    return {
       data,
