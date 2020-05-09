@@ -46,6 +46,47 @@ exports[`Index matches the snapshot 1`] = `
       an image
        to instantly convert it to PNG
     </div>
+    <div
+      className="makeStyles-subtext-7"
+    >
+      Your images are never uploaded (
+      <a
+        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        href="https://github.com/imgdrop/imgdrop/blob/master/PRIVACY.md"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        target="_blank"
+      >
+        Privacy Policy
+      </a>
+      )
+    </div>
+    <div
+      className="makeStyles-subtext-7"
+    >
+      Made with pride by a gay man
+       
+      <span
+        aria-label="pride flag"
+        role="img"
+      >
+        🏳️‍🌈
+      </span>
+       
+      (
+      <a
+        className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
+        href="https://github.com/imgdrop/imgdrop"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        target="_blank"
+      >
+        Github
+      </a>
+      )
+    </div>
   </div>
 </div>
 `;
