@@ -1,4 +1,4 @@
-import { createStyles, makeStyles } from '@material-ui/core';
+import { Link, createStyles, makeStyles } from '@material-ui/core';
 import { Panorama } from '@material-ui/icons';
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) =>
          borderStyle: 'dashed',
          borderColor: theme.palette.grey.A100,
          borderRadius: theme.spacing(2),
-         padding: theme.spacing(1),
+         padding: theme.spacing(2),
 
          display: 'flex',
          flexDirection: 'column',
@@ -50,6 +50,12 @@ const useStyles = makeStyles((theme) =>
          textAlign: 'center',
          color: theme.palette.grey.A400,
       },
+
+      subtext: {
+         ...theme.typography.h6,
+         textAlign: 'center',
+         color: theme.palette.grey.A400,
+      },
    })
 );
 
@@ -65,6 +71,7 @@ export const ImageDrop: React.FC<ImageDropProps> = ({ imageName, onImageDropped 
    });
 
    const isActive = isDragActive || isFileDialogActive;
+   const stopPropogation = (event: React.UIEvent): void => event.stopPropagation();
 
    /* eslint-disable react/jsx-props-no-spreading */
    return (
@@ -77,6 +84,32 @@ export const ImageDrop: React.FC<ImageDropProps> = ({ imageName, onImageDropped 
             <div className={classes.text}>
                Just drop {imageName ? `a ${imageName} image` : 'an image'} to instantly
                convert it to PNG
+            </div>
+            <div className={classes.subtext}>
+               Your images are never uploaded (
+               <Link
+                  href='https://github.com/imgdrop/imgdrop/blob/master/PRIVACY.md'
+                  target='_blank'
+                  onClick={stopPropogation}
+               >
+                  Privacy Policy
+               </Link>
+               )
+            </div>
+            <div className={classes.subtext}>
+               Made with pride by a gay man{' '}
+               <span role='img' aria-label='pride flag'>
+                  🏳️‍🌈
+               </span>{' '}
+               (
+               <Link
+                  href='https://github.com/imgdrop/imgdrop'
+                  target='_blank'
+                  onClick={stopPropogation}
+               >
+                  Github
+               </Link>
+               )
             </div>
          </div>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import * as dropzone from 'react-dropzone';
 import TestRenderer from 'react-test-renderer';
 import { ImageDrop } from './ImageDrop';
+import { Link } from '@material-ui/core';
 
 describe(ImageDrop, () => {
    let useDropzoneSpy: jest.SpyInstance;
@@ -62,7 +63,7 @@ describe(ImageDrop, () => {
          }));
       });
 
-      expect(renderer.toJSON()).toEqual(activeJson);
+      expect(JSON.stringify(renderer.toJSON())).toBe(JSON.stringify(activeJson));
    });
 
    it('calls the provided callback when a file is dropped', () => {
@@ -73,5 +74,17 @@ describe(ImageDrop, () => {
 
       useDropzoneSpy.mock.calls[0][0].onDrop(['file', 'image']);
       expect(imageDroppedMock).toHaveBeenCalledWith(['file', 'image']);
+   });
+
+   it('stops propogation on link clicks', () => {
+      const renderer = createRenderer();
+      const eventMock = {
+         stopPropagation: jest.fn()
+      };
+      renderer.root.findAllByType(Link).forEach(link => {
+         link.props.onClick(eventMock);
+      });
+      expect(eventMock.stopPropagation).toHaveBeenCalledWith();
+      expect(eventMock.stopPropagation).toHaveBeenCalledTimes(2);
    });
 });

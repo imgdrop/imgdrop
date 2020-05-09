@@ -53,7 +53,7 @@
       "lint": "run-s lint:*",
       "lint:tsc": "tsc",
       "lint:eslint": "eslint \"**/*.{ts,tsx}\" --max-warnings 0",
-      "lint:prettier": "prettier \"**/*.{ts,tsx,js,json,yml}\" -c",
+      "lint:prettier": "prettier \"**/*.{ts,tsx,js,json,yml,md}\" -c",
       "fix": "run-s fix:*",
       "fix:eslint": "yarn lint:eslint --fix",
       "fix:prettier": "yarn lint:prettier --write",
