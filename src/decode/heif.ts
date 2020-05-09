@@ -34,12 +34,12 @@ export async function decodeHeifImage(file: File): Promise<HTMLCanvasElement> {
             // heif_chroma_4xx
             return uploadPlanarRGBA(data, planes[0], planes[1], planes[2], planes[3]);
          }
-         if (chroma % 1) {
+         if (chroma % 2) {
             // heif_chroma_interleaved_*A
             return uploadRGBA(data, planes[0].width, planes[0].height);
          }
          // heif_chroma_interleaved_*
-         return uploadRGB(data, planes[0].width, planes[1].height);
+         return uploadRGB(data, planes[0].width, planes[0].height);
       case 2: // heif_colorspace_monochrome
          return uploadPlanarGray(data, planes[0], planes[1]);
       default:

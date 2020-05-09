@@ -6,7 +6,7 @@ import { loadWasmModule } from '../../util/wasm';
 
 /* eslint-disable no-underscore-dangle */
 
-const rgbMappings = [3, 4, 5, 3, 4, 5, 6, 10];
+const rgbMappings = [3, 4, 5, 3, 4, 5, 6, 7, 8, 9, 10];
 const chromaPlanes = [
    [0], // heif_chroma_monochrome
    [0, 1, 2], // heif_chroma_420
@@ -63,7 +63,7 @@ const chromaFixup = [
    },
    {
       // heif_chroma_interleaved_RRGGBBAA_LE
-      widthMul: 3,
+      widthMul: 4,
       depth: 16,
    },
 ];
@@ -109,9 +109,12 @@ export async function decodeHeifImage(
       const fixup = chromaFixup[chroma];
       const dataPtr = module._getHeifData(id);
       let input: Uint8Array | Uint16Array;
+      let stride = module._getHeifStride(id);
       if (fixup.depth === 16) {
          // eslint-disable-next-line no-bitwise
-         input = module.HEAPU16.subarray(dataPtr >> 2);
+         input = module.HEAPU16.subarray(dataPtr >> 1);
+         // eslint-disable-next-line no-bitwise
+         stride >>= 1;
       } else {
          input = module.HEAPU8.subarray(dataPtr);
       }
@@ -119,7 +122,7 @@ export async function decodeHeifImage(
       fixupData(data.subarray(plane.offset), input, {
          width: plane.width * fixup.widthMul,
          height: plane.height,
-         stride: module._getHeifStride(id),
+         stride,
          ...fixup,
       });
    });
