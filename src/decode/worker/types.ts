@@ -4,6 +4,7 @@
 
 import * as heif from './heif';
 import * as jp2 from './jp2';
+import * as pnm from './pnm';
 import * as raw from './raw';
 import * as tiff from './tiff';
 import * as webp from './webp';
@@ -13,6 +14,7 @@ export const workerExports = {
    ...tiff,
    ...jp2,
    ...heif,
+   ...pnm,
    ...raw,
 };
 

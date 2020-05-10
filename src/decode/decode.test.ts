@@ -6,6 +6,7 @@ import { decodeImage } from './decode';
 import * as heif from './heif';
 import * as html from './html';
 import * as jp2 from './jp2';
+import * as pnm from './pnm';
 import * as raw from './raw';
 import * as tiff from './tiff';
 import * as webp from './webp';
@@ -16,6 +17,7 @@ describe(decodeImage, () => {
    let decodeTiffSpy: jest.SpyInstance;
    let decodeJP2Spy: jest.SpyInstance;
    let decodeHeifSpy: jest.SpyInstance;
+   let decodePNMSpy: jest.SpyInstance;
    let decodeRawSpy: jest.SpyInstance;
 
    beforeEach(() => {
@@ -24,6 +26,7 @@ describe(decodeImage, () => {
       decodeTiffSpy = jest.spyOn(tiff, 'decodeTiffImage');
       decodeJP2Spy = jest.spyOn(jp2, 'decodeJP2Image');
       decodeHeifSpy = jest.spyOn(heif, 'decodeHeifImage');
+      decodePNMSpy = jest.spyOn(pnm, 'decodePNMImage');
       decodeRawSpy = jest.spyOn(raw, 'decodeRawImage');
    });
 
@@ -166,6 +169,28 @@ describe(decodeImage, () => {
          decodeHTMLSpy.mockRejectedValue('error');
          decodeHeifSpy.mockRejectedValue('heif error');
          await expect(decodeImage(fileMock)).rejects.toBe('heif error');
+      });
+   });
+
+   describe('PNM', () => {
+      let fileMock: File;
+
+      beforeEach(() => {
+         fileMock = new File([new Uint8Array([0x50, 0x31, 0x20])], 'file');
+      });
+
+      it('decodes using PNM if HTML fails and its a PNM image', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodePNMSpy.mockResolvedValue('image');
+         await expect(decodeImage(fileMock)).resolves.toBe('image');
+         expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
+         expect(decodePNMSpy).toHaveBeenCalledWith(fileMock);
+      });
+
+      it('rejects if HTML fails and PNM fails', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodePNMSpy.mockRejectedValue('pnm error');
+         await expect(decodeImage(fileMock)).rejects.toBe('pnm error');
       });
    });
 

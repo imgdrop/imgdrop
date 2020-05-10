@@ -7,6 +7,7 @@ import { getPathExtension } from '../util/path';
 import { checkHeifImage, decodeHeifImage } from './heif';
 import { decodeHTMLImage } from './html';
 import { checkJP2Image, decodeJP2Image } from './jp2';
+import { checkPNMImage, decodePNMImage } from './pnm';
 import { decodeRawImage } from './raw';
 import { checkTiffImage, decodeTiffImage } from './tiff';
 import { checkWebpImage, decodeWebpImage } from './webp';
@@ -37,6 +38,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    if (checkHeifImage(header)) {
       console.debug('Trying HEIF decoder...');
       return decodeHeifImage(file);
+   }
+
+   if (checkPNMImage(header)) {
+      console.debug('Trying PNM decoder...');
+      return decodePNMImage(file);
    }
 
    console.debug('Trying LibRaw decoder...');

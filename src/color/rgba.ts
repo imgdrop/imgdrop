@@ -57,3 +57,17 @@ export function uploadRGB(
    });
    return rgbaShader.end();
 }
+
+export function uploadGrayAlpha(
+   data: Uint8Array,
+   width: number,
+   height: number
+): HTMLCanvasElement {
+   rgbaShader.begin(width, height);
+   rgbaShader.uploadTexture('rgba', WebGLRenderingContext.LUMINANCE_ALPHA, data, {
+      offset: 0,
+      width,
+      height,
+   });
+   return rgbaShader.end();
+}
