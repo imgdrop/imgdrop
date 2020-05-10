@@ -1005,10 +1005,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@imgdrop/pnm@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@imgdrop/pnm/-/pnm-1.0.1.tgz#ef0358b060a65f01e420f8e9c1f4040ff3d1c425"
-  integrity sha512-2qKNTV1+AkNiRQ6WBAkh0OJShrDVg+cezlbuut8qrE9uE2ebsNqMxDwhhNzkxSVr4t2XqDjaeaZGQMk+ZkJ2lw==
+"@imgdrop/pnm@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@imgdrop/pnm/-/pnm-1.0.2.tgz#38d699c5f93c6cb61a1a03ed8f532725b8ad8469"
+  integrity sha512-8rsJSU9kYCHUHbErDFCXIC+xdL5n1fwEWgbsh1SAMZ3xCc8f3ww+l1ZwXTe1h92aC6G78oJMMpTCbw8AjrCo8Q==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.0.0"
