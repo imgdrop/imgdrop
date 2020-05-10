@@ -28,6 +28,11 @@ This image converter works completely client side using modern technologies like
    -  JPEG 2000 Codestream
 -  `libheif`
    -  HEIC (hopefully I don't get _too_ many users and land in patent infringement <\_<)
+-  `@imgdrop/pnm`
+   -  Pixel BitMap
+   -  Pixel GrayMap
+   -  Pixel PixMap
+   -  Pixel Arbitrary Map
 -  LibRaw
    -  Canon Raw
    -  Adobe Negative
@@ -36,11 +41,6 @@ This image converter works completely client side using modern technologies like
 ## Planned to Support
 
 -  TIFF YUV
--  NetPBM family:
-   -  Pixel BitMap
-   -  Pixel GrayMap
-   -  Pixel PixMap
-   -  Pixel Arbitrary Map
 -  DDS family:
    -  DXT1
    -  DXT2

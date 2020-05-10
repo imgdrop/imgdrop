@@ -43,6 +43,12 @@ exports.createPages = ({ actions }) => {
    createPage('heif', 'HEIF');
    createPage('heic', 'HEIC');
    createPage('heix', 'HEIX');
+   createPage('netpbm', 'NetPBM');
+   createPage('pnm', 'PNM');
+   createPage('pbm', 'Pixel Bitmap');
+   createPage('pgm', 'Pixel Graymap');
+   createPage('ppm', 'Pixel Pixmap');
+   createPage('pam', 'Pixel Arbitrary Map');
    createPage('cr2', 'Canon raw');
    createPage('nef', 'Nikon raw');
    createPage('raf', 'Fuji raw');
