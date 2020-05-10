@@ -1,10 +1,13 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+/* eslint-disable no-underscore-dangle */
+
 import * as wasm from '../../util/wasm';
 import { decodeRawImage } from './raw';
 
 jest.mock('../../../wasm/raw/raw', () => 'raw js', { virtual: true });
 jest.mock('../../../wasm/raw/raw.wasm', () => 'raw wasm', { virtual: true });
-
-/* eslint-disable no-underscore-dangle */
 
 describe(decodeRawImage, () => {
    let rawModuleMock: {

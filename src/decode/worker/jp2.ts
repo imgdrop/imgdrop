@@ -1,10 +1,13 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+/* eslint-disable no-underscore-dangle */
+
 import js from '../../../wasm/jp2/jp2';
 import wasm from '../../../wasm/jp2/jp2.wasm';
 import { fixupData } from '../../color/fixup';
 import { ColorPlane } from '../../color/types';
 import { loadWasmModule } from '../../util/wasm';
-
-/* eslint-disable no-underscore-dangle */
 
 export async function decodeJP2Image(
    file: File,

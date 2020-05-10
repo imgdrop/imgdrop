@@ -1,10 +1,13 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+/* eslint-disable no-underscore-dangle */
+
 import * as wasm from '../../util/wasm';
 import { decodeJP2Image } from './jp2';
 
 jest.mock('../../../wasm/jp2/jp2', () => 'jp2 js', { virtual: true });
 jest.mock('../../../wasm/jp2/jp2.wasm', () => 'jp2 wasm', { virtual: true });
-
-/* eslint-disable no-underscore-dangle */
 
 describe(decodeJP2Image, () => {
    let jp2ModuleMock: {

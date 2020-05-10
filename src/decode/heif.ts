@@ -1,3 +1,7 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 import { uploadPlanarGray } from '../color/gray';
 import { uploadPlanarRGBA, uploadRGB, uploadRGBA } from '../color/rgba';
 import { uploadPlanarYUV } from '../color/yuv';

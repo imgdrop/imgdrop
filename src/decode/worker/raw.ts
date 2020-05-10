@@ -1,8 +1,11 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at https://mozilla.org/MPL/2.0/.
+/* eslint-disable no-underscore-dangle */
+
 import js from '../../../wasm/raw/raw';
 import wasm from '../../../wasm/raw/raw.wasm';
 import { loadWasmModule } from '../../util/wasm';
-
-/* eslint-disable no-underscore-dangle */
 
 export async function decodeRawImage(
    file: File
