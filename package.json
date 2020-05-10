@@ -112,8 +112,7 @@
             "rules": {
                "dot-notation": "off",
                "@typescript-eslint/no-explicit-any": "off",
-               "@typescript-eslint/no-non-null-assertion": "off",
-               "import/no-extraneous-dependencies": "off"
+               "@typescript-eslint/no-non-null-assertion": "off"
             }
          }
       ]
