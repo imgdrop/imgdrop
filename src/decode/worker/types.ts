@@ -4,10 +4,10 @@
 
 import * as heif from './heif';
 import * as jp2 from './jp2';
+import * as pnm from './pnm';
 import * as raw from './raw';
 import * as tiff from './tiff';
 import * as webp from './webp';
-import * as pnm from './pnm';
 
 export const workerExports = {
    ...webp,
@@ -29,5 +29,3 @@ export interface WorkerMessage<E extends keyof WorkerExports> {
    name: E;
    args: Parameters<WorkerExports[E]>;
 }
-
-export declare function postMessage(data: any, transferables?: Transferable[]): void;

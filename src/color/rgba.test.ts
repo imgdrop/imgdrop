@@ -3,7 +3,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 import { shaderMocks } from './__mocks__/shader-cache-array';
-import { uploadPlanarRGBA, uploadRGB, uploadRGBA } from './rgba';
+import { uploadGrayAlpha, uploadPlanarRGBA, uploadRGB, uploadRGBA } from './rgba';
 
 jest.mock('./rgba.glsl', () => 'rgba meta');
 jest.mock('./rgba-planar.glsl', () => 'rgba planar meta');
@@ -14,6 +14,7 @@ beforeEach(() => {
       RGBA: 'RGBA',
       RGB: 'RGB',
       LUMINANCE: 'luminance',
+      LUMINANCE_ALPHA: 'luminance alpha',
    } as any;
 });
 
@@ -94,6 +95,25 @@ describe(uploadRGB, () => {
          width: 100,
          height: 200,
       });
+      expect(shaderMocks[0].end).toHaveBeenCalledWith();
+   });
+});
+
+describe(uploadGrayAlpha, () => {
+   it('uploads the gray-alpha data to WebGL and returns the canvas', () => {
+      shaderMocks[0].end.mockReturnValue('canvas');
+      expect(uploadGrayAlpha('data' as any, 100, 200)).toBe('canvas');
+      expect(shaderMocks[0].begin).toHaveBeenCalledWith(100, 200);
+      expect(shaderMocks[0].uploadTexture).toHaveBeenCalledWith(
+         'rgba',
+         'luminance alpha',
+         'data',
+         {
+            offset: 0,
+            width: 100,
+            height: 200,
+         }
+      );
       expect(shaderMocks[0].end).toHaveBeenCalledWith();
    });
 });

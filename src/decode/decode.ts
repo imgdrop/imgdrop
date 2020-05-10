@@ -7,10 +7,10 @@ import { getPathExtension } from '../util/path';
 import { checkHeifImage, decodeHeifImage } from './heif';
 import { decodeHTMLImage } from './html';
 import { checkJP2Image, decodeJP2Image } from './jp2';
+import { checkPNMImage, decodePNMImage } from './pnm';
 import { decodeRawImage } from './raw';
 import { checkTiffImage, decodeTiffImage } from './tiff';
 import { checkWebpImage, decodeWebpImage } from './webp';
-import { checkPNMImage, decodePNMImage } from './pnm';
 
 export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    console.log(`Mimetype: ${file.type}`);
