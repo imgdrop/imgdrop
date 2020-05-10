@@ -29,3 +29,5 @@ export interface WorkerMessage<E extends keyof WorkerExports> {
    name: E;
    args: Parameters<WorkerExports[E]>;
 }
+
+export declare function postMessage(data: any, transferables?: Transferable[]): void;

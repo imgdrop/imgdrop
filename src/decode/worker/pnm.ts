@@ -1,6 +1,10 @@
 import { TupleType } from '@imgdrop/pnm';
 import { readBlobData } from '../../util/data';
-import { rescaleMaxval } from '../../color/depth';
+import { fixupData } from '../../color/fixup';
+
+declare class FileReaderSync {
+   readAsArrayBuffer(file: Blob): ArrayBuffer;
+}
 
 export async function decodePNMImage(file: File): Promise<{
    data: Uint8Array;
@@ -11,15 +15,20 @@ export async function decodePNMImage(file: File): Promise<{
    const pnm = await import(/* webpackChunkName: 'pnm' */ '@imgdrop/pnm');
 
    let offset = 0;
-   const decoder = new pnm.PNMDecoder(async size => {
-      const buffer = await readBlobData(file.slice(offset, offset + size));
+   const reader = new FileReaderSync();
+   const decoder = new pnm.PNMDecoder(size => {
+      const buffer = reader.readAsArrayBuffer(file.slice(offset, offset + size));
       offset += buffer.byteLength;
-      return new Uint8Array(buffer);
+      return buffer;
    });
-   await decoder.decode();
+   decoder.decode();
 
    const data = new Uint8Array(decoder.data.buffer);
-   rescaleMaxval(decoder.maxval, decoder.data, data);
+   fixupData(data, decoder.data, {
+      width: decoder.width * decoder.depth,
+      height: decoder.height,
+      maxval: decoder.maxval
+   });
    return {
       data,
       width: decoder.width,
