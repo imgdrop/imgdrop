@@ -92,7 +92,7 @@ export const ImageDrop: React.FC<ImageDropProps> = ({ imageName, onImageDropped 
                   target='_blank'
                   onClick={stopPropogation}
                >
-                  Privacy Policy
+                  Privacy&nbsp;Policy
                </Link>
                )
             </div>

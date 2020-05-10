@@ -58,7 +58,7 @@ exports[`matches the snapshot 1`] = `
         onFocus={[Function]}
         target="_blank"
       >
-        Privacy Policy
+        Privacy Policy
       </a>
       )
     </div>
@@ -128,7 +128,7 @@ exports[`matches the snapshot when active 1`] = `
         onFocus={[Function]}
         target="_blank"
       >
-        Privacy Policy
+        Privacy Policy
       </a>
       )
     </div>
@@ -219,7 +219,7 @@ exports[`matches the snapshot when provided a name 1`] = `
         onFocus={[Function]}
         target="_blank"
       >
-        Privacy Policy
+        Privacy Policy
       </a>
       )
     </div>

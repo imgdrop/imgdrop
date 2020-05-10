@@ -58,7 +58,7 @@ exports[`Index matches the snapshot 1`] = `
         onFocus={[Function]}
         target="_blank"
       >
-        Privacy Policy
+        Privacy Policy
       </a>
       )
     </div>
