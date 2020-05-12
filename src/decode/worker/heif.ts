@@ -115,9 +115,9 @@ export async function decodeHeifImage(
       let stride = module._getHeifStride(id);
       if (fixup.depth === 16) {
          // eslint-disable-next-line no-bitwise
-         input = module.HEAPU16.subarray(dataPtr >> 1);
+         input = module.HEAPU16.subarray(dataPtr >>> 1);
          // eslint-disable-next-line no-bitwise
-         stride >>= 1;
+         stride >>>= 1;
       } else {
          input = module.HEAPU8.subarray(dataPtr);
       }

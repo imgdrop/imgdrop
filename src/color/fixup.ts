@@ -39,7 +39,7 @@ export function fixupData(
          for (let x = 0; x < width; x += 1) {
             let value = input[y * stride + x];
             if (swap) {
-               value = (value >> 8) | ((value & 0xff) << 8);
+               value = (value >>> 8) | ((value & 0xff) << 8);
             }
             output[y * width + x] = (value * 0xff) / maxval;
          }
