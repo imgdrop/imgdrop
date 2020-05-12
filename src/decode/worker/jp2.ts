@@ -32,7 +32,7 @@ export async function decodeJP2Image(
    const data = new Uint8Array(dataSize);
    planes.forEach((plane, index) => {
       // eslint-disable-next-line no-bitwise
-      const dataPtr = module._getJP2Data(index) >> 2;
+      const dataPtr = module._getJP2Data(index) >>> 2;
       fixupData(data.subarray(plane.offset), module.HEAP32.subarray(dataPtr), {
          width: plane.width,
          height: plane.height,
