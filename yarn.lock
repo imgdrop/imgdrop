@@ -1686,10 +1686,10 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.3.tgz#9c088679876f374eb5983f150d4787aa6fb32d7e"
   integrity sha512-FvUupuM3rlRsRtCN+fDudtmytGO6iHJuuRKS1Ss0pG5z8oX0diNEw94UEL7hgDbpN94rgaK5R7sWm6RrSkZuAQ==
 
-"@types/utif@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@types/utif/-/utif-3.0.0.tgz#d9d96b0792dce4faa4f2c8761fd45ccc27c770e3"
-  integrity sha512-lPYmgCtp5JALZ6N0bu4DqmwICKlM6ZAaui4KdQYvQf69c7LMoDbxkaM22+xP1EYmtrkk00CffBr19Sxl/bJobw==
+"@types/utif@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@types/utif/-/utif-3.0.1.tgz#2481673aa1bb23b40baf41010e37467996663a3b"
+  integrity sha512-PQ4MyFKw5ngbZDvrntyyojqbIqYsvrWt8wZEfJOlRjb3ZFPP98AUui4XbovmfoDELRDfsZX0MuohLYLkOMM1xg==
   dependencies:
     "@types/node" "*"
 
