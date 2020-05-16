@@ -33,6 +33,13 @@ This image converter works completely client side using modern technologies like
    -  Pixel GrayMap
    -  Pixel PixMap
    -  Pixel Arbitrary Map
+-  `@imgdrop/dds`
+   -  DXT1
+   -  DXT2
+   -  DXT3
+   -  DXT4
+   -  DXT5
+-  JPEG XR
 -  LibRaw
    -  Canon Raw
    -  Adobe Negative
@@ -41,13 +48,7 @@ This image converter works completely client side using modern technologies like
 ## Planned to Support
 
 -  TIFF YUV
--  DDS family:
-   -  DXT1
-   -  DXT2
-   -  DXT3
-   -  DXT4
-   -  DXT5
--  JPEG XR
+
 -  AVIF
 
 ## Supported Browsers
