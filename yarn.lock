@@ -998,6 +998,11 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
+"@imgdrop/dds@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@imgdrop/dds/-/dds-1.0.0.tgz#a167a8cd0fe1caeab4822f9bea342343ce6729f1"
+  integrity sha512-5t1cWnyV9MvM5HTmkXFqP7AbcFY7FyMWo5u0TrIN/gay0pt8Wvq3GKBgSzzTsHaeXPjLc389ml6NhzbHH0YiSg==
+
 "@imgdrop/pnm@1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@imgdrop/pnm/-/pnm-1.0.2.tgz#38d699c5f93c6cb61a1a03ed8f532725b8ad8469"

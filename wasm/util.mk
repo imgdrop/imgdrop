@@ -8,4 +8,4 @@ LDFLAGS = \
 	-s ENVIRONMENT=worker
 
 GIT_CLEAN = git clean -fdX
-GIT_DEINIT = git submodule deinit
+GIT_DEINIT = git submodule deinit -f

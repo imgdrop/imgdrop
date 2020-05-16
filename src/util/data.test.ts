@@ -2,7 +2,58 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-import { checkData, readBlobData } from './data';
+import { checkData, createSyncDataReader, readBlobData } from './data';
+
+describe(createSyncDataReader, () => {
+   let fileReaderMock: {
+      readAsArrayBuffer: jest.Mock;
+   };
+   let fileReaderSpy: jest.SpyInstance;
+   let fileMock: {
+      slice: jest.Mock;
+   };
+   let reader: (size: number) => ArrayBuffer;
+
+   beforeEach(() => {
+      fileReaderMock = {
+         readAsArrayBuffer: jest.fn(),
+      };
+      fileReaderMock.readAsArrayBuffer.mockReturnValue('buffer');
+      fileReaderSpy = jest.spyOn(window as any, 'FileReaderSync');
+      fileReaderSpy.mockImplementation(function FileReaderSync() {
+         return fileReaderMock;
+      });
+      fileMock = {
+         slice: jest.fn(),
+      };
+      fileMock.slice.mockReturnValue('slice');
+      reader = createSyncDataReader(fileMock as any);
+   });
+
+   it('reads a slice from the file', () => {
+      expect(fileReaderSpy).toHaveBeenCalledWith();
+      expect(reader(10)).toBe('buffer');
+      expect(fileMock.slice).toHaveBeenCalledWith(0, 10);
+      expect(fileReaderMock.readAsArrayBuffer).toHaveBeenCalledWith('slice');
+   });
+
+   it('reads each slice after each other', () => {
+      const buffer1 = {
+         byteLength: 10,
+      };
+      const buffer2 = {
+         byteLength: 20,
+      };
+      fileReaderMock.readAsArrayBuffer.mockReturnValueOnce(buffer1);
+      fileReaderMock.readAsArrayBuffer.mockReturnValueOnce(buffer2);
+      expect(reader(10)).toBe(buffer1);
+      expect(fileMock.slice).toHaveBeenCalledWith(0, 10);
+      expect(reader(20)).toBe(buffer2);
+      expect(fileMock.slice).toHaveBeenCalledWith(10, 30);
+      expect(fileMock.slice).toHaveBeenCalledTimes(2);
+      expect(fileReaderMock.readAsArrayBuffer).toHaveBeenCalledTimes(2);
+   });
+});
 
 describe(readBlobData, () => {
    let fileReaderMock: {

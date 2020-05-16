@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import * as dds from './dds';
 import { decodeImage } from './decode';
 import * as heif from './heif';
 import * as html from './html';
@@ -18,6 +19,7 @@ describe(decodeImage, () => {
    let decodeJP2Spy: jest.SpyInstance;
    let decodeHeifSpy: jest.SpyInstance;
    let decodePNMSpy: jest.SpyInstance;
+   let decodeDDSSpy: jest.SpyInstance;
    let decodeRawSpy: jest.SpyInstance;
 
    beforeEach(() => {
@@ -27,6 +29,7 @@ describe(decodeImage, () => {
       decodeJP2Spy = jest.spyOn(jp2, 'decodeJP2Image');
       decodeHeifSpy = jest.spyOn(heif, 'decodeHeifImage');
       decodePNMSpy = jest.spyOn(pnm, 'decodePNMImage');
+      decodeDDSSpy = jest.spyOn(dds, 'decodeDDSImage');
       decodeRawSpy = jest.spyOn(raw, 'decodeRawImage');
    });
 
@@ -191,6 +194,33 @@ describe(decodeImage, () => {
          decodeHTMLSpy.mockRejectedValue('error');
          decodePNMSpy.mockRejectedValue('pnm error');
          await expect(decodeImage(fileMock)).rejects.toBe('pnm error');
+      });
+   });
+
+   describe('DDS', () => {
+      let fileMock: File;
+
+      beforeEach(() => {
+         // prettier-ignore
+         fileMock = new File([new Uint8Array([
+            0x44, 0x44, 0x53, 0x20,
+            0x7C, 0x00, 0x00, 0x00,
+            0x11, 0x22, 0x33, 0x44,
+         ])], 'file');
+      });
+
+      it('decodes using DDS if HTML fails and its a DDS image', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeDDSSpy.mockResolvedValue('image');
+         await expect(decodeImage(fileMock)).resolves.toBe('image');
+         expect(decodeHTMLSpy).toHaveBeenCalledWith(fileMock);
+         expect(decodeDDSSpy).toHaveBeenCalledWith(fileMock);
+      });
+
+      it('rejects if HTML fails and DDS fails', async () => {
+         decodeHTMLSpy.mockRejectedValue('error');
+         decodeDDSSpy.mockRejectedValue('dds error');
+         await expect(decodeImage(fileMock)).rejects.toBe('dds error');
       });
    });
 
