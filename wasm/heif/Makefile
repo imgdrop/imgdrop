@@ -43,6 +43,7 @@ clean:
 	rm heif.js heif.wasm
 
 ci: all
+	$(H265_CD) git status
 	$(GIT_DEINIT) libde265
 	$(GIT_DEINIT) libheif
 
