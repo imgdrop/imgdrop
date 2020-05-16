@@ -24,7 +24,7 @@ $(H265_MAKE):
 		--disable-dec265
 	$(H265_CD) rm a.out*
 
-$(HEIF_MAKE):
+$(HEIF_MAKE): $(H265_MAKE)
 	$(HEIF_CD) ./autogen.sh
 	$(HEIF_CD) emconfigure ./configure \
 		CFLAGS='$(CFLAGS)' \
