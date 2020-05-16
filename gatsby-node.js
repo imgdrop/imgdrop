@@ -49,6 +49,7 @@ exports.createPages = ({ actions }) => {
    createPage('pgm', 'Pixel Graymap');
    createPage('ppm', 'Pixel Pixmap');
    createPage('pam', 'Pixel Arbitrary Map');
+   createPage('dds', 'DirectDraw Surface');
    createPage('cr2', 'Canon raw');
    createPage('nef', 'Nikon raw');
    createPage('raf', 'Fuji raw');
