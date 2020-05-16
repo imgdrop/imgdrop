@@ -4,10 +4,7 @@
 
 import { TupleType } from '@imgdrop/pnm';
 import { fixupData } from '../../color/fixup';
-
-declare class FileReaderSync {
-   readAsArrayBuffer(file: Blob): ArrayBuffer;
-}
+import { createSyncDataReader } from '../../util/data';
 
 export async function decodePNMImage(
    file: File
@@ -18,14 +15,7 @@ export async function decodePNMImage(
    format: TupleType;
 }> {
    const pnm = await import(/* webpackChunkName: 'pnm' */ '@imgdrop/pnm');
-
-   let offset = 0;
-   const reader = new FileReaderSync();
-   const decoder = new pnm.PNMDecoder((size) => {
-      const buffer = reader.readAsArrayBuffer(file.slice(offset, offset + size));
-      offset += buffer.byteLength;
-      return buffer;
-   });
+   const decoder = new pnm.PNMDecoder(createSyncDataReader(file));
    decoder.decode();
 
    const data = new Uint8Array(decoder.data.buffer);

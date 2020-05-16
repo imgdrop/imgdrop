@@ -4,6 +4,7 @@
 
 import { readBlobData } from '../util/data';
 import { getPathExtension } from '../util/path';
+import { checkDDSImage, decodeDDSImage } from './dds';
 import { checkHeifImage, decodeHeifImage } from './heif';
 import { decodeHTMLImage } from './html';
 import { checkJP2Image, decodeJP2Image } from './jp2';
@@ -43,6 +44,11 @@ export async function decodeImage(file: File): Promise<HTMLCanvasElement> {
    if (checkPNMImage(header)) {
       console.debug('Trying PNM decoder...');
       return decodePNMImage(file);
+   }
+
+   if (checkDDSImage(header)) {
+      console.debug('Trying DDS decoder...');
+      return decodeDDSImage(file);
    }
 
    console.debug('Trying LibRaw decoder...');

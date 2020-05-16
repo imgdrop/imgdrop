@@ -2,6 +2,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+import * as dds from './dds';
 import * as heif from './heif';
 import * as jp2 from './jp2';
 import * as pnm from './pnm';
@@ -15,6 +16,7 @@ export const workerExports = {
    ...jp2,
    ...heif,
    ...pnm,
+   ...dds,
    ...raw,
 };
 

@@ -1,6 +1,7 @@
 {
    "private": true,
    "dependencies": {
+      "@imgdrop/dds": "1.0.0",
       "@imgdrop/pnm": "1.0.2",
       "@material-ui/core": "4.9.14",
       "@material-ui/icons": "4.9.1",

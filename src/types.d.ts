@@ -18,3 +18,7 @@ declare module '*.glsl' {
    };
    export default glsl;
 }
+
+declare class FileReaderSync {
+   readAsArrayBuffer(blob: Blob): ArrayBuffer;
+}
