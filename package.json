@@ -11,7 +11,7 @@
       "@types/react-helmet": "6.0.0",
       "@types/utif": "3.0.1",
       "gatsby": "2.21.33",
-      "notistack": "0.9.15",
+      "notistack": "0.9.16",
       "react": "16.13.1",
       "react-dom": "16.13.1",
       "react-dropzone": "11.0.1",
