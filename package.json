@@ -10,7 +10,7 @@
       "@types/react": "16.9.35",
       "@types/react-helmet": "6.0.0",
       "@types/utif": "3.0.1",
-      "gatsby": "2.22.3",
+      "gatsby": "2.22.4",
       "notistack": "0.9.16",
       "react": "16.13.1",
       "react-dom": "16.13.1",
