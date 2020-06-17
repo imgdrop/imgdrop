@@ -7003,10 +7003,10 @@ gatsby-admin@^0.1.65:
     urql "^1.9.7"
     yup "^0.29.1"
 
-gatsby-cli@2.12.45, gatsby-cli@^2.12.44:
-  version "2.12.45"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.45.tgz#5f99e8ea96264c55e981d13147c1a387c9bf1164"
-  integrity sha512-CY0ltZ5DvrSo30MkPcU2FFGiCrQUjirXAY7TdFEhc8IeV5Gj9E2AFmUF1FO4Dna6yv47WBBaHKFpsiKc5Iq0XA==
+gatsby-cli@2.12.46, gatsby-cli@^2.12.44:
+  version "2.12.46"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.46.tgz#1ae6783c5ed5df0678ccff39280463eb866550a7"
+  integrity sha512-G8gvBbM7oV8OyJZ09zeTGz8mGbOgCNuhYGin32H40quDdibwvpcMY428QXHM9D3qh5HQQrTh1sHttQeNwh4fXw==
   dependencies:
     "@babel/code-frame" "^7.10.1"
     "@babel/runtime" "^7.10.2"
@@ -7024,7 +7024,7 @@ gatsby-cli@2.12.45, gatsby-cli@^2.12.44:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.3.5"
-    gatsby-recipes "^0.1.39"
+    gatsby-recipes "^0.1.40"
     gatsby-telemetry "^1.3.11"
     hosted-git-info "^3.0.4"
     ink "^2.7.1"
@@ -7203,10 +7203,10 @@ gatsby-react-router-scroll@^3.0.2:
     scroll-behavior "^0.9.12"
     warning "^3.0.0"
 
-gatsby-recipes@^0.1.39:
-  version "0.1.39"
-  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.39.tgz#6bd079e0011fbe41c14b371f9b757bcaa377c3ad"
-  integrity sha512-Pf8EGKhCAv4E1rU0NL6pKH9mC8QB/0pW/9oAAb9Rs2N3TeBYcQ36hQP95ana63GZwY35eKoFzjdWGHmegQw90Q==
+gatsby-recipes@^0.1.40:
+  version "0.1.40"
+  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.40.tgz#902ec7f00a3889f59c9d9cf327c153204a17e227"
+  integrity sha512-W5c3lqM8V+J/GuYTw2jZEBsIZQyOzl8RwOKYAlrW05kABSXP603W2zaLGP9EB04PfVy/4TCEAO2IQL24F7jaTg==
   dependencies:
     "@babel/core" "^7.10.2"
     "@babel/generator" "^7.10.2"
