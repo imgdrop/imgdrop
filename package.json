@@ -35,7 +35,7 @@
       "gatsby-plugin-prefetch-google-fonts": "1.4.3",
       "gatsby-plugin-react-helmet": "3.3.4",
       "gatsby-plugin-robots-txt": "1.5.1",
-      "gatsby-plugin-sitemap": "2.4.4",
+      "gatsby-plugin-sitemap": "2.4.6",
       "gatsby-plugin-typescript": "2.4.6",
       "jest": "25.5.4",
       "npm-run-all": "4.1.5",
