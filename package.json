@@ -30,7 +30,7 @@
       "eslint-plugin-jsx-a11y": "6.3.1",
       "eslint-plugin-react": "7.20.1",
       "eslint-plugin-react-hooks": "4.0.4",
-      "gatsby-cli": "2.12.51",
+      "gatsby-cli": "2.12.52",
       "gatsby-plugin-material-ui": "2.1.9",
       "gatsby-plugin-prefetch-google-fonts": "1.4.3",
       "gatsby-plugin-react-helmet": "3.3.6",
