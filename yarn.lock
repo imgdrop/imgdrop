@@ -6276,12 +6276,12 @@ gatsby-plugin-robots-txt@1.5.1:
     "@babel/runtime" "^7.10.0"
     generate-robotstxt "^8.0.3"
 
-gatsby-plugin-sitemap@2.4.6:
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sitemap/-/gatsby-plugin-sitemap-2.4.6.tgz#e0e77ac6fa10e3bffed884a42c85a00328e32122"
-  integrity sha512-Vd252Px3liW499yvuSE/aOEXTHPHDX2zKvxyHoJQNTg4/8vUeJkxjX6Z50vGfspeU0HTuF8XwUu4yL3wc2+xsw==
+gatsby-plugin-sitemap@2.4.9:
+  version "2.4.9"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sitemap/-/gatsby-plugin-sitemap-2.4.9.tgz#fd6ac60fec2339f93dad2dfb7aaa2be83d9fd8c5"
+  integrity sha512-8b4iJrU1oJED0bp/b7xVt/NsRAti4xvz7BRu7x7NLIv1sm04/2zmNuNnLpEFrSNwQcy60ERaioKTQTXKsawM7g==
   dependencies:
-    "@babel/runtime" "^7.10.2"
+    "@babel/runtime" "^7.10.3"
     minimatch "^3.0.4"
     pify "^3.0.0"
     sitemap "^1.13.0"
