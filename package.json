@@ -42,7 +42,7 @@
       "prettier": "2.0.5",
       "react-test-renderer": "16.13.1",
       "ts-jest": "25.5.1",
-      "typescript": "3.9.5",
+      "typescript": "3.9.6",
       "webpack-glsl-minify": "1.4.0",
       "worker-plugin": "4.0.3"
    },
