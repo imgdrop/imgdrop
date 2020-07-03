@@ -2865,7 +2865,7 @@ babel-plugin-macros@^2.8.0:
     cosmiconfig "^6.0.0"
     resolve "^1.12.0"
 
-babel-plugin-remove-graphql-queries@^2.9.11, babel-plugin-remove-graphql-queries@^2.9.12:
+babel-plugin-remove-graphql-queries@^2.9.12:
   version "2.9.12"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.9.12.tgz#9d6b22b799ac11173fb91c8973f88846b391c130"
   integrity sha512-CJjsW331GuuU+h3SpKcrtMfzq3+Ypq6Oth8UQCBO3SP2gJw0EUGPVpmQwEXIT94sotUfVLWCasGQK7rRaeYb1A==
@@ -6325,20 +6325,7 @@ gatsby-plugin-sitemap@2.4.9:
     pify "^3.0.0"
     sitemap "^1.13.0"
 
-gatsby-plugin-typescript@2.4.12:
-  version "2.4.12"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.4.12.tgz#f48faf2db3b30b97ed467398c1d5363edd742618"
-  integrity sha512-BYHtWh6OrgK3C1UvpFq2bRijN/EuIbnD06ar6tAfnlKh7pspkX+DpxW3S/94j4Z5lc8wsaTmGZ9bWlU+z0io5g==
-  dependencies:
-    "@babel/core" "^7.10.3"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.10.1"
-    "@babel/plugin-proposal-numeric-separator" "^7.10.1"
-    "@babel/plugin-proposal-optional-chaining" "^7.10.3"
-    "@babel/preset-typescript" "^7.10.1"
-    "@babel/runtime" "^7.10.3"
-    babel-plugin-remove-graphql-queries "^2.9.11"
-
-gatsby-plugin-typescript@^2.4.13:
+gatsby-plugin-typescript@2.4.13, gatsby-plugin-typescript@^2.4.13:
   version "2.4.13"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-typescript/-/gatsby-plugin-typescript-2.4.13.tgz#81208b1cf9e776954b9b7ac64a3f02e39c1e368b"
   integrity sha512-lyuaMt1AA8P29pYQGviMWKhYznAkyvmRWyGQLoMnNkmv5v6uNY+rqdMv/TjkSs2ng/Aic7jxsoCkIFNsIXp/KQ==
