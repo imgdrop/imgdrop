@@ -36,7 +36,7 @@
       "gatsby-plugin-react-helmet": "3.3.9",
       "gatsby-plugin-robots-txt": "1.5.1",
       "gatsby-plugin-sitemap": "2.4.9",
-      "gatsby-plugin-typescript": "2.4.13",
+      "gatsby-plugin-typescript": "2.4.14",
       "jest": "25.5.4",
       "npm-run-all": "4.1.5",
       "prettier": "2.0.5",
