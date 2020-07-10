@@ -29,7 +29,7 @@
       "eslint-plugin-import": "2.22.0",
       "eslint-plugin-jsx-a11y": "6.3.1",
       "eslint-plugin-react": "7.20.3",
-      "eslint-plugin-react-hooks": "4.0.6",
+      "eslint-plugin-react-hooks": "4.0.7",
       "gatsby-cli": "2.12.60",
       "gatsby-plugin-material-ui": "2.1.9",
       "gatsby-plugin-prefetch-google-fonts": "1.4.3",
