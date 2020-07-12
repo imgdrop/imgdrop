@@ -7,7 +7,7 @@
       "@material-ui/icons": "4.9.1",
       "@material-ui/styles": "4.10.0",
       "@sentry/browser": "5.19.1",
-      "@types/react": "16.9.42",
+      "@types/react": "16.9.43",
       "@types/react-helmet": "6.0.0",
       "@types/utif": "3.0.1",
       "gatsby": "2.24.2",
