@@ -14,7 +14,7 @@
       "notistack": "0.9.17",
       "react": "16.13.1",
       "react-dom": "16.13.1",
-      "react-dropzone": "11.0.1",
+      "react-dropzone": "11.0.2",
       "react-helmet": "6.1.0",
       "utif": "3.1.0"
    },
